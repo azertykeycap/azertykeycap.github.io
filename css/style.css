@@ -27,6 +27,9 @@
   }
   .image{
     height: 300px;
+    display: flex;
+    align-items:center
+
   }
   .container{
     display: flex;
@@ -43,7 +46,10 @@
 
   }
   .btn{
-    align-items: stretch
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+
   }
 
   h2 {
