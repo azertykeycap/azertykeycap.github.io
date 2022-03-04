@@ -2,6 +2,12 @@
     z-index: 100;
     top: 0px;
     width: 100%;
+    position: fixed
+    
+  }
+
+  body {
+    background-color: lightgray;
   }
 
   .navbar {
@@ -16,6 +22,7 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
+    background-color: white;
 
   }
   .image{
@@ -45,10 +52,11 @@
     font-size: large;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     margin: 20px;
+    background-color: white;
   }
 
   .button {
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 0px rgba(26, 19, 19, 0.2);
     border: none;
     color: grey;
     padding:  25px;
@@ -75,6 +83,11 @@
 
   p {
     font-family: monospace, sans-serif;
+
+  }
+  .border{
+    border-bottom: solid;
+    border-bottom-color:lightgray
 
   }
 
