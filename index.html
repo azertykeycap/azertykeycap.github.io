@@ -15,6 +15,8 @@
 
 <body class="has-navbar-fixed-top">
 
+<a id="bcktotop"></a>
+
 <!-- START NAV -->
 <nav class="navbar is-fixed-top">
   <div class="container">
@@ -56,6 +58,17 @@
   </div>
 </nav>
 <!-- END NAV -->
+
+<div class="info-div">
+  <h2 class="title">Important :</h2>
+  <p class="info-txt">
+    Ce site est maintenu et mis à jour à la main, donc il se peut qu'il y ait un peu de retard sur l'ajout des sets de touches, même si nous faisons en sorte que ça ne soit pas le cas ! <br>
+    De nombreux produits ne seront pas en stock, c'est malheureusement normal. Un grand nombre proviennent de "GBs", qui sont des ventes limités dans le temps, vous allez donc devoir chercher sur le marché d'occasion. <br>
+    Si vous remarquez des erreurs, ou si il manque des sets qui ne sont pas listés, n'hésitez pas à contacter Plaketdebeur#7393 sur discord. <br>
+    En savoir plus sur <a href="https://www.keycaps.info/" target="_blank">les profils</a> <br>
+    Le serveur discord de la communauté et ses réseaux sont trouvables <a href="#pied">tout en bas du site</a>
+  </p>
+</div>
 
 <div class="title-div">
   <h2 class="title" id="new">Derniers ajouts</h2>
@@ -1316,7 +1329,7 @@
 
 </div>
 
-<footer class="footer">
+<footer class="footer" id="pied">
   <div class="container">
     <div class="content has-text-centered">
       <div class="soc">
@@ -1326,12 +1339,13 @@
         <a href="https://claviers-mecaniques.org/"><i class="fa fa-globe" aria-hidden="true"></i></a>
       </div>
       <p>
-        Site fournit par la communauté Mechanical Keyboards France <br>
-        En savoir plus sur <a href="https://www.keycaps.info/">les profils</a>
+        Site fournit par la communauté Mechanical Keyboards France
       </p>
     </div>
   </div>
 </footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </body>
 <script>
@@ -1352,6 +1366,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 }
+});
+</script>
+
+<script>
+var btn = $('#bcktotop');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
 });
 </script>
 </html>

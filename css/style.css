@@ -35,7 +35,7 @@ strong {
   color: ghostwhite
 }
 
-.footer a:hover {
+a:hover {
   color: crimson;
 }
 
@@ -43,6 +43,11 @@ strong {
 .fa-brands {
   color: ghostwhite;
   margin: 10px
+}
+
+.fa:hover,
+.fa-brands:hover {
+  color: #f7314a;
 }
 
 /*  */
@@ -137,4 +142,57 @@ strong {
   padding-left: 8px;
   padding-right: 8px;
   text-align: center;
+}
+
+.info-div {
+  text-align: center;
+  font-size: large;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  margin-bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.info-txt {
+  text-align: center;
+  font-size: large;
+  padding: 1%;
+}
+
+#bcktotop {
+  display: inline-block;
+  background-color: var(--card-bg);
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#bcktotop::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#bcktotop:hover {
+  cursor: pointer;
+  background-color: #00ace7;
+}
+#bcktotop:active {
+  background-color: #7dcfeb;
+}
+#bcktotop.show {
+  opacity: 1;
+  visibility: visible;
 }
