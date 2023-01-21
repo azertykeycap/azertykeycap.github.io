@@ -89,6 +89,11 @@ strong {
   flex: 1;
 }
 
+.btn:hover, .button:hover {
+  background-color: var(--card-bg);
+  color: ghostwhite;
+}
+
 .container {
   text-align: center;
   padding: 10px 20px;
