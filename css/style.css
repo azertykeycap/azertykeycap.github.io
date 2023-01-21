@@ -69,14 +69,12 @@ strong {
   padding: 10px;
   flex-wrap: wrap;
   justify-content: center;
-
 }
 
 .btn {
   align-items: stretch;
   display: flex;
   flex-direction: row;
-
 }
 
 .button {
