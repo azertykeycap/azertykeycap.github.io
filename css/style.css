@@ -162,6 +162,11 @@ a:hover {
   padding: 1%;
 }
 
+.clone {
+  color: var(--accent-red);
+  font-weight: 900;
+}
+
 #bcktotop {
   display: inline-block;
   background-color: var(--card-bg);
@@ -178,6 +183,7 @@ a:hover {
   visibility: hidden;
   z-index: 1000;
 }
+
 #bcktotop::after {
   content: "\f077";
   font-family: FontAwesome;
@@ -187,13 +193,16 @@ a:hover {
   line-height: 50px;
   color: #fff;
 }
+
 #bcktotop:hover {
   cursor: pointer;
   background-color: var(--accent-blue);
 }
+
 #bcktotop:active {
   background-color: #7dcfeb;
 }
+
 #bcktotop.show {
   opacity: 1;
   visibility: visible;
