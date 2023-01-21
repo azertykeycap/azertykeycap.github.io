@@ -27,6 +27,7 @@ body {
 .footer {
   background: var(--card-bg);
   color: ghostwhite;
+  padding: 3rem 1.5rem 3rem;
 }
 
 .footer p,
