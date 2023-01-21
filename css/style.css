@@ -1,43 +1,50 @@
-h1, h2 {
-  text-align: center;
-  font-family: monospace, sans-serif;
-  font-size: large;
-}
-
-h2 {
-  text-align: center;
-  font-family: monospace, sans-serif;
-  font-size: large;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  margin: 20px;
-  background-color: white;
-}
-
-p {
-  font-family: monospace, sans-serif;
-
+:root {
+  --bg: #182b4c;
+  --card-bg: #020b19;
 }
 
 body {
-  background-color: lightgray;
+  background: var(--bg);
+  font-family: Helvetica, Arial, sans-serif;
 }
 
-.bar {
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  z-index: 100;
-  top: 0px;
-  width: 100%;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
+.navbar {
+  background: var(--card-bg);
 }
 
-.nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.navbar-item {
+  color: ghostwhite;
 }
+
+.navbar-menu {
+  background-color: var(--card-bg);
+}
+
+.title.no-padding {
+  margin-bottom: 0 !important;
+}
+
+.footer {
+  background: var(--card-bg);
+  color: ghostwhite;
+}
+
+.footer p,
+strong {
+  color: ghostwhite
+}
+
+.footer a:hover {
+  color: crimson;
+}
+
+.fa,
+.fa-brands {
+  color: ghostwhite;
+  margin: 10px
+}
+
+/*  */
 
 .components {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -46,20 +53,14 @@ body {
   display: flex;
   flex-direction: column;
   background-color: white;
-
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .image {
   height: 300px;
   display: flex;
   align-items: center
-}
-
-.container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: stretch
 }
 
 .list {
@@ -98,4 +99,19 @@ body {
 .border {
   border-bottom: solid;
   border-bottom-color: lightgray
+}
+
+.title-div {
+  text-align: center;
+  font-size: large;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin: 30px auto;
+  width: 40%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.title {
+  padding: 0.5%;
+  /* color: ghostwhite; */
 }
