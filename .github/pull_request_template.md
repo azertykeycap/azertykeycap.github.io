@@ -16,4 +16,4 @@ Veuillez supprimer les options qui ne sont pas pertinentes.
 
 - [ ] Mon code suit les directives de style de ce projet
 - [ ] J'ai effectué un auto-examen de mon propre code
-- [ ] Si j'ai ajouté un set de touche, je l'ai aussi inclut dans la catégorie "Derniers ajouts"
+- [ ] Si j'ai ajouté un ou plusieurs sets de touches, je l'ai aussi inclut dans la catégorie "Derniers ajouts"
