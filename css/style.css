@@ -1,6 +1,8 @@
 :root {
   --bg: #182b4c;
   --card-bg: #020b19;
+  --accent-blue: #00ace7;
+  --accent-red: #f7314a;
 }
 
 body {
@@ -36,7 +38,7 @@ strong {
 }
 
 a:hover {
-  color: crimson;
+  color: var(--accent-red);
 }
 
 .fa,
@@ -47,7 +49,7 @@ a:hover {
 
 .fa:hover,
 .fa-brands:hover {
-  color: #f7314a;
+  color: var(--accent-red);
 }
 
 /*  */
@@ -126,7 +128,7 @@ a:hover {
 
 .alert-red {
   color: ghostwhite;
-  background-color: #f7314a;
+  background-color: var(--accent-red);
   border-radius: 4px;
   display: inline-block;
   padding-left: 8px;
@@ -136,7 +138,7 @@ a:hover {
 
 .alert-blue {
   color: ghostwhite;
-  background-color: #00ace7;
+  background-color: var(--accent-blue);
   border-radius: 4px;
   display: inline-block;
   padding-left: 8px;
@@ -187,7 +189,7 @@ a:hover {
 }
 #bcktotop:hover {
   cursor: pointer;
-  background-color: #00ace7;
+  background-color: var(--accent-blue);
 }
 #bcktotop:active {
   background-color: #7dcfeb;
