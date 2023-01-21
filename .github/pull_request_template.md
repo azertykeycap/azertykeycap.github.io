@@ -10,6 +10,7 @@ Veuillez supprimer les options qui ne sont pas pertinentes.
 - [ ] Correction de bogue (changement non cassant qui corrige un problème)
 - [ ] Nouvelle fonctionnalité (changement non cassant qui ajoute une fonctionnalité)
 - [ ] Changement radical (correctif ou caractéristique qui empêcherait la fonctionnalité existante de fonctionner comme prévu)
+- [ ] Correction d'information(s) éronnée(s)
 - [ ] Ajout d'un ou plusieurs sets de touches à la liste
 
 # Checklist:
