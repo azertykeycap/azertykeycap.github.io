@@ -1,5 +1,8 @@
 ---
-title: Mon article de blog
+img: https://picsum.photos/200/300
+title: Keyreactive - KAMistry
+category: PBT DS
+url: https://google.com
 ---
 
 Ceci est mon article en cours.

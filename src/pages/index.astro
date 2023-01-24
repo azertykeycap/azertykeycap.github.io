@@ -1,6 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const posts = await Astro.glob("../md/keycaps/*.md");
+import { Picture } from "@astrojs/image/components";
+import {
+  contentfulClient,
+  KeycapArticleContentfulInterface,
+  KeycapArticleType,
+} from "../lib/contentful";
+
+const entries =
+  await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
+    content_type: "article",
+  });
+
+const articles: Array<KeycapArticleType> = entries.items.map((e) => {
+  const { title, img, material, description, profile, startDate, endDate } =
+    e.fields;
+
+  return {
+    title,
+    img: img.fields.file.url,
+    material,
+    description,
+    profile,
+    startDate: startDate ? new Date(startDate).toLocaleDateString() : undefined,
+    endDate: endDate ? new Date(endDate).toLocaleDateString() : undefined,
+  };
+});
 ---
 
 <Layout title="Welcome to Astro.">
@@ -11,7 +36,21 @@ const posts = await Astro.glob("../md/keycaps/*.md");
       />
       <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
     </p>
-    {posts.map((c) => c.frontmatter.title)}
+
+    {
+      articles.map((a) => (
+        <article>
+          <Picture
+            src={a.img}
+            widths={[200, 400, 800]}
+            aspectRatio="16:9"
+            sizes="(max-width: 800px) 100vw, 800px"
+            alt="descriptive text"
+          />
+          <span>{a.title}</span>
+        </article>
+      ))
+    }
   </main>
 </Layout>
 
