@@ -1,5 +1,5 @@
-import contentful, { Asset, Entry } from "contentful";
-import type { Document } from "@contentful/rich-text-types";
+import contentful, { Asset, Entry } from 'contentful';
+import type { Document } from '@contentful/rich-text-types';
 export interface TopWarningContentfulInterface {
   richWarning: Document;
 }
@@ -9,6 +9,7 @@ export interface TopWarningInterface {}
 export interface ProfileContentfulInterface {
   readonly title: string;
   readonly slug: string;
+  readonly abbreviation: string;
 }
 
 export interface KeycapArticleContentfulInterface {
@@ -27,7 +28,7 @@ export interface KeycapArticleContentfulInterface {
 
 export type KeycapArticleType = Omit<
   KeycapArticleContentfulInterface,
-  "img" | "profile" | "startDate" | "endDate"
+  'img' | 'profile' | 'startDate' | 'endDate'
 > & {
   img: string;
   profile: string;
@@ -41,5 +42,5 @@ export const contentfulClient = contentful.createClient({
   accessToken: import.meta.env.DEV
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
     : import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
-  host: import.meta.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
+  host: import.meta.env.DEV ? 'preview.contentful.com' : 'cdn.contentful.com'
 });

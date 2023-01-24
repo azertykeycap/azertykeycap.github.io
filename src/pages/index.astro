@@ -1,63 +1,35 @@
 ---
-import { Image } from "@astrojs/image/components";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { group } from "radash";
+import { Image } from '@astrojs/image/components';
+import { group } from 'radash';
 
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
+
 import {
   contentfulClient,
   KeycapArticleContentfulInterface,
   KeycapArticleType,
-  ProfileContentfulInterface,
-  TopWarningContentfulInterface,
-} from "../lib/contentful";
+  ProfileContentfulInterface
+} from '../lib/contentful';
 
-import GoTop from "../components/GoTop.astro";
-
-import { OGImageRoute } from "astro-og-canvas";
-
-export const { getStaticPaths, get } = OGImageRoute({
-  // Tell us the name of your dynamic route segment.
-  // In this case it’s `route`, because the file is named `[...route].ts`.
-  param: "index",
-
-  // A collection of pages to generate images for.
-  // This can be any map of paths to data, not necessarily a glob result.
-  pages: {
-    index: {
-      title: "Plaketdebeur",
-      description: "Plaketdebeur",
-    },
-  },
-
-  // For each page, this callback will be used to customize the OpenGraph
-  // image. For example, if `pages` was passed a glob like above, you
-  // could read values from frontmatter.
-  getImageOptions: () => ({
-    title: "Plaketdebeur",
-    description: "Plaketdebeur",
-  }),
-});
+import GoTop from '../components/elements/GoTop.astro';
+import WarningText from '../components/elements/WarningText.astro';
+import Navigation from '../components/core/Navigation.astro';
+import Article from '../components/articles/Article.astro';
 
 const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
-    content_type: "article",
+    content_type: 'article'
   });
 
 const navigationLinksEntries =
   await contentfulClient.getEntries<ProfileContentfulInterface>({
-    content_type: "keycaps-profile",
-  });
-
-const warningTopEntry =
-  await contentfulClient.getEntries<TopWarningContentfulInterface>({
-    content_type: "warning-top",
+    content_type: 'keycaps-profile'
   });
 
 const navigationLinks: Array<ProfileContentfulInterface> =
   navigationLinksEntries.items.map((n) => {
-    const { title, slug } = n.fields;
-    return { title, slug };
+    const { title, slug, abbreviation } = n.fields;
+    return { title, slug, abbreviation };
   });
 
 const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
@@ -72,7 +44,7 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
     endDate,
     url,
     warning,
-    isNew,
+    isNew
   } = e.fields;
 
   return {
@@ -87,50 +59,25 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
     endDate: endDate ? new Date(endDate).toLocaleDateString() : undefined,
     url,
     warning,
-    isNew,
+    isNew
   };
 });
-
-const warningContent = documentToHtmlString(
-  warningTopEntry.items[0].fields.richWarning
-);
 
 const articleByProfile = group(articles, (a) => a.profile);
 ---
 
-<Layout title="Welcome to Astro.">
-  <nav>
-    <ul class="space-x-3">
-      {
-        navigationLinks.map((n) => (
-          <li class="inline">
-            <a href={`#${n.slug}`}>{n.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-  <main>
-    <header>
-      <div set:html={warningContent} />
-    </header>
+<Layout navigationLinks={navigationLinks}>
+  <main slot="main">
+    <!-- <WarningText /> -->
     {
       Object.keys(articleByProfile).map((a) => (
         <section id={navigationLinks.find((n) => a === n.title)?.slug}>
-          <span>{a}</span>
-          {articleByProfile[a]?.map((a) => (
-            <article>
-              <Image
-                src={a.img}
-                height={400}
-                aspectRatio="16:9"
-                format="avif"
-                alt={a.title}
-              />
-              <span>{a.title}</span>
-              <span>{a.profile}</span>
-            </article>
-          ))}
+          <h3>{a}</h3>
+          <div>
+            {articleByProfile[a]?.map((a) => (
+              <Article article={a} />
+            ))}
+          </div>
         </section>
       ))
     }
@@ -140,8 +87,18 @@ const articleByProfile = group(articles, (a) => a.profile);
 
 <style>
   main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
+    @apply mx-auto max-w-7xl space-y-6 py-6 sm:px-6 lg:space-y-10 lg:px-8;
+  }
+
+  section {
+    @apply mt-6;
+  }
+
+  section > div {
+    @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4;
+  }
+
+  h3 {
+    @apply mb-4 text-lg font-semibold lg:text-2xl;
   }
 </style>

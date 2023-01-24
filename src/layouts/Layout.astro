@@ -1,9 +1,12 @@
 ---
+import Navigation from '../components/core/Navigation.astro';
+import type { ProfileContentfulInterface } from '../lib/contentful';
+
 export interface Props {
-  title: string;
+  navigationLinks: Array<ProfileContentfulInterface>;
 }
 
-const { title } = Astro.props;
+const { navigationLinks } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -16,31 +19,23 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+    <title>Azerty Keycaps by Plaketdebeur</title>
   </head>
   <body>
-    <slot />
+    <Navigation navigationLinks={navigationLinks} />
+    <slot name="main" />
+    <slot name="footer" />
   </body>
 </html>
 <style is:global>
-  :root {
-    --accent: 124, 58, 237;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      #da62c4 30%,
-      white 60%
-    );
-  }
   html {
-    font-family: system-ui, sans-serif;
-    @apply bg-slate-100 font-sans scroll-smooth;
+    @apply h-full scroll-smooth bg-slate-50 font-sans;
   }
-  code {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+
+  body {
+    @apply min-h-full;
   }
 </style>

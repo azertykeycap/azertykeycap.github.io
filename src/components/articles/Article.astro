@@ -1,0 +1,89 @@
+---
+import { Image } from '@astrojs/image/components';
+import type { KeycapArticleType } from '../../lib/contentful';
+
+export interface Props {
+  article: KeycapArticleType;
+}
+
+const { title, img, material, description, profile, startDate, endDate, url } =
+  Astro.props.article;
+---
+
+<article>
+  <figure>
+    <Image
+      src={img}
+      height={240}
+      aspectRatio="16:10"
+      format="avif"
+      alt={title}
+    />
+    <figcaption>
+      <dt class="sr-only">Title</dt>
+      <dd><h4>{title}</h4></dd>
+      <hr />
+      <section>
+        <div>
+          <dt>Profil :</dt>
+          <dd>{profile}</dd>
+        </div>
+        <div>
+          <dt>Material :</dt>
+          <dd>{material}</dd>
+        </div>
+        {
+          description && (
+            <>
+              <dt class="sr-only">Description</dt>
+              <dd>{description}</dd>
+            </>
+          )
+        }
+        {startDate && <dd>{startDate}</dd>}
+        {endDate && <dd>{endDate}</dd>}
+        <a href={url} target="_blank">
+          <button> En savoir +</button>
+        </a>
+      </section>
+    </figcaption>
+  </figure>
+</article>
+
+<style>
+  article {
+    @apply flex flex-col rounded-lg border border-warm-gray-200 bg-white transition hover:border-warm-gray-300;
+  }
+
+  section {
+    @apply flex flex-col space-y-1 p-4 text-sm;
+  }
+
+  section > div {
+    @apply flex w-full;
+  }
+
+  div dt {
+    @apply basis-1/3 font-semibold text-warm-gray-900;
+  }
+
+  div dd {
+    @apply basis-2/3 text-warm-gray-600;
+  }
+
+  h4 {
+    @apply p-4 text-center text-base font-medium text-warm-gray-800;
+  }
+
+  hr {
+    @apply h-px border-none bg-warm-gray-100;
+  }
+
+  button {
+    @apply mt-4 w-full self-end rounded-md bg-teal-400 p-2 font-medium text-white transition hover:bg-teal-500;
+  }
+
+  img {
+    @apply w-full rounded-t-lg border-b border-b-warm-gray-100 bg-slate-300 object-fill;
+  }
+</style>

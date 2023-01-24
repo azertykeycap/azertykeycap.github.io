@@ -1,0 +1,145 @@
+---
+import type { ProfileContentfulInterface } from '../../lib/contentful';
+
+export interface Props {
+  navigationLinks: Array<ProfileContentfulInterface>;
+}
+
+const { navigationLinks } = Astro.props;
+---
+
+<header>
+  <div class="bg-warm-gray-50">
+    <nav
+      class="relative mx-auto flex max-w-7xl items-center justify-between px-6 pt-6 xl:px-8"
+    >
+      <div class="flex flex-1 items-center">
+        <div class="flex w-full items-center justify-between lg:w-auto">
+          <a href="#">
+            <span class="sr-only">PLAKET INDUSTRIES</span>
+            <img
+              class="h-8 w-auto sm:h-10"
+              src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
+              alt=""
+            />
+          </a>
+          <div class="-mr-2 flex items-center lg:hidden">
+            <button
+              type="button"
+              class="focus-ring-inset bg-warm-gray-50 text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!-- Heroicon name: outline/bars-3 -->
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul>
+        {
+          navigationLinks.map((n) => (
+            <li>
+              <a href={`#${n.slug}`}>{n.abbreviation}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <!--
+      Mobile menu, show/hide based on menu open state.
+
+      Entering: "duration-150 ease-out"
+        From: "opacity-0 scale-95"
+        To: "opacity-100 scale-100"
+      Leaving: "duration-100 ease-in"
+        From: "opacity-100 scale-100"
+        To: "opacity-0 scale-95"
+    -->
+  <div
+    class="absolute inset-x-0 top-0 z-30 origin-top transform p-2 transition lg:hidden"
+  >
+    <div
+      class="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+    >
+      <div class="flex items-center justify-between px-5 pt-4">
+        <div>
+          <img
+            class="h-8 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
+            alt=""
+          />
+        </div>
+        <div class="-mr-2">
+          <button
+            type="button"
+            class="text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md bg-white p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500"
+          >
+            <span class="sr-only">Close menu</span>
+            <!-- Heroicon name: outline/x-mark -->
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="pt-5 pb-6">
+        <div class="space-y-1 px-2">
+          <ul>
+            {
+              navigationLinks.map((n) => (
+                <li>
+                  <a href={`#${n.slug}`}>{n.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1024px) {
+    a {
+      @apply block rounded-md px-3 py-2 text-base font-medium text-warm-gray-900 transition hover:bg-warm-gray-100;
+    }
+  }
+
+  @media screen(lg) {
+    a {
+      @apply text-base font-medium text-warm-gray-500 transition hover:text-warm-gray-900;
+    }
+  }
+
+  ul {
+    @apply hidden lg:ml-10 lg:flex lg:gap-x-10;
+  }
+</style>
