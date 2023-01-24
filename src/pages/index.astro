@@ -55,8 +55,12 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
     description,
     material,
     status,
-    startDate: startDate ? new Date(startDate).toLocaleDateString() : undefined,
-    endDate: endDate ? new Date(endDate).toLocaleDateString() : undefined,
+    startDate: startDate
+      ? new Date(startDate).toLocaleDateString('fr-FR')
+      : undefined,
+    endDate: endDate
+      ? new Date(endDate).toLocaleDateString('fr-FR')
+      : undefined,
     url,
     warning,
     isNew

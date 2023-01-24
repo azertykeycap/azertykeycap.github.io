@@ -23,7 +23,7 @@ const { navigationLinks } = Astro.props;
               alt=""
             />
           </a>
-          <div class="-mr-2 flex items-center lg:hidden">
+          <div class="-mr-2 flex items-center lg:hidden" id="btn-open">
             <button
               type="button"
               class="focus-ring-inset bg-warm-gray-50 text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
@@ -49,7 +49,7 @@ const { navigationLinks } = Astro.props;
           </div>
         </div>
       </div>
-      <ul>
+      <ul class="hidden lg:flex">
         {
           navigationLinks.map((n) => (
             <li>
@@ -71,8 +71,10 @@ const { navigationLinks } = Astro.props;
         From: "opacity-100 scale-100"
         To: "opacity-0 scale-95"
     -->
+
   <div
     class="absolute inset-x-0 top-0 z-30 origin-top transform p-2 transition lg:hidden"
+    id="mobile-menu"
   >
     <div
       class="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
@@ -88,6 +90,7 @@ const { navigationLinks } = Astro.props;
         <div class="-mr-2">
           <button
             type="button"
+            id="btn-close"
             class="text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md bg-white p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500"
           >
             <span class="sr-only">Close menu</span>
@@ -111,7 +114,7 @@ const { navigationLinks } = Astro.props;
       </div>
       <div class="pt-5 pb-6">
         <div class="space-y-1 px-2">
-          <ul>
+          <ul id="mobile-ul lg:hidden">
             {
               navigationLinks.map((n) => (
                 <li>
@@ -140,6 +143,28 @@ const { navigationLinks } = Astro.props;
   }
 
   ul {
-    @apply hidden lg:ml-10 lg:flex lg:gap-x-10;
+    @apply flex flex-col font-medium lg:ml-10 lg:flex-row lg:gap-x-10;
   }
 </style>
+
+<script>
+  const btnClose = document.getElementById('btn-close');
+  const btnOpen = document.getElementById('btn-open');
+  const menuMobile = document.getElementById('mobile-menu');
+  const ulMobile = document.getElementById('mobile-ul');
+
+  ulMobile?.addEventListener('click', () => {
+    menuMobile?.classList.remove('block');
+    menuMobile?.classList.add('hidden');
+  });
+
+  btnClose?.addEventListener('click', () => {
+    menuMobile?.classList.remove('block');
+    menuMobile?.classList.add('hidden');
+  });
+
+  btnOpen?.addEventListener('click', () => {
+    menuMobile?.classList.remove('hidden');
+    menuMobile?.classList.add('block');
+  });
+</script>

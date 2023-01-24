@@ -24,14 +24,14 @@ const { title, img, material, description, profile, startDate, endDate, url } =
       <dd><h4>{title}</h4></dd>
       <hr />
       <section>
-        <div>
+        <dl>
           <dt>Profil :</dt>
           <dd>{profile}</dd>
-        </div>
-        <div>
+        </dl>
+        <dl>
           <dt>Material :</dt>
           <dd>{material}</dd>
-        </div>
+        </dl>
         {
           description && (
             <>
@@ -59,15 +59,15 @@ const { title, img, material, description, profile, startDate, endDate, url } =
     @apply flex flex-col space-y-1 p-4 text-sm;
   }
 
-  section > div {
+  section > dl {
     @apply flex w-full;
   }
 
-  div dt {
+  dl dt {
     @apply basis-1/3 font-semibold text-warm-gray-900;
   }
 
-  div dd {
+  dl dd {
     @apply basis-2/3 text-warm-gray-600;
   }
 
