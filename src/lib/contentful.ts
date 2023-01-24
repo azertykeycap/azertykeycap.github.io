@@ -1,24 +1,25 @@
 import contentful, { Asset } from "contentful";
 
 export interface KeycapArticleContentfulInterface {
-  img: Asset;
-  title: string;
-  profile: string;
-  description?: string;
-  material: string;
-  status?: string;
-  startDate?: Date;
-  endDate?: Date;
-  url?: string;
-  warning?: string;
-  isNew?: boolean;
+  readonly img: Asset;
+  readonly title: string;
+  readonly profile: Record<"fields", { title: string; slug: string }>;
+  readonly description?: string;
+  readonly material: string;
+  readonly status?: string;
+  readonly startDate?: Date;
+  readonly endDate?: Date;
+  readonly url?: string;
+  readonly warning?: string;
+  readonly isNew?: boolean;
 }
 
 export type KeycapArticleType = Omit<
   KeycapArticleContentfulInterface,
-  "img" | "startDate" | "endDate"
+  "img" | "profile" | "startDate" | "endDate"
 > & {
   img: string;
+  profile: string;
   startDate?: string;
   endDate?: string;
 };

@@ -1,0 +1,12 @@
+---
+import type { KeycapArticleType } from "../lib/contentful";
+
+export interface Props {
+  article: KeycapArticleType;
+}
+
+const { title, img, material, description, profile, startDate, endDate } =
+  Astro.props.article;
+---
+
+<article></article>
