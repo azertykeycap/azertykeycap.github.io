@@ -1,0 +1,31 @@
+<a id="top">back to the top</a>
+
+<style>
+  a {
+    @apply hidden bottom-0 right-0 p-3 bg-black font-semibold text-white cursor-pointer;
+  }
+</style>
+
+<script>
+  const btnTop = document.getElementById("top");
+  console.log(btnTop);
+
+  if (btnTop) {
+    btnTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+      });
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300 && btnTop) {
+        btnTop.classList.remove("hidden");
+        btnTop.classList.add("fixed");
+      } else {
+        btnTop.classList.remove("fixed");
+        btnTop.classList.add("hidden");
+      }
+    });
+  }
+</script>

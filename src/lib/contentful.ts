@@ -1,15 +1,26 @@
-import contentful, { Asset } from "contentful";
+import contentful, { Asset, Entry } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+export interface TopWarningContentfulInterface {
+  richWarning: Document;
+}
+
+export interface TopWarningInterface {}
+
+export interface ProfileContentfulInterface {
+  readonly title: string;
+  readonly slug: string;
+}
 
 export interface KeycapArticleContentfulInterface {
   readonly img: Asset;
   readonly title: string;
-  readonly profile: Record<"fields", { title: string; slug: string }>;
+  readonly profile: Entry<ProfileContentfulInterface>;
   readonly description?: string;
   readonly material: string;
   readonly status?: string;
   readonly startDate?: Date;
   readonly endDate?: Date;
-  readonly url?: string;
+  readonly url: string;
   readonly warning?: string;
   readonly isNew?: boolean;
 }
@@ -20,6 +31,7 @@ export type KeycapArticleType = Omit<
 > & {
   img: string;
   profile: string;
+  profileId: string;
   startDate?: string;
   endDate?: string;
 };

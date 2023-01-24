@@ -1,72 +1,115 @@
 ---
-import { group } from "radash";
-import Layout from "../layouts/Layout.astro";
 import { Picture } from "@astrojs/image/components";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { group } from "radash";
+
+import Layout from "../layouts/Layout.astro";
 import {
   contentfulClient,
   KeycapArticleContentfulInterface,
   KeycapArticleType,
+  ProfileContentfulInterface,
+  TopWarningContentfulInterface,
 } from "../lib/contentful";
 
-const entries =
+import GoTop from "../components/GoTop.astro";
+
+const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
     content_type: "article",
   });
 
-const articles: Array<KeycapArticleType> = entries.items.map((e) => {
+const navigationLinksEntries =
+  await contentfulClient.getEntries<ProfileContentfulInterface>({
+    content_type: "keycaps-profile",
+  });
+
+const warningTopEntry =
+  await contentfulClient.getEntries<TopWarningContentfulInterface>({
+    content_type: "warning-top",
+  });
+
+const navigationLinks: Array<ProfileContentfulInterface> =
+  navigationLinksEntries.items.map((n) => {
+    const { title, slug } = n.fields;
+    return { title, slug };
+  });
+
+const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
   const {
-    title,
     img,
-    material,
-    description,
+    title,
     profile,
+    description,
+    material,
+    status,
     startDate,
     endDate,
     url,
+    warning,
+    isNew,
   } = e.fields;
 
   return {
-    title,
     img: img.fields.file.url,
-    material,
-    description,
+    title,
     profile: profile.fields.title,
+    profileId: profile.fields.slug,
+    description,
+    material,
+    status,
     startDate: startDate ? new Date(startDate).toLocaleDateString() : undefined,
     endDate: endDate ? new Date(endDate).toLocaleDateString() : undefined,
-    url: url,
+    url,
+    warning,
+    isNew,
   };
 });
 
-const articleByProfile = group(articles, (a) => a.profile);
+const warningContent = documentToHtmlString(
+  warningTopEntry.items[0].fields.richWarning
+);
 
-console.log(articleByProfile);
+const articleByProfile = group(articles, (a) => a.profile);
 ---
 
 <Layout title="Welcome to Astro.">
+  <nav>
+    <ul class="space-x-3">
+      {
+        navigationLinks.map((n) => (
+          <li class="inline">
+            <a href={`#${n.slug}`}>{n.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
   <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
+    <header>
+      <div set:html={warningContent} />
+    </header>
     {
       Object.keys(articleByProfile).map((a) => (
-        <>
+        <section id={navigationLinks.find((n) => a === n.title)?.slug}>
           <span>{a}</span>
-          <section>
-            {articleByProfile[a]?.map((a) => (
-              <article>
-                <Picture
-                  src={a.img}
-                  widths={[200, 400, 800]}
-                  aspectRatio="16:9"
-                  sizes="(max-width: 800px) 100vw, 800px"
-                  alt="descriptive text"
-                />
-                <span>{a.title}</span>
-                <span>{a.profile}</span>
-              </article>
-            ))}
-          </section>
-        </>
+          {articleByProfile[a]?.map((a) => (
+            <article>
+              <Picture
+                src={a.img}
+                widths={[200, 400, 800]}
+                aspectRatio="4:3"
+                sizes="(max-width: 800px) 100vw, 800px"
+                alt={a.title}
+              />
+              <span>{a.title}</span>
+              <span>{a.profile}</span>
+            </article>
+          ))}
+        </section>
       ))
     }
+    <GoTop />
   </main>
 </Layout>
 
@@ -75,19 +118,5 @@ console.log(articleByProfile);
     margin: auto;
     padding: 1.5rem;
     max-width: 60ch;
-  }
-
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
   }
 </style>
