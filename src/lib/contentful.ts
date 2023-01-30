@@ -4,6 +4,11 @@ export interface TopWarningContentfulInterface {
   richWarning: Document;
 }
 
+export interface SocialNetworkContentfulInterface {
+  title: string;
+  url: string;
+}
+
 export interface ProfileContentfulInterface {
   readonly title: string;
   readonly slug: string;

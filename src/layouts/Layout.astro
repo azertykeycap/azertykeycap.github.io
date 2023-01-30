@@ -1,12 +1,14 @@
 ---
 import Navigation from '../components/core/Navigation.astro';
 import type { ProfileContentfulInterface } from '../lib/contentful';
+import type { NavigationLayoutEnum } from '../types/enum';
 
 export interface Props {
+  layout: NavigationLayoutEnum;
   navigationLinks: Array<ProfileContentfulInterface>;
 }
 
-const { navigationLinks } = Astro.props;
+const { layout, navigationLinks } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -25,17 +27,25 @@ const { navigationLinks } = Astro.props;
     <title>Azerty Keycaps by Plaketdebeur</title>
   </head>
   <body>
-    <Navigation navigationLinks={navigationLinks} />
-    <slot name="main" />
+    <Navigation layout={layout} navigationLinks={navigationLinks} />
+    <main>
+      <slot name="main" />
+    </main>
     <slot name="footer" />
   </body>
 </html>
 <style is:global>
   html {
-    @apply h-full scroll-smooth bg-slate-50 font-sans dark:bg-slate-900;
+    @apply h-full scroll-smooth bg-slate-50 font-sans antialiased dark:bg-slate-900;
   }
 
   body {
     @apply min-h-full;
+  }
+</style>
+
+<style>
+  main {
+    @apply relative mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
   }
 </style>

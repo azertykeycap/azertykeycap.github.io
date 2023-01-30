@@ -1,12 +1,9 @@
 ---
-import { group } from 'radash';
-
 import Layout from '../layouts/Layout.astro';
+import { NavigationLayoutEnum } from '../types/enum';
 
 import {
   contentfulClient,
-  KeycapArticleContentfulInterface,
-  KeycapArticleType,
   ProfileContentfulInterface
 } from '../lib/contentful';
 
@@ -22,12 +19,15 @@ const navigationLinks: Array<ProfileContentfulInterface> =
   });
 ---
 
-<Layout navigationLinks={navigationLinks}>
-  <main slot="main">Lorem ipsum...</main>
+<Layout
+  layout={NavigationLayoutEnum.SECONDARY}
+  navigationLinks={navigationLinks}
+>
+  <section slot="main">Lorem ipsum...</section>
 </Layout>
 
 <style>
-  main {
-    @apply mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
+  section {
+    @apply mt-4;
   }
 </style>

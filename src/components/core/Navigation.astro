@@ -1,33 +1,38 @@
 ---
 import type { ProfileContentfulInterface } from '../../lib/contentful';
+import { NavigationLayoutEnum } from '../../types/enum';
+import Socials from '../elements/Socials.astro';
 
 export interface Props {
+  layout: NavigationLayoutEnum;
   navigationLinks: Array<ProfileContentfulInterface>;
 }
 
-const { navigationLinks } = Astro.props;
+const { layout, navigationLinks } = Astro.props;
 ---
 
 <header>
   <section>
     <nav>
       <div>
-        <a href="#">
+        <a href={layout === NavigationLayoutEnum.MAIN ? '#' : '/'}>
           <span class="sr-only">PLAKET INDUSTRIES</span>
           <img
             src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
             alt=""
           />
         </a>
-        <ul>
-          {
-            navigationLinks.map((n) => (
-              <li>
-                <a href={`#${n.slug}`}>{n.abbreviation}</a>
-              </li>
-            ))
-          }
-        </ul>
+        {
+          layout === NavigationLayoutEnum.MAIN && (
+            <ul>
+              {navigationLinks.map((n) => (
+                <li>
+                  <a href={`#${n.slug}`}>{n.abbreviation}</a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
         <section id="btn-open">
           <button type="button" aria-expanded="false">
             <span>Open main menu</span>
@@ -47,7 +52,9 @@ const { navigationLinks } = Astro.props;
           </button>
         </section>
       </div>
-      <div></div>
+      <div>
+        <Socials />
+      </div>
     </nav>
   </section>
 
@@ -75,15 +82,19 @@ const { navigationLinks } = Astro.props;
           </svg>
         </button>
       </div>
-      <ul id="mobile-ul">
-        {
-          navigationLinks.map((n) => (
-            <li>
-              <a href={`#${n.slug}`}>{n.title}</a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        layout === NavigationLayoutEnum.MAIN && (
+          <ul id="mobile-ul">
+            {navigationLinks.map((n) => (
+              <li>
+                <a href={`#${n.slug}`}>{n.title}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {layout !== NavigationLayoutEnum.MAIN && <a href="/">Accueil</a>}
+      <Socials />
     </nav>
   </section>
 </header>
@@ -101,18 +112,16 @@ const { navigationLinks } = Astro.props;
     @apply relative z-10 w-full;
 
     > section {
-      @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl dark:bg-slate-900/80;
+      @apply fixed inset-x-0 top-0 bg-white/70 backdrop-blur-2xl dark:bg-black/30;
 
       > nav {
         @apply justify-between lg:flex lg:items-center;
 
-        svg,
-        [astro-icon] {
-          @apply h-6 w-6 cursor-pointer text-slate-600 transition-colors hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100;
-        }
-
         > div {
-          @apply flex shrink-0 items-center gap-x-2;
+          @apply flex shrink-0 items-center gap-x-2 max-lg:w-full max-lg:justify-between;
+          &:last-child {
+            @apply max-lg:hidden;
+          }
         }
 
         button {
@@ -122,10 +131,14 @@ const { navigationLinks } = Astro.props;
             @apply sr-only;
           }
         }
+
+        svg {
+          @apply h-6 w-6 cursor-pointer text-slate-600 transition-colors hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100;
+        }
       }
 
       &#mobile-menu {
-        @apply fixed inset-x-0 top-0 z-30  m-2 origin-top transform overflow-hidden rounded-lg p-2 transition;
+        @apply fixed inset-x-0 top-0 z-30 m-2 origin-top transform overflow-hidden rounded-lg p-2 transition;
 
         button {
           @apply -mr-2;
@@ -133,6 +146,10 @@ const { navigationLinks } = Astro.props;
 
         > nav {
           @apply flex w-full flex-col items-start justify-between px-5 pt-4;
+
+          > div {
+            @apply mb-4;
+          }
         }
       }
 
@@ -157,10 +174,10 @@ const { navigationLinks } = Astro.props;
   }
 
   ul {
-    @apply hidden lg:ml-10 lg:flex lg:flex-row lg:gap-x-4 lg:font-medium;
+    @apply hidden lg:ml-10 lg:flex lg:flex-row lg:gap-x-2 lg:font-medium;
 
     &#mobile-ul {
-      @apply space-y-1 px-2 pt-5 pb-6 max-lg:block;
+      @apply space-y-1 pr-2 max-lg:block;
     }
 
     li {
