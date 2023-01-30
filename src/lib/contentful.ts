@@ -4,8 +4,6 @@ export interface TopWarningContentfulInterface {
   richWarning: Document;
 }
 
-export interface TopWarningInterface {}
-
 export interface ProfileContentfulInterface {
   readonly title: string;
   readonly slug: string;

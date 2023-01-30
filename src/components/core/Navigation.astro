@@ -47,6 +47,7 @@ const { navigationLinks } = Astro.props;
           </button>
         </section>
       </div>
+      <div></div>
     </nav>
   </section>
 
@@ -103,16 +104,19 @@ const { navigationLinks } = Astro.props;
       @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl dark:bg-slate-900/80;
 
       > nav {
+        @apply justify-between lg:flex lg:items-center;
+
+        svg,
+        [astro-icon] {
+          @apply h-6 w-6 cursor-pointer text-slate-600 transition-colors hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100;
+        }
+
         > div {
-          @apply flex w-full items-center justify-between lg:w-auto;
+          @apply flex shrink-0 items-center gap-x-2;
         }
 
         button {
           @apply inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-900;
-
-          svg {
-            @apply h-6 w-6;
-          }
 
           > span {
             @apply sr-only;

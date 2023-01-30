@@ -1,0 +1,33 @@
+---
+import { group } from 'radash';
+
+import Layout from '../layouts/Layout.astro';
+
+import {
+  contentfulClient,
+  KeycapArticleContentfulInterface,
+  KeycapArticleType,
+  ProfileContentfulInterface
+} from '../lib/contentful';
+
+const navigationLinksEntries =
+  await contentfulClient.getEntries<ProfileContentfulInterface>({
+    content_type: 'keycaps-profile'
+  });
+
+const navigationLinks: Array<ProfileContentfulInterface> =
+  navigationLinksEntries.items.map((n) => {
+    const { title, slug, abbreviation } = n.fields;
+    return { title, slug, abbreviation };
+  });
+---
+
+<Layout navigationLinks={navigationLinks}>
+  <main slot="main">Lorem ipsum...</main>
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
+  }
+</style>
