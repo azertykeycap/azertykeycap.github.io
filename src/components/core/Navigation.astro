@@ -100,7 +100,7 @@ const { navigationLinks } = Astro.props;
     @apply relative z-10 w-full;
 
     > section {
-      @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl;
+      @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl dark:bg-slate-900/80;
 
       > nav {
         > div {
@@ -108,7 +108,7 @@ const { navigationLinks } = Astro.props;
         }
 
         button {
-          @apply inline-flex items-center justify-center rounded-md bg-white p-2 text-warm-gray-400 hover:bg-warm-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500;
+          @apply inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-900;
 
           svg {
             @apply h-6 w-6;
@@ -145,10 +145,10 @@ const { navigationLinks } = Astro.props;
   }
 
   a {
-    @apply block rounded-md px-3 py-2 text-base font-medium text-warm-gray-900 transition hover:bg-warm-gray-100;
+    @apply block rounded-md px-3 py-2 text-base font-medium text-slate-900 transition hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-900;
 
     @media screen(lg) {
-      @apply text-base font-medium text-warm-gray-500 transition hover:text-warm-gray-900;
+      @apply text-base font-medium text-slate-500 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100;
     }
   }
 
@@ -157,6 +157,10 @@ const { navigationLinks } = Astro.props;
 
     &#mobile-ul {
       @apply space-y-1 px-2 pt-5 pb-6 max-lg:block;
+    }
+
+    li {
+      @apply w-fit;
     }
   }
 </style>

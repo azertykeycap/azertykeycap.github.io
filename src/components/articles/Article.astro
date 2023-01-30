@@ -139,13 +139,13 @@ const {
 
 <style lang="postcss">
   article {
-    @apply relative flex h-fit flex-col rounded-lg border border-warm-gray-200 bg-white transition hover:border-warm-gray-300;
+    @apply relative flex h-fit flex-col rounded-lg border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600;
 
     &.new {
-      @apply rounded-xl border-4 border-amber-400;
+      @apply rounded-xl border-[3px] border-amber-400;
 
       > div {
-        @apply absolute -inset-4 flex h-fit w-fit shrink-0 items-center rounded-full bg-amber-400 fill-white p-3 text-xs font-bold uppercase text-white lg:pl-4 lg:pr-5;
+        @apply absolute -inset-4 flex h-fit w-fit shrink-0 items-center rounded-full bg-amber-400 fill-white p-3 text-xs font-bold uppercase text-white lg:p-2 lg:pl-3 lg:pr-4;
 
         > span {
           @apply hidden lg:inline;
@@ -155,7 +155,7 @@ const {
   }
 
   section {
-    @apply flex flex-col space-y-1 p-4 text-sm text-warm-gray-700;
+    @apply flex flex-col space-y-1 p-4 text-sm text-slate-700 dark:text-slate-200;
 
     &:last-child {
       @apply pt-0;
@@ -171,36 +171,36 @@ const {
       @apply flex w-full items-center;
     }
     dt {
-      @apply basis-2/5 font-semibold text-warm-gray-900;
+      @apply basis-2/5 font-semibold text-slate-900 dark:text-slate-100;
     }
 
     dd {
-      @apply basis-3/5 text-warm-gray-600;
+      @apply basis-3/5 text-slate-600 dark:text-slate-300;
 
       &.status {
-        @apply mb-1 flex basis-auto items-center rounded bg-teal-700 p-1 px-2 text-xs font-bold uppercase text-white;
+        @apply mb-1 flex basis-auto items-center rounded bg-indigo-700 p-1 px-2 text-xs font-bold uppercase text-white dark:border dark:border-indigo-700 dark:bg-indigo-700/10 dark:text-indigo-100;
       }
     }
 
     span {
-      @apply w-fit rounded bg-red-500 px-2 py-1 font-bold text-white;
+      @apply w-fit rounded bg-red-500 px-2 py-1 font-bold text-white dark:border dark:border-red-600 dark:bg-red-600/10 dark:text-red-100;
     }
   }
 
   h4 {
-    @apply p-4 text-center text-base font-medium text-warm-gray-800;
+    @apply p-4 text-center text-base font-medium text-slate-800 dark:text-slate-100;
   }
 
   hr {
-    @apply h-px border-none bg-warm-gray-100;
+    @apply h-px border-none bg-slate-100 dark:bg-slate-700;
   }
 
   button {
-    @apply w-full self-end rounded-md bg-teal-400 p-2 font-medium text-white transition hover:bg-teal-500 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
+    @apply w-full self-end rounded-md bg-teal-400 p-2 font-medium text-white transition hover:bg-teal-500 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 dark:border dark:border-teal-500 dark:bg-teal-500/10 dark:text-teal-100 dark:hover:bg-teal-500/20;
   }
 
   img {
-    @apply w-full rounded-t-lg border-b border-b-warm-gray-100 bg-slate-300 object-fill;
+    @apply w-full rounded-t-lg border-b border-b-slate-100 bg-slate-300 object-fill dark:border-b-slate-800 dark:bg-slate-700;
   }
 
   div {
@@ -210,7 +210,7 @@ const {
       @apply flex-1;
 
       &.secondary > button {
-        @apply bg-teal-50 p-2 text-teal-800 transition hover:bg-teal-100;
+        @apply bg-teal-50 p-2 text-teal-800 transition hover:bg-teal-100 dark:bg-teal-100/20 dark:text-teal-200 dark:hover:bg-teal-100/30;
       }
     }
   }
