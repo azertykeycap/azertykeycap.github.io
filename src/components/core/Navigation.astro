@@ -5,7 +5,7 @@ import Socials from '../elements/Socials.astro';
 
 export interface Props {
   layout: NavigationLayoutEnum;
-  navigationLinks: Array<ProfileContentfulInterface>;
+  navigationLinks?: Array<ProfileContentfulInterface>;
 }
 
 const { layout, navigationLinks } = Astro.props;
@@ -23,7 +23,7 @@ const { layout, navigationLinks } = Astro.props;
           />
         </a>
         {
-          layout === NavigationLayoutEnum.MAIN && (
+          layout === NavigationLayoutEnum.MAIN && navigationLinks && (
             <ul>
               {navigationLinks.map((n) => (
                 <li>
@@ -83,7 +83,7 @@ const { layout, navigationLinks } = Astro.props;
         </button>
       </div>
       {
-        layout === NavigationLayoutEnum.MAIN && (
+        layout === NavigationLayoutEnum.MAIN && navigationLinks && (
           <ul id="mobile-ul">
             {navigationLinks.map((n) => (
               <li>

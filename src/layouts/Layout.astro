@@ -5,7 +5,7 @@ import type { NavigationLayoutEnum } from '../types/enum';
 
 export interface Props {
   layout: NavigationLayoutEnum;
-  navigationLinks: Array<ProfileContentfulInterface>;
+  navigationLinks?: Array<ProfileContentfulInterface>;
 }
 
 const { layout, navigationLinks } = Astro.props;

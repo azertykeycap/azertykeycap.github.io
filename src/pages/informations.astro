@@ -1,33 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { NavigationLayoutEnum } from '../types/enum';
-
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import {
   contentfulClient,
-  ProfileContentfulInterface
+  InformationContentfulInterface
 } from '../lib/contentful';
+import { NavigationLayoutEnum } from '../types/enum';
 
-const navigationLinksEntries =
-  await contentfulClient.getEntries<ProfileContentfulInterface>({
-    content_type: 'keycaps-profile'
+const informationEntry =
+  await contentfulClient.getEntries<InformationContentfulInterface>({
+    content_type: 'information-rich-text'
   });
 
-const navigationLinks: Array<ProfileContentfulInterface> =
-  navigationLinksEntries.items.map((n) => {
-    const { title, slug, abbreviation } = n.fields;
-    return { title, slug, abbreviation };
-  });
+const informationContent = documentToHtmlString(
+  informationEntry.items[0].fields.informationRichText
+);
 ---
 
-<Layout
-  layout={NavigationLayoutEnum.SECONDARY}
-  navigationLinks={navigationLinks}
->
-  <section slot="main">Lorem ipsum...</section>
+<Layout layout={NavigationLayoutEnum.SECONDARY}>
+  <section slot="main" set:html={informationContent} />
 </Layout>
+
+<style is:global>
+  p a {
+    @apply cursor-pointer  underline;
+  }
+</style>
 
 <style>
   section {
-    @apply mt-4;
+    @apply prose mt-8 dark:prose-invert;
   }
 </style>

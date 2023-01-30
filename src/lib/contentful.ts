@@ -1,7 +1,7 @@
 import contentful, { Asset, Entry } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
-export interface TopWarningContentfulInterface {
-  richWarning: Document;
+export interface InformationContentfulInterface {
+  informationRichText: Document;
 }
 
 export interface SocialNetworkContentfulInterface {
