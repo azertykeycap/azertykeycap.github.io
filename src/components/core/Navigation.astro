@@ -31,7 +31,6 @@ const { navigationLinks } = Astro.props;
         <section id="btn-open">
           <button type="button" aria-expanded="false">
             <span>Open main menu</span>
-            <!-- Heroicon name: outline/bars-3 -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -50,17 +49,6 @@ const { navigationLinks } = Astro.props;
       </div>
     </nav>
   </section>
-
-  <!--
-      Mobile menu, show/hide based on menu open state.
-
-      Entering: "duration-150 ease-out"
-        From: "opacity-0 scale-95"
-        To: "opacity-100 scale-100"
-      Leaving: "duration-100 ease-in"
-        From: "opacity-100 scale-100"
-        To: "opacity-0 scale-95"
-    -->
 
   <section id="mobile-menu" class="hidden">
     <nav>
@@ -109,7 +97,7 @@ const { navigationLinks } = Astro.props;
   }
 
   header {
-    @apply relative w-full;
+    @apply relative z-10 w-full;
 
     > section {
       @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl;

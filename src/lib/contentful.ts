@@ -22,7 +22,8 @@ export interface KeycapArticleContentfulInterface {
   readonly startDate?: Date;
   readonly endDate?: Date;
   readonly url: string;
-  readonly warning?: string;
+  readonly additionalUrl?: string;
+  readonly warningText?: string;
   readonly isNew?: boolean;
 }
 

@@ -13,7 +13,6 @@ import {
 
 import GoTop from '../components/elements/GoTop.astro';
 import WarningText from '../components/elements/WarningText.astro';
-import Navigation from '../components/core/Navigation.astro';
 import Article from '../components/articles/Article.astro';
 
 const articlesEntries =
@@ -43,7 +42,8 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
     startDate,
     endDate,
     url,
-    warning,
+    additionalUrl,
+    warningText,
     isNew
   } = e.fields;
 
@@ -62,7 +62,8 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
       ? new Date(endDate).toLocaleDateString('fr-FR')
       : undefined,
     url,
-    warning,
+    additionalUrl,
+    warningText,
     isNew
   };
 });
@@ -91,18 +92,18 @@ const articleByProfile = group(articles, (a) => a.profile);
 
 <style lang="postcss">
   main {
-    @apply mx-auto mt-16 max-w-7xl space-y-6 py-6 sm:px-6 lg:space-y-10 lg:px-8;
+    @apply mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
   }
 
   section {
     @apply mt-6;
 
     > div {
-      @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4;
+      @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
     }
   }
 
   h3 {
-    @apply mb-4 text-lg font-semibold lg:text-2xl;
+    @apply mb-6 text-lg font-semibold lg:text-2xl;
   }
 </style>
