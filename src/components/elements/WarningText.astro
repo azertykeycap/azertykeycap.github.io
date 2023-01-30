@@ -50,12 +50,13 @@ const warningContent = documentToHtmlString(
   </div>
 </div>
 
-<style is:global>
+<style is:global lang="postcss">
   article.warning {
     @apply space-y-2 text-sm text-white;
-  }
-  article.warning p a {
-    @apply cursor-pointer underline;
+
+    p a {
+      @apply cursor-pointer underline;
+    }
   }
 </style>
 

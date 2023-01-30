@@ -1,29 +1,49 @@
-<a id="top" class="hidden">back to the top</a>
+<a id="top" class="hidden"
+  ><button
+    ><svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"></path>
+    </svg>
+  </button></a
+>
 
-<style>
+<style lang="postcss">
   a {
-    @apply bottom-0 right-0 p-3 bg-black font-semibold text-white cursor-pointer;
+    @apply bottom-0 right-0 m-4 flex cursor-pointer items-center rounded-full bg-teal-400 p-3 font-semibold text-white shadow-md;
+
+    > button {
+      @apply text-white;
+    }
   }
 </style>
 
 <script>
-  const btnTop = document.getElementById("top");
+  const btnTop = document.getElementById('top');
 
   if (btnTop) {
-    btnTop.addEventListener("click", () => {
+    btnTop.addEventListener('click', () => {
       window.scrollTo({
         top: 0,
-        left: 0,
+        left: 0
       });
     });
 
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 300 && btnTop) {
-        btnTop.classList.remove("hidden");
-        btnTop.classList.add("fixed");
+        btnTop.classList.remove('hidden');
+        btnTop.classList.add('fixed');
       } else {
-        btnTop.classList.remove("fixed");
-        btnTop.classList.add("hidden");
+        btnTop.classList.remove('fixed');
+        btnTop.classList.add('hidden');
       }
     });
   }

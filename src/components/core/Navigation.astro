@@ -9,57 +9,47 @@ const { navigationLinks } = Astro.props;
 ---
 
 <header>
-  <div class="bg-warm-gray-50">
-    <nav
-      class="relative mx-auto flex max-w-7xl items-center justify-between px-6 pt-6 xl:px-8"
-    >
-      <div class="flex flex-1 items-center">
-        <div class="flex w-full items-center justify-between lg:w-auto">
-          <a href="#">
-            <span class="sr-only">PLAKET INDUSTRIES</span>
-            <img
-              class="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
-              alt=""
-            />
-          </a>
-          <div class="-mr-2 flex items-center lg:hidden" id="btn-open">
-            <button
-              type="button"
-              class="focus-ring-inset bg-warm-gray-50 text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-              aria-expanded="false"
+  <section>
+    <nav>
+      <div>
+        <a href="#">
+          <span class="sr-only">PLAKET INDUSTRIES</span>
+          <img
+            src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
+            alt=""
+          />
+        </a>
+        <ul>
+          {
+            navigationLinks.map((n) => (
+              <li>
+                <a href={`#${n.slug}`}>{n.abbreviation}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <section id="btn-open">
+          <button type="button" aria-expanded="false">
+            <span>Open main menu</span>
+            <!-- Heroicon name: outline/bars-3 -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
             >
-              <span class="sr-only">Open main menu</span>
-              <!-- Heroicon name: outline/bars-3 -->
-              <svg
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+            </svg>
+          </button>
+        </section>
       </div>
-      <ul class="hidden lg:flex">
-        {
-          navigationLinks.map((n) => (
-            <li>
-              <a href={`#${n.slug}`}>{n.abbreviation}</a>
-            </li>
-          ))
-        }
-      </ul>
     </nav>
-  </div>
+  </section>
 
   <!--
       Mobile menu, show/hide based on menu open state.
@@ -72,78 +62,114 @@ const { navigationLinks } = Astro.props;
         To: "opacity-0 scale-95"
     -->
 
-  <div
-    class="absolute inset-x-0 top-0 z-30 origin-top transform p-2 transition lg:hidden"
-    id="mobile-menu"
-  >
-    <div
-      class="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
-    >
-      <div class="flex items-center justify-between px-5 pt-4">
-        <div>
-          <img
-            class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
-            alt=""
-          />
-        </div>
-        <div class="-mr-2">
-          <button
-            type="button"
-            id="btn-close"
-            class="text-warm-gray-400 hover:bg-warm-gray-100 inline-flex items-center justify-center rounded-md bg-white p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500"
+  <section id="mobile-menu" class="hidden">
+    <nav>
+      <div>
+        <img
+          src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
+          alt=""
+        />
+        <button type="button" id="btn-close">
+          <span>Close menu</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
           >
-            <span class="sr-only">Close menu</span>
-            <!-- Heroicon name: outline/x-mark -->
-            <svg
-              class="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
       </div>
-      <div class="pt-5 pb-6">
-        <div class="space-y-1 px-2">
-          <ul id="mobile-ul lg:hidden">
-            {
-              navigationLinks.map((n) => (
-                <li>
-                  <a href={`#${n.slug}`}>{n.title}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+      <ul id="mobile-ul">
+        {
+          navigationLinks.map((n) => (
+            <li>
+              <a href={`#${n.slug}`}>{n.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
 </header>
 
-<style>
-  @media (max-width: 1024px) {
-    a {
-      @apply block rounded-md px-3 py-2 text-base font-medium text-warm-gray-900 transition hover:bg-warm-gray-100;
+<style lang="postcss">
+  img {
+    @apply h-8 w-auto;
+
+    &:not(#mobile-menu) {
+      @apply sm:h-10;
     }
   }
 
-  @media screen(lg) {
-    a {
+  header {
+    @apply relative w-full;
+
+    > section {
+      @apply fixed inset-x-0 top-0 bg-white/80 backdrop-blur-2xl;
+
+      > nav {
+        > div {
+          @apply flex w-full items-center justify-between lg:w-auto;
+        }
+
+        button {
+          @apply inline-flex items-center justify-center rounded-md bg-white p-2 text-warm-gray-400 hover:bg-warm-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500;
+
+          svg {
+            @apply h-6 w-6;
+          }
+
+          > span {
+            @apply sr-only;
+          }
+        }
+      }
+
+      &#mobile-menu {
+        @apply fixed inset-x-0 top-0 z-30  m-2 origin-top transform overflow-hidden rounded-lg p-2 transition;
+
+        button {
+          @apply -mr-2;
+        }
+
+        > nav {
+          @apply flex w-full flex-col items-start justify-between px-5 pt-4;
+        }
+      }
+
+      &:not(#mobile-menu) {
+        > nav {
+          @apply mx-auto flex max-w-7xl items-center justify-between px-6 py-4 xl:px-8;
+
+          section {
+            @apply -mr-2 flex items-center lg:hidden;
+          }
+        }
+      }
+    }
+  }
+
+  a {
+    @apply block rounded-md px-3 py-2 text-base font-medium text-warm-gray-900 transition hover:bg-warm-gray-100;
+
+    @media screen(lg) {
       @apply text-base font-medium text-warm-gray-500 transition hover:text-warm-gray-900;
     }
   }
 
   ul {
-    @apply flex flex-col font-medium lg:ml-10 lg:flex-row lg:gap-x-10;
+    @apply hidden lg:ml-10 lg:flex lg:flex-row lg:gap-x-4 lg:font-medium;
+
+    &#mobile-ul {
+      @apply space-y-1 px-2 pt-5 pb-6 max-lg:block;
+    }
   }
 </style>
 

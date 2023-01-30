@@ -89,17 +89,17 @@ const articleByProfile = group(articles, (a) => a.profile);
   </main>
 </Layout>
 
-<style>
+<style lang="postcss">
   main {
-    @apply mx-auto max-w-7xl space-y-6 py-6 sm:px-6 lg:space-y-10 lg:px-8;
+    @apply mx-auto mt-16 max-w-7xl space-y-6 py-6 sm:px-6 lg:space-y-10 lg:px-8;
   }
 
   section {
     @apply mt-6;
-  }
 
-  section > div {
-    @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4;
+    > div {
+      @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4;
+    }
   }
 
   h3 {

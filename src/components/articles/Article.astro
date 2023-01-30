@@ -50,7 +50,7 @@ const { title, img, material, description, profile, startDate, endDate, url } =
   </figure>
 </article>
 
-<style>
+<style lang="postcss">
   article {
     @apply flex flex-col rounded-lg border border-warm-gray-200 bg-white transition hover:border-warm-gray-300;
   }
@@ -61,14 +61,14 @@ const { title, img, material, description, profile, startDate, endDate, url } =
 
   section > dl {
     @apply flex w-full;
-  }
 
-  dl dt {
-    @apply basis-1/3 font-semibold text-warm-gray-900;
-  }
+    dt {
+      @apply basis-1/3 font-semibold text-warm-gray-900;
+    }
 
-  dl dd {
-    @apply basis-2/3 text-warm-gray-600;
+    dd {
+      @apply basis-2/3 text-warm-gray-600;
+    }
   }
 
   h4 {
