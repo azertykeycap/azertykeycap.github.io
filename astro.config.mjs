@@ -4,5 +4,5 @@ import tailwind from '@astrojs/tailwind';
 import compress from 'astro-compress';
 
 export default defineConfig({
-  integrations: [, tailwind(), compress()]
+  integrations: [tailwind(), compress()]
 });

@@ -18,17 +18,15 @@ const informationContent = documentToHtmlString(
 ---
 
 <Layout layout={NavigationLayoutEnum.SECONDARY}>
-  <section slot="main" set:html={informationContent} />
+  <section
+    class="prose prose-slate dark:prose-invert"
+    slot="main"
+    set:html={informationContent}
+  />
 </Layout>
-
-<style is:global>
-  p a {
-    @apply cursor-pointer  underline;
-  }
-</style>
 
 <style>
   section {
-    @apply prose mt-8 dark:prose-invert;
+    @apply mt-8;
   }
 </style>
