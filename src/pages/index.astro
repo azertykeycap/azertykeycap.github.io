@@ -21,7 +21,8 @@ const articlesEntries =
 
 const navigationLinksEntries =
   await contentfulClient.getEntries<ProfileContentfulInterface>({
-    content_type: 'keycaps-profile'
+    content_type: 'keycaps-profile',
+    order: 'fields.title'
   });
 
 const navigationLinks: Array<ProfileContentfulInterface> =
@@ -73,16 +74,18 @@ const articleByProfile = group(articles, (a) => a.profile);
 <Layout layout={NavigationLayoutEnum.MAIN} navigationLinks={navigationLinks}>
   <div slot="main">
     {
-      Object.keys(articleByProfile).map((a) => (
-        <section id={navigationLinks.find((n) => a === n.title)?.slug}>
-          <h3>{a}</h3>
-          <div>
-            {articleByProfile[a]?.map((a) => (
-              <Article article={a} />
-            ))}
-          </div>
-        </section>
-      ))
+      Object.keys(articleByProfile)
+        .sort()
+        .map((a) => (
+          <section id={navigationLinks.find((n) => a === n.title)?.slug}>
+            <h3>{a}</h3>
+            <div>
+              {articleByProfile[a]?.map((a) => (
+                <Article article={a} />
+              ))}
+            </div>
+          </section>
+        ))
     }
     <GoTop />
   </div>
