@@ -1,27 +1,24 @@
-<a id="top" class="hidden"
-  ><button
-    ><svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-6 h-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"></path>
-    </svg>
-  </button></a
->
+<button class="hidden"
+  ><svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"></path>
+  </svg>
+</button>
 
 <style lang="postcss">
-  a {
-    @apply bottom-0 right-0 m-4 flex cursor-pointer items-center rounded-full bg-teal-500 p-3 font-semibold text-white shadow-md;
+  > button {
+    @apply bottom-0 right-0 m-4 flex cursor-pointer items-center rounded-full bg-teal-500 p-3 font-semibold text-white shadow-md transition hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
 
-    > button {
-      @apply text-white;
+    svg {
+      @apply h-6 w-6;
     }
   }
 </style>

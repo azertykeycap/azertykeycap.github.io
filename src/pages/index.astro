@@ -80,9 +80,11 @@ const articleByProfile = group(articles, (a) => a.profile);
           <section id={navigationLinks.find((n) => a === n.title)?.slug}>
             <h3>{a}</h3>
             <div>
-              {articleByProfile[a]?.map((a) => (
-                <Article article={a} />
-              ))}
+              {articleByProfile[a]
+                ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
+                ?.map((a) => (
+                  <Article article={a} />
+                ))}
             </div>
           </section>
         ))
