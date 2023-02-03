@@ -1,4 +1,4 @@
-<button class="hidden" id="top"
+<button type="button" class="hidden" id="top"
   ><svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -14,8 +14,9 @@
 </button>
 
 <style lang="postcss">
-  button {
-    @apply bottom-0 right-0 m-4 flex cursor-pointer items-center rounded-full bg-teal-500 p-3 font-semibold text-white shadow-md transition hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
+  button,
+  [type='button'] {
+    @apply bottom-0 right-0 m-4 flex cursor-pointer items-center rounded-full bg-teal-500 p-3 font-semibold text-white shadow-md transition-colors hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
 
     svg {
       @apply h-6 w-6;

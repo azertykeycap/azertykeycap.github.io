@@ -123,14 +123,20 @@ const {
         <div>
           {
             additionalUrl && (
-              <a href={additionalUrl} class="secondary" target="_blank">
-                <button>Kit secondaire</button>
+              <a
+                tabindex="0"
+                role="button"
+                href={additionalUrl}
+                class="secondary"
+                target="_blank"
+              >
+                Kit secondaire
               </a>
             )
           }
-          <a href={url} target="_blank">
-            <button>En savoir +</button>
-          </a>
+          <a tabindex="0" role="button" href={url} target="_blank"
+            >En savoir +</a
+          >
         </div>
       </section>
     </figcaption>
@@ -139,7 +145,7 @@ const {
 
 <style lang="postcss">
   article {
-    @apply relative flex h-fit flex-col rounded-lg border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600;
+    @apply relative flex h-fit flex-col rounded-lg border border-slate-200 bg-white transition-colors hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600;
 
     &.new {
       @apply rounded-xl border-[3px] border-amber-400;
@@ -178,7 +184,7 @@ const {
       @apply basis-3/5 text-slate-600 dark:text-slate-300;
 
       &.status {
-        @apply mb-1 flex basis-auto items-center rounded bg-indigo-700 p-1 px-2 text-xs font-bold uppercase text-white dark:border dark:border-indigo-700 dark:bg-indigo-700/10 dark:text-indigo-100;
+        @apply flex basis-auto items-center rounded bg-teal-700 p-1 px-2 text-xs font-bold uppercase text-white dark:border dark:border-teal-700 dark:bg-indigo-700/10 dark:text-teal-100;
       }
     }
 
@@ -195,8 +201,8 @@ const {
     @apply h-px border-none bg-slate-100 dark:bg-slate-700;
   }
 
-  button {
-    @apply w-full self-end rounded-md bg-teal-500 p-2 font-semibold text-white transition hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 dark:border dark:border-teal-500 dark:bg-teal-500/10 dark:text-teal-100 dark:hover:bg-teal-500/20;
+  a {
+    @apply w-full self-end rounded-md border-transparent bg-indigo-600 p-2 text-center font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 dark:border dark:border-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-100 dark:hover:bg-indigo-500/20;
   }
 
   img {
@@ -209,8 +215,8 @@ const {
     a {
       @apply flex-1;
 
-      &.secondary > button {
-        @apply bg-teal-50 p-2 text-teal-800 transition hover:bg-teal-100/50 dark:bg-teal-100/20 dark:text-teal-200 dark:hover:bg-teal-100/30;
+      &.secondary {
+        @apply bg-indigo-50 p-2 text-indigo-800 transition-colors hover:bg-indigo-100/50 dark:bg-indigo-100/20 dark:text-indigo-200 dark:hover:bg-indigo-100/30;
       }
     }
   }
