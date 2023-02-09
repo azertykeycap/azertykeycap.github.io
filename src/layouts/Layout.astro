@@ -1,0 +1,90 @@
+---
+import Navigation from '../components/core/Navigation.astro';
+import type { ProfileContentfulInterface } from '../lib/contentful';
+import type { NavigationLayoutEnum } from '../types/enum';
+
+export interface Props {
+  layout: NavigationLayoutEnum;
+  title: string;
+  navigationLinks?: Array<ProfileContentfulInterface>;
+}
+
+const { title, layout, navigationLinks } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+    />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta
+      name="og:title"
+      content={`Azertykeycaps par Plaketdebeur - ${title}`}
+    />
+    <meta name="og:type" content="website" />
+    <meta name="og:url" content="https://azertykeycaps.fr" />
+    <meta name="og:image" content="" />
+    <meta name="og:site_name" content="Azertykeycaps" />
+    <meta
+      name="og:description"
+      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+    />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta
+      name="twitter:title"
+      content={`Azertykeycaps par Plaketdebeur - ${title}`}
+    />
+    <meta
+      name="twitter:description"
+      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+    />
+    <meta
+      name="twitter:image"
+      content="https://cdn.company.com/posts/filename.jpg"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image:alt" content="image alt content" />
+    <meta name="twitter:site" content="@hegoom" />
+    <meta name="twitter:creator" content="@hegoom" />
+
+    <link rel="icon" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Azerty Keycaps - {title}</title>
+  </head>
+  <body>
+    <Navigation layout={layout} navigationLinks={navigationLinks} />
+    <main>
+      <slot name="main" />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
+<style is:global>
+  html {
+    @apply h-full scroll-smooth bg-slate-50 font-sans antialiased dark:bg-slate-900;
+  }
+
+  body {
+    @apply min-h-full;
+  }
+</style>
+
+<style>
+  main {
+    @apply relative mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
+  }
+</style>

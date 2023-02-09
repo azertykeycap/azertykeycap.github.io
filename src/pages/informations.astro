@@ -1,0 +1,33 @@
+---
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+import {
+  contentfulClient,
+  InformationContentfulInterface
+} from '../lib/contentful';
+import Layout from '../layouts/Layout.astro';
+import { NavigationLayoutEnum } from '../types/enum';
+
+const informationEntry =
+  await contentfulClient.getEntries<InformationContentfulInterface>({
+    content_type: 'information-rich-text'
+  });
+
+const informationContent = documentToHtmlString(
+  informationEntry.items[0].fields.informationRichText
+);
+---
+
+<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations">
+  <section
+    class="prose prose-slate dark:prose-invert"
+    slot="main"
+    set:html={informationContent}
+  />
+</Layout>
+
+<style>
+  section {
+    @apply mt-8;
+  }
+</style>
