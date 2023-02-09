@@ -83,7 +83,7 @@ const articleByProfile = group(articles, (a) => a.profile);
         .map((a, i) => (
           <section id={navigationLinks.find((n) => a === n.title)?.slug}>
             <h3>{a}</h3>
-            <div>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {articleByProfile[a]
                 ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
                 ?.map((a, j) => (
@@ -97,13 +97,7 @@ const articleByProfile = group(articles, (a) => a.profile);
   </div>
 </Layout>
 
-<style lang="postcss">
-  section {
-    > div {
-      @apply grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
-    }
-  }
-
+<style>
   h3 {
     @apply mt-10 mb-8 text-2xl font-semibold dark:text-white;
   }
