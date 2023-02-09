@@ -1,7 +1,10 @@
 ---
+import { Image } from '@astrojs/image/components';
+
 import type { ProfileContentfulInterface } from '../../lib/contentful';
 import { NavigationLayoutEnum } from '../../types/enum';
 import Socials from '../elements/Socials.astro';
+import Logo from '../../assets/logo.png';
 
 export interface Props {
   layout: NavigationLayoutEnum;
@@ -17,9 +20,12 @@ const { layout, navigationLinks } = Astro.props;
       <div>
         <a href={layout === NavigationLayoutEnum.MAIN ? '#' : '/'}>
           <span class="sr-only">PLAKET INDUSTRIES</span>
-          <img
-            src="https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=500"
-            alt=""
+          <Image
+            src={Logo}
+            aspectRatio={1 / 1}
+            width={40}
+            height={40}
+            alt="Author logo"
           />
         </a>
         {
@@ -61,9 +67,12 @@ const { layout, navigationLinks } = Astro.props;
   <section id="mobile-menu" class="hidden">
     <nav>
       <div>
-        <img
-          src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
-          alt=""
+        <Image
+          src={Logo}
+          aspectRatio={1 / 1}
+          width={32}
+          height={32}
+          alt="Author logo"
         />
         <button type="button" id="btn-close">
           <span>Close menu</span>

@@ -76,14 +76,14 @@ const articleByProfile = group(articles, (a) => a.profile);
     {
       Object.keys(articleByProfile)
         .sort()
-        .map((a) => (
+        .map((a, i) => (
           <section id={navigationLinks.find((n) => a === n.title)?.slug}>
             <h3>{a}</h3>
             <div>
               {articleByProfile[a]
                 ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
-                ?.map((a) => (
-                  <Article article={a} />
+                ?.map((a, j) => (
+                  <Article article={a} isHighPriority={i === 0 && j < 4} />
                 ))}
             </div>
           </section>
