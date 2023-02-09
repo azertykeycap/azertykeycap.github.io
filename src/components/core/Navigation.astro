@@ -23,8 +23,8 @@ const { layout, navigationLinks } = Astro.props;
           <Image
             src={Logo}
             aspectRatio={1 / 1}
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             alt="Author logo"
             format={'webp'}
           />
@@ -113,10 +113,6 @@ const { layout, navigationLinks } = Astro.props;
 <style lang="postcss">
   img {
     @apply h-8 w-auto;
-
-    &:not(#mobile-menu) {
-      @apply sm:h-10;
-    }
   }
 
   header {

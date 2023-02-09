@@ -1,10 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
 import {
   contentfulClient,
   InformationContentfulInterface
 } from '../lib/contentful';
+import Layout from '../layouts/Layout.astro';
 import { NavigationLayoutEnum } from '../types/enum';
 
 const informationEntry =
@@ -17,7 +18,7 @@ const informationContent = documentToHtmlString(
 );
 ---
 
-<Layout layout={NavigationLayoutEnum.SECONDARY}>
+<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations">
   <section
     class="prose prose-slate dark:prose-invert"
     slot="main"

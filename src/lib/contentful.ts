@@ -1,6 +1,7 @@
 import contentful, { Asset, Entry } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 export interface InformationContentfulInterface {
+  title: string;
   informationRichText: Document;
 }
 

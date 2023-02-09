@@ -5,10 +5,11 @@ import type { NavigationLayoutEnum } from '../types/enum';
 
 export interface Props {
   layout: NavigationLayoutEnum;
+  title: string;
   navigationLinks?: Array<ProfileContentfulInterface>;
 }
 
-const { layout, navigationLinks } = Astro.props;
+const { title, layout, navigationLinks } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -22,7 +23,10 @@ const { layout, navigationLinks } = Astro.props;
     />
     <meta name="generator" content={Astro.generator} />
 
-    <meta name="og:title" content="Azertykeycaps par Plaketdebeur" />
+    <meta
+      name="og:title"
+      content={`Azertykeycaps par Plaketdebeur - ${title}`}
+    />
     <meta name="og:type" content="website" />
     <meta name="og:url" content="https://azertykeycaps.fr" />
     <meta name="og:image" content="" />
@@ -33,7 +37,10 @@ const { layout, navigationLinks } = Astro.props;
     />
     <meta property="og:locale" content="fr_FR" />
 
-    <meta name="twitter:title" content="Azertykeycaps par Plaketdebeur" />
+    <meta
+      name="twitter:title"
+      content={`Azertykeycaps par Plaketdebeur - ${title}`}
+    />
     <meta
       name="twitter:description"
       content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
@@ -56,7 +63,7 @@ const { layout, navigationLinks } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Azerty Keycaps by Plaketdebeur</title>
+    <title>Azerty Keycaps - {title}</title>
   </head>
   <body>
     <Navigation layout={layout} navigationLinks={navigationLinks} />

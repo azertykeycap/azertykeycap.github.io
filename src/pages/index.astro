@@ -71,7 +71,11 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
 const articleByProfile = group(articles, (a) => a.profile);
 ---
 
-<Layout layout={NavigationLayoutEnum.MAIN} navigationLinks={navigationLinks}>
+<Layout
+  layout={NavigationLayoutEnum.MAIN}
+  navigationLinks={navigationLinks}
+  title="Keycaps"
+>
   <div slot="main">
     {
       Object.keys(articleByProfile)
@@ -96,7 +100,7 @@ const articleByProfile = group(articles, (a) => a.profile);
 <style lang="postcss">
   section {
     > div {
-      @apply grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+      @apply grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
     }
   }
 
