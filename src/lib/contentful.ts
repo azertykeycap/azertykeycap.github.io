@@ -16,13 +16,21 @@ export interface ProfileContentfulInterface {
   readonly abbreviation: string;
 }
 
+export enum StatusEnum {
+  IN_STOCK = 'En stock',
+  GB_RUNNING = 'GB en cours',
+  GB_OVER = 'GB terminé',
+  IC = 'Interest Check',
+  OUT_STOCK = 'Out Of Stock'
+}
+
 export interface KeycapArticleContentfulInterface {
   readonly img: Asset;
   readonly title: string;
   readonly profile: Entry<ProfileContentfulInterface>;
   readonly description?: string;
   readonly material: string;
-  readonly status?: string;
+  readonly status?: StatusEnum;
   readonly startDate?: Date;
   readonly endDate?: Date;
   readonly url: string;

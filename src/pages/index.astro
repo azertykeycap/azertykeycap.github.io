@@ -1,6 +1,5 @@
 ---
 import { group } from 'radash';
-
 import Layout from '../layouts/Layout.astro';
 
 import {
@@ -11,8 +10,8 @@ import {
 } from '../lib/contentful';
 
 import GoTop from '../components/elements/GoTop.astro';
-import Article from '../components/articles/Article.astro';
 import { NavigationLayoutEnum } from '../types/enum';
+import ArticleList from '../components/articles/ArticleList';
 
 const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
@@ -68,7 +67,7 @@ const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
   };
 });
 
-const articleByProfile = group(articles, (a) => a.profile);
+const articlesByProfile = group(articles, (a) => a.profile);
 ---
 
 <Layout
@@ -77,28 +76,11 @@ const articleByProfile = group(articles, (a) => a.profile);
   title="Keycaps"
 >
   <div slot="main">
-    {
-      Object.keys(articleByProfile)
-        .sort()
-        .map((a, i) => (
-          <section id={navigationLinks.find((n) => a === n.title)?.slug}>
-            <h3>{a}</h3>
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {articleByProfile[a]
-                ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
-                ?.map((a, j) => (
-                  <Article article={a} isHighPriority={i === 0 && j < 4} />
-                ))}
-            </div>
-          </section>
-        ))
-    }
+    <ArticleList
+      articles={articlesByProfile}
+      navigationLinks={navigationLinks}
+      client:load
+    />
     <GoTop />
   </div>
 </Layout>
-
-<style>
-  h3 {
-    @apply mt-10 mb-8 text-2xl font-semibold dark:text-white;
-  }
-</style>
