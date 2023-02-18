@@ -1,5 +1,7 @@
 ---
 import Navigation from '../components/core/Navigation.astro';
+import './../styles/reset.css.ts';
+
 import type { ProfileContentfulInterface } from '../lib/contentful';
 import type { NavigationLayoutEnum } from '../types/enum';
 
@@ -85,6 +87,6 @@ const { title, layout, navigationLinks } = Astro.props;
 
 <style>
   main {
-    @apply relative mx-auto mt-16 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
+    @apply relative mx-auto mt-20 mb-12 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
   }
 </style>

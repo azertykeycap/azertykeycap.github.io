@@ -1,14 +1,10 @@
-import { cva, cx } from 'class-variance-authority';
+import { cx } from 'class-variance-authority';
 import type { KeycapArticleType } from '../../lib/contentful';
 
 export interface ArticleProps {
   article: KeycapArticleType;
   isHighPriority: boolean;
 }
-
-const t = cva('article', {
-  variants: {}
-});
 
 export default function Article(props: ArticleProps) {
   const { article, isHighPriority } = props;
@@ -31,9 +27,9 @@ export default function Article(props: ArticleProps) {
     <article
       class={cx(
         isNew
-          ? 'rounded-xl border-[3px] border-amber-500'
-          : 'border border-slate-200 hover:border-slate-300',
-        'relative flex h-fit flex-col rounded-lg  bg-white transition-colors dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600'
+          ? 'rounded-xl border-[3px] border-amber-500 dark:border-amber-500'
+          : 'border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',
+        'relative flex h-fit flex-col rounded-lg  bg-white transition-colors  dark:bg-slate-900'
       )}
     >
       {isNew && (
@@ -189,7 +185,7 @@ export default function Article(props: ArticleProps) {
               'flex flex-col space-y-1 p-4 pt-0 text-sm text-slate-700 dark:text-slate-200'
             }
           >
-            <div class={'flex flex-col pt-4 lg:gap-y-2'}>
+            <div class={'flex flex-col gap-2 pt-4 xl:flex-row'}>
               {additionalUrl && (
                 <a
                   role="button"
@@ -205,7 +201,7 @@ export default function Article(props: ArticleProps) {
                 href={url}
                 target="_blank"
                 class={
-                  'w-full self-end rounded-md border-transparent bg-indigo-600 p-2 text-center font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 dark:border dark:border-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-100 dark:hover:bg-indigo-500/20'
+                  'w-full flex-1 self-end rounded-md border-transparent bg-indigo-600 p-2 text-center font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 dark:border dark:border-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-100 dark:hover:bg-indigo-500/20'
                 }
               >
                 En savoir +
