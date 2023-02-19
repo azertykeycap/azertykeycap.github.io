@@ -2,13 +2,6 @@
 import Svg from '@jasikpark/astro-svg-loader';
 
 import { styles } from './styles.css';
-interface CustomDataFile {
-  default: Record<string, any>;
-}
-
-const svgs = await Astro.glob<CustomDataFile>('../../../assets/*.svg');
-
-// console.log(svgs);
 
 import {
   contentfulClient,
@@ -18,7 +11,6 @@ import {
 interface SocialIconInterface {
   title: string;
   url: string;
-  icon: string;
 }
 
 const socialLinksEntries =
@@ -28,8 +20,8 @@ const socialLinksEntries =
 
 const socialLinks: Array<SocialIconInterface> = socialLinksEntries.items.map(
   (n) => {
-    const { title, url, svgIcon } = n.fields;
-    return { title, url, icon: svgIcon.fields.file.url };
+    const { title, url } = n.fields;
+    return { title, url };
   }
 );
 ---

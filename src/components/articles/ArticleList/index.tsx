@@ -45,14 +45,8 @@ export default function ArticleList(props: ArticleListProps) {
             <section
               id={props.navigationLinks.find((n) => a === n.title)?.slug}
             >
-              <h3 class={'mt-10 mb-12 text-2xl font-semibold dark:text-white'}>
-                {a}
-              </h3>
-              <div
-                class={
-                  'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-                }
-              >
+              <h2 class={styles.section.title}>{a}</h2>
+              <div class={styles.section.grid}>
                 {articlesDisplay[a]
                   ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
                   ?.filter((a) => (checked ? a.status === 'En stock' : a))

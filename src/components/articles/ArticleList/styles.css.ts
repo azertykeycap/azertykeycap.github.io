@@ -21,37 +21,37 @@ const container = style({
   }
 });
 
-const title = style({
-  marginTop: '2.5rem',
-  marginBottom: '3rem',
-  fontSize: '1.25rem',
-  fontWeight: '600',
-  '@media': {
-    [mediaQueries.dark]: {
-      color: vars.color.white
+const section = {
+  title: style({
+    marginTop: '2rem',
+    marginBottom: '2.5rem',
+    fontSize: '1.75rem',
+    fontWeight: '600',
+    '@media': {
+      [mediaQueries.dark]: {
+        color: vars.color.white
+      }
     }
-  }
-});
-
-const grid = style({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-  gap: '1.5rem',
-  '@media': {
-    [mediaQueries.sm]: {
-      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
-    },
-    [mediaQueries.md]: {
-      gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
-    },
-    [mediaQueries.lg]: {
-      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
+  }),
+  grid: style({
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+    gap: '1.5rem',
+    '@media': {
+      [mediaQueries.sm]: {
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+      },
+      [mediaQueries.md]: {
+        gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
+      },
+      [mediaQueries.lg]: {
+        gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
+      }
     }
-  }
-});
+  })
+};
 
 export const styles = {
   container,
-  title,
-  grid
+  section
 };

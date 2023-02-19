@@ -21,7 +21,7 @@ globalStyle('body', {
 const layout = {
   main: style({
     display: 'flex',
-    rowGap: '1.5rem',
+    rowGap: '0.5rem',
     flexDirection: 'column',
     position: 'relative',
     marginLeft: 'auto',
@@ -32,7 +32,7 @@ const layout = {
     padding: '1.5rem',
     '@media': {
       [mediaQueries.lg]: {
-        rowGap: '2.5rem',
+        rowGap: '1rem',
         paddingLeft: '2rem',
         paddingRight: '2rem'
       }

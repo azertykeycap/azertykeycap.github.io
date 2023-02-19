@@ -24,6 +24,7 @@ const section = {
       paddingBottom: '1.5rem',
       '@media': {
         [mediaQueries.lg]: {
+          marginTop: 0,
           flexDirection: 'row',
           columnGap: '0.5rem',
           paddingBottom: 0
@@ -42,7 +43,7 @@ const section = {
   a: style({
     display: 'block',
     borderRadius: '0.375rem',
-    padding: '0.75rem 0.5rem',
+    padding: '0.5rem 0.75rem',
     fontSize: '1rem',
     fontWeight: 500,
     color: vars.color.slate900,
