@@ -16,8 +16,7 @@ globalStyle('html', {
   WebkitTextSizeAdjust: '100%',
   MozTabSize: 4,
   tabSize: 4,
-  fontFamily: [
-    'Inter',
+  fontFamily: `'Inter',
     'ui-sans-serif',
     'system-ui',
     '-apple-system',
@@ -31,8 +30,7 @@ globalStyle('html', {
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol',
-    'Noto Color Emoji'
-  ]
+    'Noto Color Emoji'`
 });
 
 globalStyle('body', {

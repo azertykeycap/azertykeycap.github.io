@@ -2,6 +2,9 @@
 import { group } from 'radash';
 import Layout from '../layouts/Layout.astro';
 
+import GoTop from '../components/elements/GoTop/index.astro';
+import ArticleList from '../components/articles/ArticleList/index';
+
 import {
   contentfulClient,
   KeycapArticleContentfulInterface,
@@ -9,9 +12,7 @@ import {
   ProfileContentfulInterface
 } from '../lib/contentful';
 
-import GoTop from '../components/elements/GoTop.astro';
 import { NavigationLayoutEnum } from '../types/enum';
-import ArticleList from '../components/articles/ArticleList';
 
 const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
@@ -75,12 +76,11 @@ const articlesByProfile = group(articles, (a) => a.profile);
   navigationLinks={navigationLinks}
   title="Keycaps"
 >
-  <div slot="main">
-    <ArticleList
-      articles={articlesByProfile}
-      navigationLinks={navigationLinks}
-      client:load
-    />
-    <GoTop />
-  </div>
+  <ArticleList
+    slot="main"
+    articles={articlesByProfile}
+    navigationLinks={navigationLinks}
+    client:load
+  />
+  <GoTop />
 </Layout>

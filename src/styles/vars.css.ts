@@ -1,8 +1,4 @@
-import {
-  createGlobalTheme,
-  createVar,
-  createThemeContract
-} from '@vanilla-extract/css';
+import { createGlobalTheme, createThemeContract } from '@vanilla-extract/css';
 
 export const rawVars = {
   color: {
@@ -38,11 +34,13 @@ export const vars = createGlobalTheme(':root', {
     indigo600: '#4f46e5',
     indigo700: '#4338ca',
     indigo800: '#3730a3',
-    indigo900: '#312e81'
+    indigo900: '#312e81',
+    teal500: '#14b8a6',
+    teal600: '#0d9488'
   },
 
   fontFamily: {
-    body: 'Inter, system-ui, -apple-system'
+    body: `'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`
   },
 
   fontSize: {

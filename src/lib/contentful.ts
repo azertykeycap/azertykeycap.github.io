@@ -8,6 +8,7 @@ export interface InformationContentfulInterface {
 export interface SocialNetworkContentfulInterface {
   title: string;
   url: string;
+  svgIcon: Asset;
 }
 
 export interface ProfileContentfulInterface {

@@ -1,5 +1,6 @@
 ---
 import Navigation from '../components/core/Navigation/Navigation.astro';
+import { styles } from './styles.css';
 import './../styles/reset.css.ts';
 
 import type { ProfileContentfulInterface } from '../lib/contentful';
@@ -69,24 +70,9 @@ const { title, layout, navigationLinks } = Astro.props;
   </head>
   <body>
     <Navigation layout={layout} navigationLinks={navigationLinks} />
-    <main>
+    <main class={styles.layout.main}>
       <slot name="main" />
     </main>
     <slot name="footer" />
   </body>
 </html>
-<style is:global>
-  html {
-    @apply h-full scroll-smooth bg-slate-50 font-sans antialiased dark:bg-slate-900;
-  }
-
-  body {
-    @apply min-h-full;
-  }
-</style>
-
-<style>
-  main {
-    @apply relative mx-auto mt-20 mb-12 max-w-7xl space-y-6 py-6 px-6 sm:px-6 lg:space-y-10 lg:px-8;
-  }
-</style>

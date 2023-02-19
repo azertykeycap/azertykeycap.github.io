@@ -1,0 +1,51 @@
+---
+import Svg from '@jasikpark/astro-svg-loader';
+
+import { styles } from './styles.css';
+interface CustomDataFile {
+  default: Record<string, any>;
+}
+
+const svgs = await Astro.glob<CustomDataFile>('../../../assets/*.svg');
+
+// console.log(svgs);
+
+import {
+  contentfulClient,
+  SocialNetworkContentfulInterface
+} from '../../../lib/contentful';
+
+interface SocialIconInterface {
+  title: string;
+  url: string;
+  icon: string;
+}
+
+const socialLinksEntries =
+  await contentfulClient.getEntries<SocialNetworkContentfulInterface>({
+    content_type: 'socialNetwork'
+  });
+
+const socialLinks: Array<SocialIconInterface> = socialLinksEntries.items.map(
+  (n) => {
+    const { title, url, svgIcon } = n.fields;
+    return { title, url, icon: svgIcon.fields.file.url };
+  }
+);
+---
+
+<section class={styles.section.base}>
+  <a href="/informations/" class={styles.section.a}>Informations</a>
+  <div class={styles.section.div}>
+    {
+      socialLinks.map((s) => (
+        <a href={s.url} target="_blank" aria-label={`${s.title} link`}>
+          <Svg
+            src={import(`../../../assets/${s.title}.svg?raw`)}
+            class={styles.section.svg}
+          />
+        </a>
+      ))
+    }
+  </div>
+</section>
