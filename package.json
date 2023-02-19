@@ -12,14 +12,21 @@
   },
   "dependencies": {
     "@astrojs/image": "^0.14.1",
+    "@astrojs/preact": "^2.0.3",
     "@astrojs/tailwind": "^3.0.0",
     "@contentful/rich-text-html-renderer": "^16.0.2",
-    "astro": "^2.0.9",
+    "@vanilla-extract/dynamic": "^2.0.3",
+    "astro": "^2.0.13",
     "astro-compress": "^1.1.28",
+    "astro-vanilla-extract": "^2.0.0",
+    "clsx": "^1.2.1",
     "contentful": "^9.2.19",
+    "preact": "^10.12.1",
     "tailwindcss": "^3.2.4"
   },
   "devDependencies": {
+    "@jasikpark/astro-svg-loader": "^0.1.0",
+    "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "postcss-nesting": "^11.0.1",
     "prettier": "^2.8.3",
