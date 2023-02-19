@@ -1,6 +1,6 @@
 ---
 import { Image } from '@astrojs/image/components';
-import { cx } from 'class-variance-authority';
+import { clsx } from 'clsx';
 
 import Socials from '../../elements/Socials/index.astro';
 
@@ -23,7 +23,9 @@ const { layout, navigationLinks } = Astro.props;
 <header class={styles.header.base}>
   <section class={styles.header.section}>
     <nav
-      class={cx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
+      class={clsx(
+        `${styles.header.nav.desktop.base} ${styles.header.nav.base}`
+      )}
     >
       <div class={styles.header.nav.div}>
         <a
@@ -86,7 +88,7 @@ const { layout, navigationLinks } = Astro.props;
 
   <section
     id="mobile-menu"
-    class={cx(`hidden ${styles.header.mobile.base} ${styles.header.section}`)}
+    class={clsx(`hidden ${styles.header.mobile.base} ${styles.header.section}`)}
   >
     <nav class={styles.header.mobile.nav.base}>
       <div class={`${styles.header.mobile.nav.div} ${styles.header.nav.div}`}>

@@ -4,8 +4,10 @@ import { vars } from '../../../styles/vars.css';
 
 const button = {
   base: style({
+    position: 'fixed',
     bottom: '0',
     right: '0',
+    visibility: 'visible',
     margin: '1rem',
     display: 'flex',
     cursor: 'pointer',
@@ -29,9 +31,14 @@ const button = {
       }
     }
   }),
+
   svg: style({
     height: '1.5rem',
     width: '1.5rem'
+  }),
+
+  hidden: style({
+    visibility: 'hidden'
   })
 };
 

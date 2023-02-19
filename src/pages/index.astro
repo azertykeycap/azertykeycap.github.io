@@ -2,8 +2,8 @@
 import { group } from 'radash';
 import Layout from '../layouts/Layout.astro';
 
-import GoTop from '../components/elements/GoTop/index.astro';
-import ArticleList from '../components/articles/ArticleList/index';
+import ArticleList from '../components/articles/ArticleList';
+import GoTop from '../components/elements/GoTop';
 
 import {
   contentfulClient,
@@ -82,5 +82,5 @@ const articlesByProfile = group(articles, (a) => a.profile);
     navigationLinks={navigationLinks}
     client:load
   />
-  <GoTop />
+  <GoTop slot="goto" client:load />
 </Layout>

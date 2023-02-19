@@ -1,4 +1,4 @@
-import { cx } from 'class-variance-authority';
+import { clsx } from 'clsx';
 import type { KeycapArticleType } from '../../lib/contentful';
 
 export interface ArticleProps {
@@ -25,7 +25,7 @@ export default function Article(props: ArticleProps) {
 
   return (
     <article
-      class={cx(
+      class={clsx(
         isNew
           ? 'rounded-xl border-[3px] border-amber-500 dark:border-amber-500'
           : 'border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',

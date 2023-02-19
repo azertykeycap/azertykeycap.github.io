@@ -72,7 +72,7 @@ const { title, layout, navigationLinks } = Astro.props;
     <Navigation layout={layout} navigationLinks={navigationLinks} />
     <main class={styles.layout.main}>
       <slot name="main" />
+      <slot name="goto" />
     </main>
-    <slot name="footer" />
   </body>
 </html>
