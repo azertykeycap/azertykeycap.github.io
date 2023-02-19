@@ -1,0 +1,160 @@
+---
+import { Image } from '@astrojs/image/components';
+import { cx } from 'class-variance-authority';
+
+import type { ProfileContentfulInterface } from '../../../lib/contentful';
+import { NavigationLayoutEnum } from '../../../types/enum';
+import Socials from '../../elements/Socials.astro';
+import Logo from '../../../assets/logo.png';
+import { styles } from './styles.css';
+import { srOnly } from '../../../styles/common.css';
+
+export interface Props {
+  layout: NavigationLayoutEnum;
+  navigationLinks?: Array<ProfileContentfulInterface>;
+}
+
+const { layout, navigationLinks } = Astro.props;
+---
+
+<header class={styles.header.base}>
+  <section class={styles.header.section}>
+    <nav
+      class={cx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
+    >
+      <div class={styles.header.nav.div}>
+        <a
+          class={styles.common.a}
+          href={layout === NavigationLayoutEnum.MAIN ? '#' : '/'}
+        >
+          <span class={srOnly}>PLAKET INDUSTRIES</span>
+          <Image
+            src={Logo}
+            aspectRatio={1 / 1}
+            width={32}
+            height={32}
+            alt="Author logo"
+            format={'webp'}
+            class={styles.img}
+          />
+        </a>
+        {
+          layout === NavigationLayoutEnum.MAIN && navigationLinks && (
+            <ul class={styles.common.ul.base}>
+              {navigationLinks.map((n) => (
+                <li class={styles.common.ul.li}>
+                  <a href={`#${n.slug}`} class={styles.common.a}>
+                    {n.abbreviation}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        <section id="btn-open" class={styles.header.nav.mobile.base}>
+          <button
+            type="button"
+            aria-expanded="false"
+            class={styles.header.nav.button.base}
+          >
+            <span class={srOnly}>Open main menu</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              class={styles.header.svg}
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+            </svg>
+          </button>
+        </section>
+      </div>
+      <div class={styles.header.nav.div}>
+        <Socials />
+      </div>
+    </nav>
+  </section>
+
+  <section
+    id="mobile-menu"
+    class={cx(`hidden ${styles.header.mobile.base} ${styles.header.section}`)}
+  >
+    <nav class={styles.header.mobile.nav.base}>
+      <div class={`${styles.header.mobile.nav.div} ${styles.header.nav.div}`}>
+        <Image
+          src={Logo}
+          aspectRatio={1 / 1}
+          width={32}
+          height={32}
+          alt="Author logo"
+          format={'webp'}
+          class={styles.img}
+        />
+        <button
+          type="button"
+          id="btn-close"
+          class={styles.header.mobile.button}
+        >
+          <span class={srOnly}>Close menu</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            class={styles.header.svg}
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      {
+        layout === NavigationLayoutEnum.MAIN && navigationLinks && (
+          <ul id="mobile-ul" class={styles.common.ul.mobile.base}>
+            {navigationLinks.map((n) => (
+              <li class={styles.common.ul.li}>
+                <a href={`#${n.slug}`} class={styles.common.a}>
+                  {n.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {layout !== NavigationLayoutEnum.MAIN && <a href="/">Accueil</a>}
+      <Socials />
+    </nav>
+  </section>
+</header>
+
+<script>
+  const btnClose = document.getElementById('btn-close');
+  const btnOpen = document.getElementById('btn-open');
+  const menuMobile = document.getElementById('mobile-menu');
+  const ulMobile = document.getElementById('mobile-ul');
+
+  ulMobile?.addEventListener('click', () => {
+    menuMobile?.classList.remove('block');
+    menuMobile?.classList.add('hidden');
+  });
+
+  btnClose?.addEventListener('click', () => {
+    menuMobile?.classList.remove('block');
+    menuMobile?.classList.add('hidden');
+  });
+
+  btnOpen?.addEventListener('click', () => {
+    menuMobile?.classList.remove('hidden');
+    menuMobile?.classList.add('block');
+  });
+</script>
