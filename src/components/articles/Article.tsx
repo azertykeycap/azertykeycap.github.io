@@ -27,9 +27,9 @@ export default function Article(props: ArticleProps) {
     <article
       class={clsx(
         isNew
-          ? 'rounded-xl border-[3px] border-amber-500 dark:border-amber-500'
-          : 'border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',
-        'relative flex h-fit flex-col rounded-lg  bg-white transition-colors  dark:bg-slate-900'
+          ? 'rounded-[0.72rem] border-[3px] border-amber-500 dark:border-amber-500'
+          : 'rounded-[0.58rem] border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',
+        'relative flex h-fit flex-col  bg-white transition-colors  dark:bg-slate-900'
       )}
     >
       {isNew && (
