@@ -33,11 +33,9 @@ const input = {
       {
         border: `1px solid ${vars.color.slate300}`,
         color: vars.color.indigo600,
-        selectors: {
-          '&:focus': {
-            outlineColor: vars.color.indigo600,
-            boxShadow: `0 0 0 1px ${vars.color.indigo600}`
-          }
+        '&:focus': {
+          outlineColor: vars.color.indigo600,
+          boxShadow: `0 0 0 1px ${vars.color.indigo600}`
         }
       }
     ],

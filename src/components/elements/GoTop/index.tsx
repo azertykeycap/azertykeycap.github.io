@@ -15,6 +15,7 @@ export default function GoTop() {
           styles.button.base,
           scrollPosition < 300 && styles.button.hidden
         )}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
