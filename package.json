@@ -18,6 +18,7 @@
     "@vanilla-extract/dynamic": "^2.0.3",
     "astro": "^2.0.13",
     "astro-compress": "^1.1.28",
+    "astro-satori": "^0.1.5",
     "astro-vanilla-extract": "^2.0.0",
     "clsx": "^1.2.1",
     "contentful": "^9.2.19",
