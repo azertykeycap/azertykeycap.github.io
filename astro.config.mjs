@@ -6,7 +6,7 @@ import preact from '@astrojs/preact';
 import image from '@astrojs/image';
 import compress from 'astro-compress';
 import vanillaExtract from 'astro-vanilla-extract';
-import vercel from '@astrojs/vercel/edge';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   integrations: [tailwind(), preact(), image(), vanillaExtract(), compress()],
