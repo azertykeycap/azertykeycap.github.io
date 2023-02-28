@@ -1,8 +1,9 @@
 export interface OgImageProps {
   title: string;
+  imgSrc?: string;
 }
 
-export const OgImage = ({ title }: OgImageProps) => (
+export const OgImage = ({ title, imgSrc }: OgImageProps) => (
   <div
     style={{
       display: 'flex',
@@ -13,6 +14,11 @@ export const OgImage = ({ title }: OgImageProps) => (
       backgroundColor: 'white'
     }}
   >
+    <img
+      src={`https://${imgSrc}?fit=fill&w=1200&h=630&fm=jpg&q=70`}
+      width={1200}
+      height={630}
+    />
     <h1
       style={{
         color: 'black',

@@ -9,8 +9,8 @@ export type generateUrlOptions = Record<string, any> & {
 };
 
 interface ApiOgImage {
-  title: string;
-  img: Asset;
+  userInfo: string;
+  image: Asset;
 }
 
 type ApiOgImageToRender = Omit<ApiOgImage, 'img'> & {
@@ -21,7 +21,9 @@ const apiOgImageEntries = await contentfulClient.getEntries<ApiOgImage>({
   content_type: 'apiOgImages'
 });
 
-console.log(apiOgImageEntries);
+const ogImages: Array<ApiOgImageToRender> = apiOgImageEntries.items.map(
+  (i) => ({ userInfo: i.fields.userInfo, img: i.fields.image.fields.file.url })
+);
 
 // ajouter fonts customs (inter)
 // voir si on peut faire des requêtes contentful propre depuis ce fichier
@@ -55,7 +57,7 @@ export const get: APIRoute = async ({ url }) => {
   }
 
   const args = Object.fromEntries(url.searchParams);
-  const props = { url, ...args };
+  const props = { url, imgSrc: ogImages[0].img, ...args };
   const imageOptions = { width, height, debug };
   const buffer = await generateImage(OgImage, props, imageOptions);
 

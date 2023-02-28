@@ -8,7 +8,6 @@ const YOGA = initYoga();
 initSatori(YOGA);
 
 export type ImageOptions = {
-  site: string;
   width: number;
   height: number;
   debug?: boolean;
@@ -17,7 +16,7 @@ export type ImageOptions = {
 export async function generateImage(
   Component: any,
   props: Record<string, any>,
-  { site, width, height, debug }: ImageOptions
+  { width, height, debug }: ImageOptions
 ) {
   const roboto500 = await fetch(
     'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hjp-Ek-_EeA.woff'
