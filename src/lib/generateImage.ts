@@ -18,8 +18,8 @@ export async function generateImage(
   props: Record<string, any>,
   { width, height, debug }: ImageOptions
 ) {
-  const roboto500 = await fetch(
-    'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hjp-Ek-_EeA.woff'
+  const inter600 = await fetch(
+    'https://rsms.me/inter/font-files/Inter-SemiBold.woff'
   ).then((res) => res.arrayBuffer());
 
   const svg = await satori(Component(props), {
@@ -28,9 +28,9 @@ export async function generateImage(
     height: height,
     fonts: [
       {
-        name: 'Roboto',
-        data: roboto500,
-        weight: 400,
+        name: 'Inter',
+        data: inter600,
+        weight: 600,
         style: 'normal'
       }
     ]

@@ -3,17 +3,18 @@ import type { APIRoute } from 'astro';
 import { generateImage } from '../../lib/generateImage';
 import { OgImage } from '../../components/core/OgImage/OgImage';
 import type { Asset } from 'contentful';
+import { random } from 'radash';
 
 export type generateUrlOptions = Record<string, any> & {
   title: string;
 };
 
-interface ApiOgImage {
+export interface ApiOgImage {
   userInfo: string;
   image: Asset;
 }
 
-type ApiOgImageToRender = Omit<ApiOgImage, 'img'> & {
+export type ApiOgImageToRender = Omit<ApiOgImage, 'img'> & {
   img: string;
 };
 
@@ -25,39 +26,20 @@ const ogImages: Array<ApiOgImageToRender> = apiOgImageEntries.items.map(
   (i) => ({ userInfo: i.fields.userInfo, img: i.fields.image.fields.file.url })
 );
 
-// ajouter fonts customs (inter)
-// voir si on peut faire des requêtes contentful propre depuis ce fichier
-// faire un random sur le tableau reçu pour prendre une image au hasard
-
-export const generateUrl = ({ title, ...args }: generateUrlOptions) => {
-  const url = new URL('/api/og.png', 'https://azertykeycaps.fr');
-
-  url.searchParams.append('title', title);
-
-  Object.keys(args).forEach((arg) => {
-    url.searchParams.append(arg, args[arg]);
-  });
-
-  return url.pathname + url.search;
-};
-
 export const get: APIRoute = async ({ url }) => {
   const debug = Boolean(url.searchParams.get('debug'));
-  const title = url.searchParams.get('title');
   const rawWidth = url.searchParams.get('w');
   const width = rawWidth ? parseInt(rawWidth) : 1200;
   const rawHeight = url.searchParams.get('h');
   const height = rawHeight ? parseInt(rawHeight) : 630;
 
-  if (!title) {
-    return new Response(null, {
-      status: 500,
-      statusText: 'Title missing'
-    });
-  }
-
   const args = Object.fromEntries(url.searchParams);
-  const props = { url, imgSrc: ogImages[0].img, ...args };
+  const props = {
+    url,
+    ogImages,
+    ...args
+  };
+
   const imageOptions = { width, height, debug };
   const buffer = await generateImage(OgImage, props, imageOptions);
 
