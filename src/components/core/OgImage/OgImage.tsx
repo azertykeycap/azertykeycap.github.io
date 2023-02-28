@@ -1,17 +1,12 @@
-import { useEffect } from 'preact/hooks';
 import { random } from 'radash';
 import type { ApiOgImageToRender } from '../../../pages/api/og.png';
 
-export interface OgImageProps {
-  ogImages: Array<ApiOgImageToRender>;
+interface OgImageProps {
+  author: string;
+  img: string;
 }
 
-export const OgImage = ({ ogImages }: OgImageProps) => {
-  const ogImageToDisplay = ogImages[random(0, ogImages.length)];
-  const { userInfo, img } = ogImageToDisplay;
-
-  console.log('ogImageToDisplay', ogImageToDisplay);
-
+export const OgImage = ({ author, img }: OgImageProps) => {
   return (
     <div
       style={{
@@ -29,30 +24,27 @@ export const OgImage = ({ ogImages }: OgImageProps) => {
         width={1200}
         height={630}
       />
-
-      {userInfo && (
-        <div
+      <div
+        style={{
+          display: 'flex',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          borderRadius: '10px',
+          padding: '20px',
+          position: 'absolute',
+          bottom: '50px',
+          left: '50px'
+        }}
+      >
+        <span
           style={{
-            display: 'flex',
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            borderRadius: '10px',
-            padding: '20px',
-            position: 'absolute',
-            bottom: '60px',
-            left: '60px'
+            color: 'white',
+            fontSize: '36px',
+            fontWeight: 'semibold'
           }}
         >
-          <span
-            style={{
-              color: 'white',
-              fontSize: '40px',
-              fontWeight: 'semibold'
-            }}
-          >
-            Author : {userInfo}
-          </span>
-        </div>
-      )}
+          Auteur : {author}
+        </span>
+      </div>
     </div>
   );
 };

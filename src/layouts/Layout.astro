@@ -12,7 +12,7 @@ export interface Props {
   navigationLinks?: Array<ProfileContentfulInterface>;
 }
 
-const { title, layout, navigationLinks } = Astro.props;
+const { title, layout, navigationLinks, ogImageLength } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -27,6 +27,8 @@ const { title, layout, navigationLinks } = Astro.props;
     <meta name="generator" content={Astro.generator} />
 
     <meta property="og:image" content={`/api/og.png`} />
+    <meta name="twitter:image" content={`/api/og.png`} />
+
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -36,7 +38,6 @@ const { title, layout, navigationLinks } = Astro.props;
       property="og:description"
       content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
     />
-    <meta property="og:image" content={`/api/og.png`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content={Astro.site} />
@@ -49,7 +50,6 @@ const { title, layout, navigationLinks } = Astro.props;
       name="twitter:description"
       content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
     />
-    <meta name="twitter:image" content={`/api/og.png`} />
 
     <link rel="icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

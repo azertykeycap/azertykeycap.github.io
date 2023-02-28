@@ -16,6 +16,8 @@ import {
 
 import { NavigationLayoutEnum } from '../types/enum';
 
+import type { ApiOgImage } from './api/og.png';
+
 const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
     content_type: 'article'
@@ -76,7 +78,7 @@ const articlesByProfile = group(articles, (a) => a.profile);
 <Layout
   layout={NavigationLayoutEnum.MAIN}
   navigationLinks={navigationLinks}
-  title="Keycaps"
+  title="Toutes les keycaps"
 >
   <ArticleList
     slot="main"
