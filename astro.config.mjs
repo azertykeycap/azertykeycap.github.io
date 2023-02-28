@@ -9,6 +9,10 @@ import vanillaExtract from 'astro-vanilla-extract';
 import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
+  site:
+    process.env.PUBLIC_VERCEL_ENV === 'production'
+      ? 'https://www.azertykeycaps.fr/'
+      : `https://${process.env.PUBLIC_VERCEL_URL}/}`,
   integrations: [tailwind(), preact(), image(), vanillaExtract(), compress()],
   output: 'server',
   adapter: vercel({ analytics: true })

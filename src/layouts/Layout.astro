@@ -30,6 +30,24 @@ const { title, layout, navigationLinks } = Astro.props;
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Azerty Keycaps - Keycaps" />
+    <meta
+      property="og:description"
+      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+    />
+    <meta property="og:image" content={`${Astro.site}api/og.png`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content={Astro.site} />
+    <meta property="twitter:url" content={Astro.site} />
+    <meta name="twitter:title" content="Azerty Keycaps - Keycaps" />
+    <meta
+      name="twitter:description"
+      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+    />
+    <meta name="twitter:image" content={`${Astro.site}api/og.png`} />
+
     <link rel="icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
