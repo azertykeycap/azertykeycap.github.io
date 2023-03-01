@@ -12,7 +12,7 @@ export interface Props {
   navigationLinks?: Array<ProfileContentfulInterface>;
 }
 
-const { title, layout, navigationLinks, ogImageLength } = Astro.props;
+const { title, layout, navigationLinks } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -33,7 +33,10 @@ const { title, layout, navigationLinks, ogImageLength } = Astro.props;
     <meta property="og:image:height" content="630" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Azerty Keycaps - Keycaps" />
+    <meta
+      property="og:title"
+      content="Azerty Keycaps - Annuaire de keycaps française"
+    />
     <meta
       property="og:description"
       content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."

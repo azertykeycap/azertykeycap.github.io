@@ -38,7 +38,7 @@ export const get: APIRoute = async ({ url }) => {
   const rawHeight = url.searchParams.get('h');
   const height = rawHeight ? parseInt(rawHeight) : 630;
 
-  const { author, img } = ogImages[random(0, ogImages.length)];
+  const { author, img } = ogImages[random(0, ogImages.length - 1)];
 
   const args = Object.fromEntries(url.searchParams);
   const props = {

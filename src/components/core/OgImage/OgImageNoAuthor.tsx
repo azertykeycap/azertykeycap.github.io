@@ -1,6 +1,3 @@
-import { random } from 'radash';
-import type { ApiOgImageToRender } from '../../../pages/api/og.png';
-
 interface OgImageNoAuthorProps {
   img: string;
 }
