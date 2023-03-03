@@ -51,104 +51,96 @@ export default function Article(props: ArticleProps) {
         decoding={isHighPriority ? 'auto' : 'async'}
         height="266"
         width="400"
-        class={styles.article.figure.img}
+        class={styles.article.content.img}
       />
-      <section>
-        <h4 class={styles.article.figure.figcaption.h4}>{title}</h4>
-        <hr class={styles.hr} />
-        <section class={styles.article.figure.figcaption.section}>
-          <dl class={styles.article.figure.figcaption.dl.base}>
-            <dt class={styles.article.figure.figcaption.dl.dt}>Profil :</dt>
-            <dd class={styles.article.figure.figcaption.dl.dd}>{profile}</dd>
+      <h4 class={styles.article.content.description.h4}>{title}</h4>
+      <hr class={styles.hr} />
+      <dl class={styles.article.content.description.dl.base}>
+        <dt class={styles.article.content.description.dl.dt}>Profil :</dt>
+        <dd class={styles.article.content.description.dl.dd}>{profile}</dd>
+        <dt class={styles.article.content.description.dl.dt}>Material :</dt>
+        <dd class={styles.article.content.description.dl.dd}>{material}</dd>
+      </dl>
+      {status && (
+        <>
+          <hr class={styles.hr} />
+          <dl class={styles.article.content.description.dl.base}>
+            <dt class={styles.article.content.description.dl.dt}>Statut :</dt>
+            <dd class={styles.article.content.description.dl.status.dd}>
+              {status}
+            </dd>
           </dl>
-          <dl class={styles.article.figure.figcaption.dl.base}>
-            <dt class={styles.article.figure.figcaption.dl.dt}>Material :</dt>
-            <dd class={styles.article.figure.figcaption.dl.dd}>{material}</dd>
-          </dl>
-        </section>
-        {status && (
-          <>
-            <hr class={styles.hr} />
-            <section class={styles.article.figure.figcaption.section}>
-              <dl class={styles.article.figure.figcaption.dl.base}>
-                <dt class={styles.article.figure.figcaption.dl.dt}>Statut :</dt>
-                <dd class={styles.article.figure.figcaption.dl.status.dd}>
-                  {status}
-                </dd>
+          {(startDate || endDate) && (
+            <>
+              <hr class={styles.hr} />
+              <dl class={styles.article.content.description.dl.base}>
+                {startDate && (
+                  <>
+                    <dt class={styles.article.content.description.dl.dt}>
+                      Date début :
+                    </dt>
+                    <dd class={styles.article.content.description.dl.dd}>
+                      {startDate}
+                    </dd>
+                  </>
+                )}
+                {endDate && (
+                  <>
+                    <dt class={styles.article.content.description.dl.dt}>
+                      Date fin :
+                    </dt>
+                    <dd class={styles.article.content.description.dl.dd}>
+                      {endDate}
+                    </dd>
+                  </>
+                )}
               </dl>
-            </section>
-            {(startDate || endDate) && (
-              <>
-                <hr class={styles.hr} />
-                <section class={styles.article.figure.figcaption.section}>
-                  {startDate && (
-                    <dl class={styles.article.figure.figcaption.dl.base}>
-                      <dt class={styles.article.figure.figcaption.dl.dt}>
-                        Date début :
-                      </dt>
-                      <dd class={styles.article.figure.figcaption.dl.dd}>
-                        {startDate}
-                      </dd>
-                    </dl>
-                  )}
-                  {endDate && (
-                    <dl class={styles.article.figure.figcaption.dl.base}>
-                      <dt class={styles.article.figure.figcaption.dl.dt}>
-                        Date fin :
-                      </dt>
-                      <dd class={styles.article.figure.figcaption.dl.dd}>
-                        {endDate}
-                      </dd>
-                    </dl>
-                  )}
-                </section>
-              </>
-            )}
-          </>
-        )}
-        {description && (
-          <>
-            <hr class={styles.hr} />
-            <section class={styles.article.figure.figcaption.section}>
-              {description}
-            </section>
-          </>
-        )}
-        {warningText && (
-          <>
-            <hr class={styles.hr} />
-            <span class={styles.article.figure.figcaption.dl.warning.span}>
-              Attention : {warningText}
-            </span>
-          </>
-        )}
-        <hr class={styles.hr} />
-        <div class={styles.article.figure.figcaption.dl.additionnalUrl.div}>
-          {additionalUrl && (
-            <a
-              role="button"
-              href={additionalUrl}
-              class={
-                styles.article.figure.figcaption.dl.additionnalUrl.button
-                  .secondary
-              }
-              target="_blank"
-            >
-              Kit secondaire
-            </a>
+            </>
           )}
+        </>
+      )}
+      {description && (
+        <>
+          <hr class={styles.hr} />
+          <section class={styles.article.content.description.section}>
+            {description}
+          </section>
+        </>
+      )}
+      {warningText && (
+        <>
+          <hr class={styles.hr} />
+          <span class={styles.article.content.description.dl.warning.span}>
+            Attention : {warningText}
+          </span>
+        </>
+      )}
+      <hr class={styles.hr} />
+      <div class={styles.article.content.description.dl.additionnalUrl.div}>
+        {additionalUrl && (
           <a
             role="button"
-            href={url}
-            target="_blank"
+            href={additionalUrl}
             class={
-              styles.article.figure.figcaption.dl.additionnalUrl.button.primary
+              styles.article.content.description.dl.additionnalUrl.button
+                .secondary
             }
+            target="_blank"
           >
-            En savoir +
+            Kit secondaire
           </a>
-        </div>
-      </section>
+        )}
+        <a
+          role="button"
+          href={url}
+          target="_blank"
+          class={
+            styles.article.content.description.dl.additionnalUrl.button.primary
+          }
+        >
+          En savoir +
+        </a>
+      </div>
     </article>
   );
 }

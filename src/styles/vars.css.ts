@@ -8,7 +8,8 @@ export const rawVars = {
     slate900: '#0f172a',
     red600: '#dc2626',
     indigo100: '#e0e7ff',
-    indigo500: '#6366f1'
+    indigo500: '#6366f1',
+    indigo700: '#4338ca'
   },
 
   opacity: {
@@ -37,7 +38,7 @@ export const vars = createGlobalTheme(':root', {
     indigo400: '#818cf8',
     indigo500: rawVars.color.indigo500,
     indigo600: '#4f46e5',
-    indigo700: '#4338ca',
+    indigo700: rawVars.color.indigo700,
     indigo800: '#3730a3',
     indigo900: '#312e81',
     teal100: '#ccfbf1',

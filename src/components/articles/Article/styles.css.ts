@@ -121,7 +121,7 @@ const article = {
     }
   ]),
 
-  figure: {
+  content: {
     img: style({
       width: '100%',
       backgroundColor: vars.color.slate300,
@@ -137,7 +137,7 @@ const article = {
       }
     }),
 
-    figcaption: {
+    description: {
       h4: style({
         padding: '1rem',
         textAlign: 'center',
@@ -152,8 +152,6 @@ const article = {
       }),
 
       section: style({
-        display: 'flex',
-        flexDirection: 'column',
         rowGap: '0.25rem',
         padding: '1rem',
         fontSize: vars.fontSize.sm,
@@ -165,13 +163,15 @@ const article = {
 
       dl: {
         base: style({
+          padding: '1rem',
           width: '100%',
-          display: 'flex',
+          display: 'grid',
+          gridTemplateColumns: '2fr 3fr',
+          rowGap: '0.25rem',
           alignItems: 'center'
         }),
 
         dt: style({
-          flexBasis: '40%',
           fontWeight: vars.fontWeight.semibold,
           color: vars.color.slate900,
           fontSize: vars.fontSize.sm,
@@ -181,7 +181,6 @@ const article = {
         }),
 
         dd: style({
-          flexBasis: '60%',
           color: vars.color.slate600,
           fontSize: vars.fontSize.sm,
           '@media': {
@@ -192,7 +191,7 @@ const article = {
         status: {
           dd: style({
             display: 'flex',
-            flexBasis: 'auto',
+            width: 'fit-content',
             alignItems: 'center',
             backgroundColor: vars.color.teal700,
             borderRadius: '0.25rem',
@@ -204,8 +203,8 @@ const article = {
             '@media': {
               [mediaQueries.dark]: {
                 color: vars.color.teal100,
-                borderColor: `1px border ${vars.color.teal700}`,
-                backgroundColor: convertHexToRGBA(vars.color.indigo700, 0.1)
+                border: `1px solid ${vars.color.teal700}`,
+                backgroundColor: convertHexToRGBA(rawVars.color.teal700, 0.2)
               }
             }
           })
@@ -258,7 +257,7 @@ const article = {
                 },
                 '@media': {
                   [mediaQueries.dark]: {
-                    borderColor: vars.color.indigo600,
+                    border: `1px solid ${vars.color.indigo600}`,
                     backgroundColor: convertHexToRGBA(
                       rawVars.color.indigo500,
                       0.1
@@ -287,16 +286,16 @@ const article = {
                 },
                 '@media': {
                   [mediaQueries.dark]: {
-                    borderColor: vars.color.indigo600,
+                    border: `1px solid ${vars.color.indigo700}`,
                     backgroundColor: convertHexToRGBA(
                       rawVars.color.indigo100,
-                      0.2
+                      0.1
                     ),
                     color: vars.color.indigo200,
                     ':hover': {
                       backgroundColor: convertHexToRGBA(
                         rawVars.color.indigo100,
-                        0.3
+                        0.2
                       )
                     }
                   }
