@@ -22,6 +22,10 @@ const container = style({
 });
 
 const section = {
+  base: style({
+    scrollMarginTop: '5.5rem'
+  }),
+
   title: style({
     marginTop: '2rem',
     marginBottom: '2.5rem',
@@ -33,6 +37,7 @@ const section = {
       }
     }
   }),
+
   grid: style({
     display: 'grid',
     gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',

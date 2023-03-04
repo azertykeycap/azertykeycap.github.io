@@ -76,12 +76,18 @@ const newBadge = {
 
 const articleBase = style({
   position: 'relative',
+  maxWidth: '400px',
+  margin: '0 auto',
   display: 'flex',
   height: 'fit-content',
   flexDirection: 'column',
   backgroundColor: vars.color.white,
   transition: `all 0.15s ${animationTiming}`,
   '@media': {
+    [mediaQueries.md]: {
+      maxWidth: 'auto',
+      margin: 0
+    },
     [mediaQueries.dark]: {
       backgroundColor: vars.color.slate900
     }

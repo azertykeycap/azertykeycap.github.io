@@ -44,6 +44,7 @@ export default function ArticleList(props: ArticleListProps) {
           <>
             <section
               id={props.navigationLinks.find((n) => a === n.title)?.slug}
+              class={styles.section.base}
             >
               <h2 class={styles.section.title}>{a}</h2>
               <div class={styles.section.grid}>
