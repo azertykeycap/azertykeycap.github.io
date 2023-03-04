@@ -2,12 +2,12 @@ import { useState, useEffect } from 'preact/hooks';
 import { styles } from './styles.css';
 
 import Article from '../Article';
+import Checkbox from '../../elements/Checkbox';
 
 import type {
   KeycapArticleType,
   ProfileContentfulInterface
 } from '../../../lib/contentful';
-import Checkbox from '../../elements/Checkbox';
 
 interface ArticleListProps {
   articles: Partial<Record<string, Array<KeycapArticleType>>>;

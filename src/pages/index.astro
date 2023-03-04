@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import { group } from 'radash';
 import Layout from '../layouts/Layout.astro';
 
@@ -13,6 +15,8 @@ import {
 } from '../lib/contentful';
 
 import { NavigationLayoutEnum } from '../types/enum';
+
+import type { ApiOgImage } from './api/og.png';
 
 const articlesEntries =
   await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
@@ -74,7 +78,7 @@ const articlesByProfile = group(articles, (a) => a.profile);
 <Layout
   layout={NavigationLayoutEnum.MAIN}
   navigationLinks={navigationLinks}
-  title="Keycaps"
+  title="Toutes les keycaps"
 >
   <ArticleList
     slot="main"

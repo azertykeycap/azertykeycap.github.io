@@ -45,7 +45,7 @@ const section = {
     borderRadius: '0.375rem',
     padding: '0.5rem 0.75rem',
     fontSize: '1rem',
-    fontWeight: 500,
+    fontWeight: vars.fontWeight.medium,
     color: vars.color.slate900,
     width: 'fit-content',
     transition: `color 0.15s ${animationTiming}`,
@@ -85,10 +85,12 @@ const section = {
     ':hover': {
       color: vars.color.slate800
     },
-    [mediaQueries.dark]: {
-      color: vars.color.slate300,
-      ':hover': {
-        color: vars.color.slate100
+    '@media': {
+      [mediaQueries.dark]: {
+        color: vars.color.slate400,
+        ':hover': {
+          color: vars.color.slate100
+        }
       }
     }
   })

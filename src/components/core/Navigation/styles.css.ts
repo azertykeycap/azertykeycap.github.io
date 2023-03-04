@@ -26,6 +26,10 @@ const header = {
 
     '@media': {
       [mediaQueries.dark]: {
+        backgroundColor: convertHexToRGBA(rawVars.color.slate900, 0.8)
+      },
+
+      [`${mediaQueries.lg} and ${mediaQueries.dark}`]: {
         backgroundColor: convertHexToRGBA(rawVars.color.black, 0.3)
       }
     },
@@ -168,8 +172,6 @@ const header = {
       zIndex: 30,
       margin: '0.5rem',
       padding: '0.5rem',
-      transformOrigin: 'top',
-      transform: '0',
       overflow: 'hidden',
       borderRadius: '0.5rem',
       transition: `all 0.15s ${animationTiming}`
@@ -206,7 +208,7 @@ const common = {
           display: 'flex',
           flexDirection: 'row',
           columnGap: '0.5rem',
-          fontWeight: 500
+          fontWeight: vars.fontWeight.medium
         }
       }
     }),
@@ -231,7 +233,7 @@ const common = {
     padding: '0.5rem 0.75rem',
     fontSize: '1rem',
     lineHeight: '1.5rem',
-    fontWeight: 500,
+    fontWeight: vars.fontWeight.medium,
     color: vars.color.slate900,
     transition: `all 0.15s ${animationTiming}`,
     ':hover': {
