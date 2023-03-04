@@ -53,7 +53,7 @@ export default function Article(props: ArticleProps) {
         width="400"
         class={styles.article.content.img}
       />
-      <h4 class={styles.article.content.description.h4}>{title}</h4>
+      <h3 class={styles.article.content.description.h4}>{title}</h3>
       <hr class={styles.hr} />
       <dl class={styles.article.content.description.dl.base}>
         <dt class={styles.article.content.description.dl.dt}>Profil :</dt>

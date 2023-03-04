@@ -1,7 +1,7 @@
 ---
 import Navigation from '../components/core/Navigation/Navigation.astro';
 import { styles } from './styles.css';
-import './../styles/reset.css.ts';
+import './../styles/reset.css';
 
 import type { ProfileContentfulInterface } from '../lib/contentful';
 import type { NavigationLayoutEnum } from '../types/enum';
@@ -55,13 +55,7 @@ const { title, layout, navigationLinks } = Astro.props;
     />
 
     <link rel="icon" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+
     <title>Azerty Keycaps - {title}</title>
   </head>
   <body>
