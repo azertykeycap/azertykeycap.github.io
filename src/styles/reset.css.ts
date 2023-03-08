@@ -232,3 +232,11 @@ globalStyle('img, video', {
 globalStyle('[hidden]', {
   display: 'none'
 });
+
+globalStyle('.hidden', {
+  display: 'none'
+});
+
+globalStyle('.block', {
+  display: 'none'
+});
