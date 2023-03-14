@@ -229,6 +229,18 @@ globalStyle('img, video', {
   height: 'auto'
 });
 
+globalStyle('img, video', {
+  maxWidth: '100%',
+  height: 'auto'
+});
+
+globalStyle("[type='checkbox'], [type='radio']", {
+  appearance: 'none',
+  padding: 0,
+  display: 'inline-block',
+  userSelect: 'none'
+});
+
 globalStyle('[hidden]', {
   display: 'none'
 });
