@@ -4,9 +4,9 @@ import { vars } from '../../../styles/vars.css';
 const inputBaseStyles = style({
   height: '1rem',
   width: '1rem',
-  borderRadius: '0.25rem',
-  outline: '2px solid transparent',
-  outlineOffset: '2px'
+  borderRadius: '0.2rem',
+  cursor: 'pointer',
+  backgroundColor: vars.color.white
 });
 
 const input = {
@@ -18,7 +18,8 @@ const input = {
   }),
 
   title: style({
-    marginLeft: '0.75rem'
+    marginLeft: '0.75rem',
+    cursor: 'pointer'
   }),
 
   span: style({
@@ -32,10 +33,12 @@ const input = {
       inputBaseStyles,
       {
         border: `1px solid ${vars.color.slate300}`,
-        color: vars.color.indigo600,
         '&:focus': {
-          outlineColor: vars.color.indigo600,
-          boxShadow: `0 0 0 1px ${vars.color.indigo600}`
+          outline: `2px solid ${vars.color.indigo600}`,
+          outlineOffset: '2px'
+        },
+        '&:checked': {
+          backgroundColor: vars.color.indigo600
         }
       }
     ],

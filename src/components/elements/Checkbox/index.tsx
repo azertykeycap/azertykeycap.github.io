@@ -17,6 +17,7 @@ export default function Checkbox({ variant, checked, onClick }: CheckboxProps) {
           name="filter"
           type="checkbox"
           checked={checked}
+          onChange={onClick}
           class={styles.input.styles[variant]}
         />
       </div>

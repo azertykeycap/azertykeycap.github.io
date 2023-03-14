@@ -9,10 +9,9 @@ const buttonBase = style({
   flex: '1 1 0',
   padding: '0.5rem',
   borderRadius: '0.375rem',
-  borderColor: 'transparent',
   textAlign: 'center',
   fontWeight: vars.fontWeight.semibold,
-  transition: `all 0.15s ${animationTiming}`,
+  transition: `background-color 0.15s ${animationTiming}`,
   ':focus': {
     outlineOffset: '2px',
     outline: `2px solid ${vars.color.indigo600}`
@@ -98,7 +97,7 @@ const article = {
   normal: style([
     articleBase,
     {
-      borderRadius: '0.58rem',
+      borderRadius: '0.75rem',
       border: `1px solid ${vars.color.slate200}`,
       ':hover': {
         borderColor: vars.color.slate300
@@ -117,7 +116,7 @@ const article = {
   new: style([
     articleBase,
     {
-      borderRadius: '0.72rem',
+      borderRadius: '0.775rem',
       border: `3px solid ${vars.color.amber500}`,
       '@media': {
         [mediaQueries.dark]: {
