@@ -20,10 +20,7 @@ const informationContent = documentToHtmlString(
 );
 ---
 
-<Layout
-  layout={NavigationLayoutEnum.SECONDARY}
-  title="Azerty Keycaps - Informations"
->
+<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations">
   <div slot="main" set:html={informationContent} class="content" />
 </Layout>
 
