@@ -1,4 +1,4 @@
-import { globalStyle } from '@vanilla-extract/css';
+import { globalStyle, globalFontFace } from '@vanilla-extract/css';
 
 // globalFontFace('Inter', {
 //   fontStyle: 'normal',
@@ -27,6 +27,13 @@ import { globalStyle } from '@vanilla-extract/css';
 //   src: "url(/fonts/Inter-Bold.woff2) format('woff2'), url(/fonts/Inter-Bold.woff) format('woff')",
 //   fontDisplay: 'swap'
 // });
+
+globalFontFace('Open Cherry', {
+  fontStyle: 'regular',
+  fontWeight: 400,
+  src: "url(/fonts/OpenCherry-Regular.otf) format('opentype')",
+  fontDisplay: 'swap'
+});
 
 globalStyle('*', {
   boxSizing: 'border-box',

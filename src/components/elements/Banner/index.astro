@@ -1,0 +1,215 @@
+<div class="cursor">
+  <div>
+    <span>ACHÈTE BORDEL</span>
+  </div>
+</div>
+
+<header>
+  <ul class="scroll">
+    <li>GMK BLANC SUR NOIR</li>
+    <li>///</li>
+    <li>IC EN COURS SUR GEEKHACK</li>
+    <li>///</li>
+    <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
+    <li>///</li>
+  </ul>
+
+  <ul class="scroll">
+    <li>GMK BLANC SUR NOIR</li>
+    <li>///</li>
+    <li>IC EN COURS SUR GEEKHACK</li>
+    <li>///</li>
+    <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
+  </ul>
+</header>
+
+<style lang="postcss">
+  header {
+    display: flex;
+    overflow: hidden;
+    gap: 2rem;
+    position: relative;
+    user-select: none;
+    background-color: black;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: white;
+    padding: 1.25rem;
+    font-family: 'Open Cherry', sans-serif;
+    cursor: pointer;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  ul {
+    flex-shrink: 0;
+    display: flex;
+    min-width: 100%;
+    gap: 2rem;
+    justify-content: space-around;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - 1rem)); /* match 1 rem to gap above */
+    }
+  }
+
+  .scroll {
+    animation: scroll 20s linear infinite;
+  }
+
+  .cursor {
+    z-index: 1000;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+      background-color 0.3s, width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 0px;
+    height: 0px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+
+    & div {
+      overflow: hidden;
+    }
+
+    & span {
+      display: inline-block;
+      transition: 0.6s;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    &.active {
+      width: 140px;
+      height: 140px;
+      border: 2px solid black;
+
+      & span {
+        transform: translateY(0%);
+        transition-delay: 0.25s;
+        opacity: 1;
+      }
+    }
+
+    &.hidden {
+      opacity: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  const queryCursor = document.querySelector('.cursor') as HTMLElement;
+  const header = document.querySelector('header') as HTMLElement;
+
+  header.addEventListener('click', () => {
+    window
+      .open('https://geekhack.org/index.php?topic=119839.0', '_blank')
+      ?.focus();
+  });
+
+  let cursor = {
+    delay: 8,
+    _x: 0,
+    _y: 0,
+    endX: window.innerWidth / 2,
+    endY: window.innerHeight / 2,
+    cursorVisible: true,
+    cursorEnlarged: false,
+    $cursor: queryCursor,
+
+    init: function () {
+      this.setupEventListeners();
+      this.animateDotOutline();
+    },
+
+    setupEventListeners: function () {
+      let self = this;
+
+      // On Hover Some Elements
+      document.querySelectorAll('header').forEach(function (el) {
+        el.addEventListener('mouseover', function () {
+          self.cursorEnlarged = true;
+          queryCursor.classList.add('active');
+        });
+        el.addEventListener('mouseout', function () {
+          self.cursorEnlarged = false;
+          queryCursor.classList.remove('active');
+        });
+      });
+
+      // On Hover Disappears
+      document.querySelectorAll('a, input, textarea').forEach(function (el) {
+        el.addEventListener('mouseover', function () {
+          self.cursorEnlarged = true;
+          queryCursor.classList.add('hidden');
+        });
+        el.addEventListener('mouseout', function () {
+          self.cursorEnlarged = false;
+          queryCursor.classList.remove('hidden');
+        });
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        // Show the cursor
+        self.cursorVisible = true;
+        self.toggleCursorVisibility();
+
+        // Position the dot
+        self.endX = e.pageX;
+        self.endY = e.pageY;
+      });
+
+      // Hide/show cursor
+      document.addEventListener('mouseenter', function (e) {
+        self.cursorVisible = true;
+        self.toggleCursorVisibility();
+        self.$cursor.style.opacity = '1';
+      });
+
+      document.addEventListener('mouseleave', function (e) {
+        self.cursorVisible = true;
+        self.toggleCursorVisibility();
+        self.$cursor.style.opacity = '0';
+      });
+    },
+
+    animateDotOutline: function () {
+      let self = this;
+
+      self._x += (self.endX - self._x) / self.delay;
+      self._y += (self.endY - self._y) / self.delay;
+      self.$cursor.style.top = self._y + 'px';
+      self.$cursor.style.left = self._x + 'px';
+
+      requestAnimationFrame(this.animateDotOutline.bind(self));
+    },
+
+    toggleCursorVisibility: function () {
+      let self = this;
+
+      if (self.cursorVisible) {
+        self.$cursor.style.opacity = '1';
+      } else {
+        self.$cursor.style.opacity = '0';
+      }
+    }
+  };
+  cursor.init();
+</script>

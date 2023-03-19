@@ -17,10 +17,11 @@ const header = {
   }),
 
   section: style({
-    position: 'fixed',
+    position: 'sticky',
     left: 0,
     right: 0,
     top: 0,
+    zIndex: 40,
     backgroundColor: convertHexToRGBA(rawVars.color.white, 0.7),
     backdropFilter: 'blur(40px)',
 
