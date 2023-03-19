@@ -1,5 +1,6 @@
 ---
 import Navigation from '../components/core/Navigation/Navigation.astro';
+import Banner from '../components/elements/Banner/index.astro';
 import { styles } from './styles.css';
 import './../styles/reset.css';
 
@@ -67,20 +68,7 @@ const { title, layout, navigationLinks } = Astro.props;
     <title>Azerty Keycaps - {title}</title>
   </head>
   <body>
-    <a href="https://deltakeyco.com/" target="_blank">
-      <header>
-        <ul class="scroll">
-          <li>GMK BLANC SUR NOIR</li>
-          <li>IC EN COURS SUR GEEKHACK</li>
-          <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
-        </ul>
-        <ul class="scroll">
-          <li>GMK BLANC SUR NOIR</li>
-          <li>IC EN COURS SUR GEEKHACK</li>
-          <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
-        </ul>
-      </header></a
-    >
+    <Banner />
     <Navigation layout={layout} navigationLinks={navigationLinks} />
     <main class={styles.layout.main}>
       <slot name="main" />
@@ -88,40 +76,3 @@ const { title, layout, navigationLinks } = Astro.props;
     </main>
   </body>
 </html>
-
-<style>
-  header {
-    display: flex;
-    overflow: hidden;
-    gap: 2rem;
-    position: relative;
-    user-select: none;
-    background-color: black;
-    font-weight: 700;
-    font-size: 2.5rem;
-    color: white;
-    padding: 1.25rem;
-    font-family: 'Open Cherry', sans-serif;
-  }
-
-  ul {
-    flex-shrink: 0;
-    display: flex;
-    min-width: 100%;
-    gap: 2rem;
-    justify-content: space-around;
-  }
-
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - 1rem)); /* match 1 rem to gap above */
-    }
-  }
-
-  .scroll {
-    animation: scroll 20s linear infinite;
-  }
-</style>
