@@ -1,25 +1,26 @@
 <div class="cursor">
   <div>
-    <span>ACHÈTE BORDEL</span>
+    <span>ACHÈTE OU ZEKTH TE RETROUVERA</span>
   </div>
 </div>
 
 <header>
   <ul class="scroll">
-    <li>GMK BLANC SUR NOIR</li>
+    <li>GMK BLANC-SUR-NOIR</li>
     <li>///</li>
-    <li>IC EN COURS SUR GEEKHACK</li>
+    <li>GB EN COURS</li>
     <li>///</li>
-    <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
+    <li>PRECOMMANDEZ VOTRE KIT</li>
     <li>///</li>
   </ul>
 
   <ul class="scroll">
-    <li>GMK BLANC SUR NOIR</li>
+    <li>GMK BLANC-SUR-NOIR</li>
     <li>///</li>
-    <li>IC EN COURS SUR GEEKHACK</li>
+    <li>GB EN COURS</li>
     <li>///</li>
-    <li>CLIQUEZ ICI POUR EN SAVOIR +</li>
+    <li>PRECOMMANDEZ VOTRE KIT</li>
+    <li>///</li>
   </ul>
 </header>
 
@@ -84,6 +85,7 @@
     justify-content: center;
     font-size: 12px;
     font-weight: 700;
+    text-align: center;
 
     & div {
       overflow: hidden;
@@ -100,6 +102,7 @@
       width: 140px;
       height: 140px;
       border: 2px solid black;
+      padding: 0.5rem;
 
       & span {
         transform: translateY(0%);
@@ -120,7 +123,7 @@
 
   header.addEventListener('click', () => {
     window
-      .open('https://geekhack.org/index.php?topic=119839.0', '_blank')
+      .open('https://geekhack.org/index.php?topic=120065.0', '_blank')
       ?.focus();
   });
 
@@ -195,7 +198,7 @@
 
       self._x += (self.endX - self._x) / self.delay;
       self._y += (self.endY - self._y) / self.delay;
-      self.$cursor.style.top = self._y + 'px';
+      self.$cursor.style.top = self._y - 30 + 'px';
       self.$cursor.style.left = self._x + 'px';
 
       requestAnimationFrame(this.animateDotOutline.bind(self));
