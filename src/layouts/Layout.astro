@@ -1,6 +1,5 @@
 ---
 import Navigation from '../components/core/Navigation/Navigation.astro';
-import Banner from '../components/elements/Banner/index.astro';
 import { styles } from './styles.css';
 import './../styles/reset.css';
 
@@ -68,7 +67,6 @@ const { title, layout, navigationLinks } = Astro.props;
     <title>Azerty Keycaps - {title}</title>
   </head>
   <body>
-    <Banner />
     <Navigation layout={layout} navigationLinks={navigationLinks} />
     <main class={styles.layout.main}>
       <slot name="main" />

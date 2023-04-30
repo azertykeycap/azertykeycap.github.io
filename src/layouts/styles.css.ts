@@ -26,7 +26,7 @@ const layout = {
     position: 'relative',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: '5rem',
+    marginTop: '1rem',
     marginBottom: '3rem',
     maxWidth: '80rem',
     padding: '1.5rem',
