@@ -257,5 +257,5 @@ globalStyle('.hidden', {
 });
 
 globalStyle('.block', {
-  display: 'none'
+  display: 'block'
 });
