@@ -9,7 +9,9 @@ export const rawVars = {
     red600: '#dc2626',
     indigo100: '#e0e7ff',
     indigo500: '#6366f1',
-    indigo700: '#4338ca'
+    indigo700: '#4338ca',
+    red700: '#b91c1c',
+    red800: '#991b1b'
   },
 
   opacity: {
@@ -48,7 +50,8 @@ export const vars = createGlobalTheme(':root', {
     amber500: '#f59e0b',
     red100: '#fee2e2',
     red600: '#dc2626',
-    red700: '#b91c1c'
+    red700: rawVars.color.red700,
+    red800: rawVars.color.red800
   },
 
   fontFamily: {

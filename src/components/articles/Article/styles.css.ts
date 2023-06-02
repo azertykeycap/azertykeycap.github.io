@@ -228,9 +228,8 @@ const article = {
             margin: '1rem',
             '@media': {
               [mediaQueries.dark]: {
-                border: `1px solid ${vars.color.red700}`,
-                backgroundColor: convertHexToRGBA(vars.color.red600, 0.1),
-                color: vars.color.red100
+                backgroundColor: convertHexToRGBA(rawVars.color.red800, 0.8),
+                color: vars.color.white
               }
             }
           })
