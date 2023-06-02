@@ -35,29 +35,39 @@ export default function ArticleList(props: ArticleListProps) {
 
   return (
     <>
-      <section class={styles.container}>
+      <section className={styles.container}>
         <Checkbox variant="primary" checked={checked} onClick={switchChecked} />
       </section>
       {Object.keys(articlesDisplay)
         .sort()
-        .map((a, i) => (
-          <>
+        .map((a, i) => {
+          const article = articlesDisplay[a];
+
+          const filteredArticles = checked
+            ? article?.filter((a) => a.status === 'En stock')
+            : article;
+
+          return (
             <section
+              key={i}
               id={props.navigationLinks.find((n) => a === n.title)?.slug}
-              class={styles.section.base}
+              className={styles.section.base}
             >
-              <h2 class={styles.section.title}>{a}</h2>
-              <div class={styles.section.grid}>
-                {articlesDisplay[a]
+              <h2 className={styles.section.title}>{a}</h2>
+              <div className={styles.section.grid}>
+                {filteredArticles
                   ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
-                  ?.filter((a) => (checked ? a.status === 'En stock' : a))
                   ?.map((a, j) => (
-                    <Article article={a} isHighPriority={i === 0 && j < 4} />
+                    <Article
+                      key={`${i}-${j}`}
+                      article={a}
+                      isHighPriority={i === 0 && j < 4}
+                    />
                   ))}
               </div>
             </section>
-          </>
-        ))}
+          );
+        })}
     </>
   );
 }

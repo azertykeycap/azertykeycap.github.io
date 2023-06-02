@@ -11,7 +11,6 @@ const inputBaseStyles = style({
 
 const input = {
   label: style({
-    height: '1.25rem',
     display: 'flex',
     alignItems: 'center',
     marginLeft: '1rem'
