@@ -9,9 +9,10 @@ import {
 } from '../lib/contentful';
 import Layout from '../layouts/Layout.astro';
 import { NavigationLayoutEnum } from '../types/enum';
+import type { TypeInformation__rich__textSkeleton } from '../lib/types';
 
 const informationEntry =
-  await contentfulClient.getEntries<InformationContentfulInterface>({
+  await contentfulClient.getEntries<TypeInformation__rich__textSkeleton>({
     content_type: 'information-rich-text'
   });
 

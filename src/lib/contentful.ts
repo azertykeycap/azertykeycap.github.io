@@ -1,4 +1,4 @@
-import contentful, { Asset, Entry } from 'contentful';
+import contentful, { Asset, Entry, EntrySkeletonType } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 export interface InformationContentfulInterface {
   title: string;
@@ -16,23 +16,22 @@ export interface ProfileContentfulInterface {
   readonly abbreviation: string;
 }
 
-export enum StatusEnum {
-  IN_STOCK = 'En stock',
-  GB_RUNNING = 'GB en cours',
-  GB_OVER = 'GB terminé',
-  IC = 'Interest Check',
-  OUT_STOCK = 'Out Of Stock'
-}
+export type StatusType =
+  | 'En stock'
+  | 'GB en cours'
+  | 'GB terminé'
+  | 'Interest Check'
+  | 'Out Of Stock';
 
 export interface KeycapArticleContentfulInterface {
-  readonly img: Asset;
   readonly title: string;
-  readonly profile: Entry<ProfileContentfulInterface>;
+  readonly img: string;
+  readonly profile: string;
   readonly description?: string;
   readonly material: string;
-  readonly status?: StatusEnum;
-  readonly startDate?: Date;
-  readonly endDate?: Date;
+  readonly status?: StatusType;
+  readonly startDate?: string;
+  readonly endDate?: string;
   readonly url: string;
   readonly additionalUrl?: string;
   readonly warningText?: string;

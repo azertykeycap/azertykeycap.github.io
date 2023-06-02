@@ -8,25 +8,27 @@ import ArticleList from '../components/articles/ArticleList';
 import GoTop from '../components/elements/GoTop';
 
 import {
-  contentfulClient,
   KeycapArticleContentfulInterface,
-  KeycapArticleType,
-  ProfileContentfulInterface
+  ProfileContentfulInterface,
+  contentfulClient
 } from '../lib/contentful';
 
 import { NavigationLayoutEnum } from '../types/enum';
 
-import type { ApiOgImage } from './api/og.png';
+import type {
+  TypeArticleSkeleton,
+  TypeKeycaps__profileSkeleton
+} from '../lib/types';
+import type { Asset, Entry } from 'contentful';
 
-const articlesEntries =
-  await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
-    content_type: 'article'
-  });
+const articlesEntries = await contentfulClient.getEntries<TypeArticleSkeleton>({
+  content_type: 'article'
+});
 
 const navigationLinksEntries =
-  await contentfulClient.getEntries<ProfileContentfulInterface>({
+  await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
     content_type: 'keycaps-profile',
-    order: 'fields.title'
+    order: ['fields.title']
   });
 
 const navigationLinks: Array<ProfileContentfulInterface> =
@@ -35,42 +37,46 @@ const navigationLinks: Array<ProfileContentfulInterface> =
     return { title, slug, abbreviation };
   });
 
-const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
-  const {
-    img,
-    title,
-    profile,
-    description,
-    material,
-    status,
-    startDate,
-    endDate,
-    url,
-    additionalUrl,
-    warningText,
-    isNew
-  } = e.fields;
+const articles: Array<KeycapArticleContentfulInterface> =
+  articlesEntries.items.map((e) => {
+    const {
+      title,
+      img,
+      slug,
+      profile,
+      material,
+      description,
+      status,
+      startDate,
+      endDate,
+      url,
+      additionalUrl,
+      warningText,
+      isNew
+    } = e.fields;
 
-  return {
-    img: img.fields.file.url,
-    title,
-    profile: profile.fields.title,
-    profileId: profile.fields.slug,
-    description,
-    material,
-    status,
-    startDate: startDate
-      ? new Date(startDate).toLocaleDateString('fr-FR')
-      : undefined,
-    endDate: endDate
-      ? new Date(endDate).toLocaleDateString('fr-FR')
-      : undefined,
-    url,
-    additionalUrl,
-    warningText,
-    isNew
-  };
-});
+    return {
+      title,
+      img: (img as Asset).fields.file?.url as string,
+      slug,
+      profile:
+        (profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>)
+          .fields?.title ?? 'undefined',
+      material,
+      description,
+      status,
+      startDate: startDate
+        ? new Date(startDate).toLocaleDateString('fr-FR')
+        : undefined,
+      endDate: endDate
+        ? new Date(endDate).toLocaleDateString('fr-FR')
+        : undefined,
+      url,
+      additionalUrl,
+      warningText,
+      isNew
+    };
+  });
 
 const articlesByProfile = group(articles, (a) => a.profile);
 ---

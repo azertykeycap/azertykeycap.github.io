@@ -1,9 +1,9 @@
 import { clsx } from 'clsx';
-import type { KeycapArticleType } from '../../../lib/contentful';
+import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 import { styles } from './styles.css';
 
 export interface ArticleProps {
-  article: KeycapArticleType;
+  article: KeycapArticleContentfulInterface;
   isHighPriority: boolean;
 }
 

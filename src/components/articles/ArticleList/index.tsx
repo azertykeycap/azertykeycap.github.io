@@ -5,12 +5,12 @@ import Article from '../Article';
 import Checkbox from '../../elements/Checkbox';
 
 import type {
-  KeycapArticleType,
+  KeycapArticleContentfulInterface,
   ProfileContentfulInterface
 } from '../../../lib/contentful';
 
 interface ArticleListProps {
-  articles: Partial<Record<string, Array<KeycapArticleType>>>;
+  articles: Partial<Record<string, Array<KeycapArticleContentfulInterface>>>;
   navigationLinks: Array<ProfileContentfulInterface>;
 }
 
