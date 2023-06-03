@@ -23,17 +23,18 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
+const profile = articlesByProfile[0].profile;
 ---
 
 <Layout
   layout={NavigationLayoutEnum.MAIN}
   navigationLinks={navigationLinks}
-  title="Annuaire de keycaps françaises"
+  title={profile.title}
 >
   <ArticleList
     slot="main"
     articles={articlesByProfile}
-    navigationLinks={navigationLinks}
+    profile={profile}
     client:load
   />
   <GoTop slot="goto" client:load />

@@ -4,14 +4,18 @@ import { styles } from './styles.css';
 import Article from '../Article';
 import Checkbox from '../../elements/Checkbox';
 
-import type {
-  KeycapArticleContentfulInterface,
-  ProfileContentfulInterface
-} from '../../../lib/contentful';
+import Apagnan from '../../../assets/apagnan.webp';
+
+import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 
 interface ArticleListProps {
   articles: Array<KeycapArticleContentfulInterface>;
-  navigationLinks: Array<ProfileContentfulInterface>;
+  profile: {
+    title: string;
+    slug: string;
+    description?: string;
+    abbreviation: string;
+  };
 }
 
 export default function ArticleList(props: ArticleListProps) {
@@ -42,9 +46,21 @@ export default function ArticleList(props: ArticleListProps) {
 
   return (
     <>
-      <section className={styles.container}>
-        <Checkbox variant="primary" checked={checked} onClick={switchChecked} />
-      </section>
+      <header className={styles.header.base}>
+        <div className={styles.header.div}>
+          <h1>{props.profile.title}</h1>
+          <div className={styles.header.checkbox.container}>
+            <Checkbox
+              variant="primary"
+              checked={checked}
+              onClick={switchChecked}
+            />
+          </div>
+        </div>
+        {props.profile.description && (
+          <p className={styles.header.p}>{props.profile.description}</p>
+        )}
+      </header>
       {sortedArticles.length > 0 ? (
         <section className={styles.section.base}>
           <div className={styles.section.grid}>
@@ -54,7 +70,14 @@ export default function ArticleList(props: ArticleListProps) {
           </div>
         </section>
       ) : (
-        <>Aucun article disponible</>
+        <div className={styles.results.noresults}>
+          <img
+            src={(Apagnan as unknown as MediaImage).src}
+            width={48}
+            height={48}
+          />
+          Aucun article disponible...
+        </div>
       )}
     </>
   );

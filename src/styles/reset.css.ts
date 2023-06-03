@@ -1,39 +1,39 @@
 import { globalStyle, globalFontFace } from '@vanilla-extract/css';
 
-// globalFontFace('Inter', {
-//   fontStyle: 'normal',
-//   fontWeight: 400,
-//   src: "url(/fonts/Inter-Regular.woff2) format('woff2'), url(/fonts/Inter-Regular.woff) format('woff')",
-//   fontDisplay: 'swap'
-// });
-
-// globalFontFace('Inter', {
-//   fontStyle: 'medium',
-//   fontWeight: 500,
-//   src: "url(/fonts/Inter-Medium.woff2) format('woff2'), url(/fonts/Inter-Medium.woff) format('woff')",
-//   fontDisplay: 'swap'
-// });
-
-// globalFontFace('Inter', {
-//   fontStyle: 'semibold',
-//   fontWeight: 600,
-//   src: "url(/fonts/Inter-SemiBold.woff2) format('woff2'), url(/fonts/Inter-SemiBold.woff) format('woff')",
-//   fontDisplay: 'swap'
-// });
-
-// globalFontFace('Inter', {
-//   fontStyle: 'bold',
-//   fontWeight: 700,
-//   src: "url(/fonts/Inter-Bold.woff2) format('woff2'), url(/fonts/Inter-Bold.woff) format('woff')",
-//   fontDisplay: 'swap'
-// });
-
-globalFontFace('Open Cherry', {
-  fontStyle: 'regular',
+globalFontFace('Inter', {
+  fontStyle: 'normal',
   fontWeight: 400,
-  src: "url(/fonts/OpenCherry-Regular.otf) format('opentype')",
+  src: "url(/fonts/Inter-Regular.woff2) format('woff2'), url(/fonts/Inter-Regular.woff) format('woff')",
   fontDisplay: 'swap'
 });
+
+globalFontFace('Inter', {
+  fontStyle: 'medium',
+  fontWeight: 500,
+  src: "url(/fonts/Inter-Medium.woff2) format('woff2'), url(/fonts/Inter-Medium.woff) format('woff')",
+  fontDisplay: 'swap'
+});
+
+globalFontFace('Inter', {
+  fontStyle: 'semibold',
+  fontWeight: 600,
+  src: "url(/fonts/Inter-SemiBold.woff2) format('woff2'), url(/fonts/Inter-SemiBold.woff) format('woff')",
+  fontDisplay: 'swap'
+});
+
+globalFontFace('Inter', {
+  fontStyle: 'bold',
+  fontWeight: 700,
+  src: "url(/fonts/Inter-Bold.woff2) format('woff2'), url(/fonts/Inter-Bold.woff) format('woff')",
+  fontDisplay: 'swap'
+});
+
+// globalFontFace('Open Cherry', {
+//   fontStyle: 'regular',
+//   fontWeight: 400,
+//   src: "url(/fonts/OpenCherry-Regular.otf) format('opentype')",
+//   fontDisplay: 'swap'
+// });
 
 globalStyle('*', {
   boxSizing: 'border-box',
@@ -51,6 +51,7 @@ globalStyle('html', {
   WebkitTextSizeAdjust: '100%',
   MozTabSize: 4,
   tabSize: 4,
+  textRendering: 'optimizeSpeed',
   fontFamily: `'Inter',
     'ui-sans-serif',
     'system-ui',

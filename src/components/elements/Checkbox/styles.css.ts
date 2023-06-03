@@ -6,16 +6,18 @@ const inputBaseStyles = style({
   width: '1rem',
   borderRadius: '0.2rem',
   cursor: 'pointer',
-  backgroundColor: vars.color.white
+  backgroundColor: vars.color.white,
 });
 
 const input = {
   label: style({
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: '0.75rem',
     marginLeft: '1rem',
-    cursor: 'pointer'
+    cursor: 'pointer',
+  whiteSpace: 'nowrap',
+
   }),
 
   title: style({
@@ -26,13 +28,14 @@ const input = {
   span: style({
     paddingRight: '1rem',
     borderRight: `1px solid ${vars.color.slate300}`,
-    color: vars.color.slate400
+    color: vars.color.slate500
   }),
 
   styles: styleVariants({
     primary: [
       inputBaseStyles,
       {
+        flexShrink: 0,
         border: `1px solid ${vars.color.slate300}`,
         '&:focus': {
           outline: `2px solid ${vars.color.indigo600}`,

@@ -3,10 +3,7 @@ export const prerender = true;
 
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
-import {
-  contentfulClient,
-  InformationContentfulInterface
-} from '../lib/contentful';
+import { contentfulClient } from '../lib/contentful';
 import Layout from '../layouts/Layout.astro';
 import { NavigationLayoutEnum } from '../types/enum';
 import type { TypeInformation__rich__textSkeleton } from '../lib/types';
@@ -21,8 +18,11 @@ const informationContent = documentToHtmlString(
 );
 ---
 
-<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations">
-  <div slot="main" set:html={informationContent} class="content" />
+<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations complémentaires">
+  <div slot="main" class="content">
+    <h1>Informations complémentaires</h1>
+    <div set:html={informationContent} />
+  </div>
 </Layout>
 
 <style lang="postcss" is:global>
@@ -65,7 +65,8 @@ const informationContent = documentToHtmlString(
 
     font-size: 1rem;
     line-height: 1.75;
-
+    text-wrap: balance;
+    
     &:first-child {
       margin-top: 0;
     }
@@ -151,7 +152,7 @@ const informationContent = documentToHtmlString(
     }
 
     & h1 {
-      font-weight: 800;
+      font-weight: 700;
       font-size: 2.25em;
       margin-top: 0;
       margin-bottom: 0.8888889em;

@@ -79,6 +79,7 @@ export type TypeInformation__rich__text<
 export interface TypeKeycaps__profileFields {
   title: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
+  description?: EntryFieldTypes.Text;
   abbreviation: EntryFieldTypes.Symbol;
 }
 

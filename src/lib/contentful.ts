@@ -108,7 +108,13 @@ export const getArticles = async () => {
         ).fields?.title,
         slug: (
           profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
-        ).fields?.slug
+        ).fields?.slug,
+        description: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.description,
+        abbreviation: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.abbreviation
       },
       material,
       description,
