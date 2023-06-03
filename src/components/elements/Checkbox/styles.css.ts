@@ -13,7 +13,9 @@ const input = {
   label: style({
     display: 'flex',
     alignItems: 'center',
-    marginLeft: '1rem'
+    gap: '0.5rem',
+    marginLeft: '1rem',
+    cursor: 'pointer'
   }),
 
   title: style({

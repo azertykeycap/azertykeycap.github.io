@@ -1,84 +1,12 @@
 ---
 export const prerender = true;
 
-import { group } from 'radash';
 import Layout from '../layouts/Layout.astro';
-
-import ArticleList from '../components/articles/ArticleList';
 import GoTop from '../components/elements/GoTop';
-
-import {
-  KeycapArticleContentfulInterface,
-  ProfileContentfulInterface,
-  contentfulClient
-} from '../lib/contentful';
-
+import { getNavigationLinks } from '../lib/contentful';
 import { NavigationLayoutEnum } from '../types/enum';
 
-import type {
-  TypeArticleSkeleton,
-  TypeKeycaps__profileSkeleton
-} from '../lib/types';
-import type { Asset, Entry } from 'contentful';
-
-const articlesEntries = await contentfulClient.getEntries<TypeArticleSkeleton>({
-  content_type: 'article'
-});
-
-const navigationLinksEntries =
-  await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
-    content_type: 'keycaps-profile',
-    order: ['fields.title']
-  });
-
-const navigationLinks: Array<ProfileContentfulInterface> =
-  navigationLinksEntries.items.map((n) => {
-    const { title, slug, abbreviation } = n.fields;
-    return { title, slug, abbreviation };
-  });
-
-const articles: Array<KeycapArticleContentfulInterface> =
-  articlesEntries.items.map((e) => {
-    const {
-      title,
-      img,
-      slug,
-      profile,
-      material,
-      description,
-      status,
-      startDate,
-      endDate,
-      url,
-      additionalUrl,
-      warningText,
-      isNew
-    } = e.fields;
-
-    return {
-      title,
-      img: (img as Asset).fields.file?.url as string,
-      slug,
-      profile:
-        (profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>)
-          .fields?.title ?? 'undefined',
-      material,
-      description,
-      status,
-      startDate: startDate
-        ? new Date(startDate).toLocaleDateString('fr-FR')
-        : undefined,
-      endDate: endDate
-        ? new Date(endDate).toLocaleDateString('fr-FR')
-        : undefined,
-      url,
-      additionalUrl,
-      warningText,
-      isNew
-    };
-  });
-
-const articlesByProfile = group(articles, (a) => a.profile);
+const navigationLinks = await getNavigationLinks();
 ---
 
 <Layout
@@ -86,11 +14,5 @@ const articlesByProfile = group(articles, (a) => a.profile);
   navigationLinks={navigationLinks}
   title="Annuaire de keycaps françaises"
 >
-  <ArticleList
-    slot="main"
-    articles={articlesByProfile}
-    navigationLinks={navigationLinks}
-    client:load
-  />
-  <GoTop slot="goto" client:load />
+  <span slot="main">Home</span>
 </Layout>

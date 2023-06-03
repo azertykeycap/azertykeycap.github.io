@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, useMemo } from 'preact/hooks';
 import { styles } from './styles.css';
 
 import Article from '../Article';
@@ -10,7 +10,7 @@ import type {
 } from '../../../lib/contentful';
 
 interface ArticleListProps {
-  articles: Partial<Record<string, Array<KeycapArticleContentfulInterface>>>;
+  articles: Array<KeycapArticleContentfulInterface>;
   navigationLinks: Array<ProfileContentfulInterface>;
 }
 
@@ -18,56 +18,44 @@ export default function ArticleList(props: ArticleListProps) {
   const [checked, setChecked] = useState(false);
   const [articlesDisplay, setArticlesDisplay] = useState(props.articles);
 
-  const filteredArticles = Object.fromEntries(
-    Object.entries(articlesDisplay).filter(
-      ([_, v]) => v && v.filter((a) => a.status === 'En stock').length !== 0
-    )
+  const filteredArticles = useMemo(
+    () => props.articles.filter((a) => a.status === 'En stock'),
+    [props.articles]
   );
 
   useEffect(() => {
-    if (checked === true) setArticlesDisplay(filteredArticles);
+    if (checked) setArticlesDisplay(filteredArticles);
     else setArticlesDisplay(props.articles);
-  }, [checked]);
+  }, [checked, filteredArticles, props.articles]);
 
   const switchChecked = (): void => {
     setChecked(!checked);
   };
+
+  const sortedArticles = useMemo(
+    () =>
+      articlesDisplay.sort((a, b) =>
+        a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1
+      ),
+    [articlesDisplay]
+  );
 
   return (
     <>
       <section className={styles.container}>
         <Checkbox variant="primary" checked={checked} onClick={switchChecked} />
       </section>
-      {Object.keys(articlesDisplay)
-        .sort()
-        .map((a, i) => {
-          const article = articlesDisplay[a];
-
-          const filteredArticles = checked
-            ? article?.filter((a) => a.status === 'En stock')
-            : article;
-
-          return (
-            <section
-              key={i}
-              id={props.navigationLinks.find((n) => a === n.title)?.slug}
-              className={styles.section.base}
-            >
-              <h2 className={styles.section.title}>{a}</h2>
-              <div className={styles.section.grid}>
-                {filteredArticles
-                  ?.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1))
-                  ?.map((a, j) => (
-                    <Article
-                      key={`${i}-${j}`}
-                      article={a}
-                      isHighPriority={i === 0 && j < 4}
-                    />
-                  ))}
-              </div>
-            </section>
-          );
-        })}
+      {sortedArticles.length > 0 ? (
+        <section className={styles.section.base}>
+          <div className={styles.section.grid}>
+            {sortedArticles.map((article, i) => (
+              <Article key={i} article={article} isHighPriority={i < 4} />
+            ))}
+          </div>
+        </section>
+      ) : (
+        <>Aucun article disponible</>
+      )}
     </>
   );
 }

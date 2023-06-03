@@ -9,6 +9,7 @@ export interface ArticleProps {
 
 export default function Article(props: ArticleProps) {
   const { article, isHighPriority } = props;
+
   const {
     img,
     profile,
@@ -57,7 +58,7 @@ export default function Article(props: ArticleProps) {
       <hr class={styles.hr} />
       <dl class={styles.article.content.description.dl.base}>
         <dt class={styles.article.content.description.dl.dt}>Profil :</dt>
-        <dd class={styles.article.content.description.dl.dd}>{profile}</dd>
+        <dd class={styles.article.content.description.dl.dd}>{profile.title}</dd>
         <dt class={styles.article.content.description.dl.dt}>Material :</dt>
         <dd class={styles.article.content.description.dl.dd}>{material}</dd>
       </dl>
