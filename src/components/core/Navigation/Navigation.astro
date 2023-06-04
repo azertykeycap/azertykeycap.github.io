@@ -25,10 +25,7 @@ const { layout, navigationLinks } = Astro.props;
     class={clsx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
   >
     <div class={styles.header.nav.div}>
-      <a
-        class={styles.common.a}
-        href={'/'}
-      >
+      <a class={styles.common.a} href={'/'}>
         <span class={srOnly}>PLAKET INDUSTRIES</span>
         <Image
           src={Logo}
@@ -38,6 +35,7 @@ const { layout, navigationLinks } = Astro.props;
           alt="Author logo"
           format={'webp'}
           class={styles.img}
+          loading={'eager'}
         />
       </a>
       {
@@ -97,6 +95,7 @@ const { layout, navigationLinks } = Astro.props;
         alt="Author logo"
         format={'webp'}
         class={styles.img}
+        loading={'eager'}
       />
       <button type="button" id="btn-close" class={styles.header.mobile.button}>
         <span class={srOnly}>Close menu</span>

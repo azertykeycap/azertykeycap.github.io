@@ -6,6 +6,11 @@ import { getNavigationLinks } from '../lib/contentful';
 import { NavigationLayoutEnum } from '../types/enum';
 
 const navigationLinks = await getNavigationLinks();
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+);
 ---
 
 <Layout

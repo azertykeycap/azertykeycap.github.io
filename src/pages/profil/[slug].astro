@@ -24,12 +24,22 @@ const { slug } = Astro.params;
 
 const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
 const profile = articlesByProfile[0].profile;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+);
 ---
 
 <Layout
   layout={NavigationLayoutEnum.MAIN}
   navigationLinks={navigationLinks}
   title={profile.title}
+  description={profile.description}
+  additonalSeoInfo={{
+    canonical: `profil/${profile.slug}`
+    
+  }}
 >
   <ArticleList
     slot="main"

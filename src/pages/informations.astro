@@ -16,9 +16,17 @@ const informationEntry =
 const informationContent = documentToHtmlString(
   informationEntry.items[0].fields.informationRichText
 );
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+);
 ---
 
-<Layout layout={NavigationLayoutEnum.SECONDARY} title="Informations complémentaires">
+<Layout
+  layout={NavigationLayoutEnum.SECONDARY}
+  title="Informations complémentaires"
+>
   <div slot="main" class="content">
     <h1>Informations complémentaires</h1>
     <div set:html={informationContent} />

@@ -11,9 +11,16 @@ export interface Props {
   title: string;
   description?: string;
   navigationLinks?: Array<ProfileContentfulInterface>;
+  additonalSeoInfo?: Partial<{ canonical: string }>;
 }
 
-const { title, description, layout, navigationLinks } = Astro.props;
+const defaultDescription =
+  'Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.';
+
+const { title, description, layout, navigationLinks, additonalSeoInfo } =
+  Astro.props;
+
+
 ---
 
 <!DOCTYPE html>
@@ -28,9 +35,7 @@ const { title, description, layout, navigationLinks } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content={description
-        ? description
-        : 'Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.'}
+      content={description ? description : defaultDescription}
     />
     <meta name="generator" content={Astro.generator} />
 
@@ -47,10 +52,12 @@ const { title, description, layout, navigationLinks } = Astro.props;
       property="og:title"
       content="Azerty Keycaps - Annuaire de keycaps françaises"
     />
+
     <meta
       property="og:description"
-      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+      content={description ? description : defaultDescription}
     />
+
     <meta property="og:locale" content="fr_FR" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -62,11 +69,15 @@ const { title, description, layout, navigationLinks } = Astro.props;
     />
     <meta
       name="twitter:description"
-      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+      content={description ? description : defaultDescription}
     />
 
     <link rel="icon" href="/favicon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="canonical"
+      href={`${Astro.site}${additonalSeoInfo && additonalSeoInfo.canonical}`}
+    />
 
     <title>Azerty Keycaps - {title}</title>
   </head>
