@@ -30,7 +30,7 @@ export type StatusType =
 export interface KeycapArticleContentfulInterface {
   readonly title: string;
   readonly img: string;
-  readonly profile: { title: string; slug: string };
+  readonly profile: { title: string; slug: string, abbreviation: string };
   readonly description?: string;
   readonly material: string;
   readonly status?: StatusType;

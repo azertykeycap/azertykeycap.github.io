@@ -3,24 +3,29 @@ import Navigation from '../components/core/Navigation/Navigation.astro';
 import { styles } from './styles.css';
 import './../styles/reset.css';
 
-import type { ProfileContentfulInterface } from '../lib/contentful';
+import type {
+  ProfileContentfulInterface,
+  KeycapArticleContentfulInterface
+} from '../lib/contentful';
 import type { NavigationLayoutEnum } from '../types/enum';
+import { Schema } from 'astro-seo-schema';
 
 export interface Props {
   layout: NavigationLayoutEnum;
   title: string;
   description?: string;
   navigationLinks?: Array<ProfileContentfulInterface>;
-  additonalSeoInfo?: Partial<{ canonical: string }>;
+  additionalSeoInfo?: Partial<{
+    canonical: string;
+    articles: Array<KeycapArticleContentfulInterface>;
+  }>;
 }
 
 const defaultDescription =
   'Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.';
 
-const { title, description, layout, navigationLinks, additonalSeoInfo } =
+const { title, description, layout, navigationLinks, additionalSeoInfo } =
   Astro.props;
-
-
 ---
 
 <!DOCTYPE html>
@@ -31,6 +36,36 @@ const { title, description, layout, navigationLinks, additonalSeoInfo } =
       src="https://azertykeycaps-analytics-eehi16tqe-kzm.vercel.app/script.js"
       data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
     ></script>
+    {
+      additionalSeoInfo?.articles &&
+        additionalSeoInfo?.articles?.length > 0 && (
+          <>
+            {additionalSeoInfo.articles.map((a) => (
+              <Schema
+                item={{
+                  '@context': 'https://schema.org',
+                  '@type': 'Product',
+                  name: `${a.title}`,
+                  image: `${a.img}`,
+                  url: `${a.url}`,
+                  description: `${a.description}` ?? undefined,
+                  brand: {
+                    '@type': 'Organization',
+                    name: `${a.profile.title}`
+                  },
+                  material: `${a.material}`,
+                  offers: {
+                    '@type': 'Offer',
+                    availability: 'https://schema.org/InStock',
+                    priceCurrency: 'USD',
+                    price: '0'
+                  }
+                }}
+              />
+            ))}
+          </>
+        )
+    }
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -76,7 +111,7 @@ const { title, description, layout, navigationLinks, additonalSeoInfo } =
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="canonical"
-      href={`${Astro.site}${additonalSeoInfo && additonalSeoInfo.canonical}`}
+      href={`${Astro.site}${additionalSeoInfo && additionalSeoInfo.canonical}`}
     />
 
     <title>Azerty Keycaps - {title}</title>

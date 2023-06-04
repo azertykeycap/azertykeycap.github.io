@@ -36,9 +36,9 @@ Astro.response.headers.set(
   navigationLinks={navigationLinks}
   title={profile.title}
   description={profile.description}
-  additonalSeoInfo={{
-    canonical: `profil/${profile.slug}`
-    
+  additionalSeoInfo={{
+    canonical: `profil/${profile.slug}`,
+    articles: articlesByProfile
   }}
 >
   <ArticleList

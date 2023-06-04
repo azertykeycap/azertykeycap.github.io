@@ -26,7 +26,26 @@ export default function Article(props: ArticleProps) {
   } = article;
 
   return (
-    <article class={clsx(isNew ? styles.article.new : styles.article.normal)}>
+    <article
+      class={clsx(isNew ? styles.article.new : styles.article.normal)}
+      itemScope
+      itemType="https://schema.org/Product"
+    >
+      <meta itemProp="name" content={title} />
+      <meta itemProp="description" content={description} />
+      <meta itemProp="url" content={url} />
+      <meta itemProp="image" content={img} />
+      <meta itemProp="material" content={material} />
+      <meta itemProp="brand" content={profile.abbreviation} />
+
+      {profile && <meta itemProp="category" content={profile.abbreviation} />}
+
+      {startDate && endDate && (
+        <meta itemProp="releaseDate" content={`${startDate} - ${endDate}`} />
+      )}
+
+      {warningText && <meta itemProp="negativeNotes" content={warningText} />}
+
       {isNew && (
         <div class={styles.newBadge.div}>
           <svg
@@ -53,28 +72,47 @@ export default function Article(props: ArticleProps) {
         height="266"
         width="400"
         class={styles.article.content.img}
+        itemProp="image"
       />
-      <h3 class={styles.article.content.description.h4}>{title}</h3>
+      <h3 itemProp="name" class={styles.article.content.description.h4}>
+        {title}
+      </h3>
       <hr class={styles.hr} />
       <dl class={styles.article.content.description.dl.base}>
         <dt class={styles.article.content.description.dl.dt}>Profil :</dt>
-        <dd class={styles.article.content.description.dl.dd}>{profile.title}</dd>
+        <dd
+          class={styles.article.content.description.dl.dd}
+          itemProp="category"
+        >
+          {profile.title}
+        </dd>
         <dt class={styles.article.content.description.dl.dt}>Material :</dt>
-        <dd class={styles.article.content.description.dl.dd}>{material}</dd>
+        <dd
+          class={styles.article.content.description.dl.dd}
+          itemProp="material"
+        >
+          {material}
+        </dd>
       </dl>
       {status && (
         <>
           <hr class={styles.hr} />
           <dl class={styles.article.content.description.dl.base}>
             <dt class={styles.article.content.description.dl.dt}>Statut :</dt>
-            <dd class={styles.article.content.description.dl.status.dd}>
+            <dd
+              class={styles.article.content.description.dl.status.dd}
+              itemProp={'availability'}
+            >
               {status}
             </dd>
           </dl>
           {(startDate || endDate) && (
             <>
               <hr class={styles.hr} />
-              <dl class={styles.article.content.description.dl.base}>
+              <dl
+                class={styles.article.content.description.dl.base}
+                itemProp={'releaseDate'}
+              >
                 {startDate && (
                   <>
                     <dt class={styles.article.content.description.dl.dt}>
@@ -103,7 +141,10 @@ export default function Article(props: ArticleProps) {
       {description && (
         <>
           <hr class={styles.hr} />
-          <section class={styles.article.content.description.section}>
+          <section
+            itemProp={'description'}
+            class={styles.article.content.description.section}
+          >
             {description}
           </section>
         </>
@@ -111,7 +152,10 @@ export default function Article(props: ArticleProps) {
       {warningText && (
         <>
           <hr class={styles.hr} />
-          <span class={styles.article.content.description.dl.warning.span}>
+          <span
+            itemProp="negativeNotes"
+            class={styles.article.content.description.dl.warning.span}
+          >
             Attention : {warningText}
           </span>
         </>
@@ -134,6 +178,7 @@ export default function Article(props: ArticleProps) {
         <a
           role="button"
           href={url}
+          itemProp="url"
           target="_blank"
           class={
             styles.article.content.description.dl.additionnalUrl.button.primary

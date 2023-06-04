@@ -45,10 +45,15 @@ export default function ArticleList(props: ArticleListProps) {
   );
 
   return (
-    <>
+    <section itemScope itemType="https://schema.org/ProductCollection">
+      <meta itemProp="name" content={props.profile.title} />
+      {props.profile.description && (
+        <meta itemProp="description" content={props.profile.description} />
+      )}
+      <meta itemProp="collectionSize" content={sortedArticles.length.toString()} />
       <header className={styles.header.base}>
         <div className={styles.header.div}>
-          <h1>{props.profile.title}</h1>
+          <h1 itemProp="name">{props.profile.title}</h1>
           <div className={styles.header.checkbox.container}>
             <Checkbox
               variant="primary"
@@ -58,7 +63,9 @@ export default function ArticleList(props: ArticleListProps) {
           </div>
         </div>
         {props.profile.description && (
-          <p className={styles.header.p}>{props.profile.description}</p>
+          <p itemProp="description" className={styles.header.p}>
+            {props.profile.description}
+          </p>
         )}
       </header>
       {sortedArticles.length > 0 ? (
@@ -79,6 +86,6 @@ export default function ArticleList(props: ArticleListProps) {
           Aucun article disponible...
         </div>
       )}
-    </>
+    </section>
   );
 }

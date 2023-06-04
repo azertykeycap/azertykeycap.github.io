@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@jasikpark/astro-svg-loader": "^0.1.0",
+    "astro-seo-schema": "^2.0.0",
     "autoprefixer": "^10.4.14",
     "mini-svg-data-uri": "^1.4.4",
     "postcss-nesting": "^11.2.2",

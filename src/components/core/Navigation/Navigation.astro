@@ -43,7 +43,7 @@ const { layout, navigationLinks } = Astro.props;
           <ul class={styles.common.ul.base}>
             {navigationLinks.map((n) => (
               <li class={styles.common.ul.li}>
-                <a href={`/profil/${n.slug}`} class={styles.common.a}>
+                <a href={`/profil/${n.slug}`} class={styles.common.a} rel="noopener">
                   {n.abbreviation}
                 </a>
               </li>
