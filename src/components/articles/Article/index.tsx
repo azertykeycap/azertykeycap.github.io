@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 import { styles } from './styles.css';
+import { useWindowSize } from '../../../lib/hooks';
 
 export interface ArticleProps {
   article: KeycapArticleContentfulInterface;
@@ -9,6 +10,11 @@ export interface ArticleProps {
 
 export default function Article(props: ArticleProps) {
   const { article, isHighPriority } = props;
+  const { width } = useWindowSize();
+
+  const isMobile = width ? width < 768 : false;
+  const IMG_WIDTH = isMobile ? 560 : 400;
+  const IMG_HEIGHT = IMG_WIDTH * 0.66;
 
   const {
     img,
@@ -65,18 +71,18 @@ export default function Article(props: ArticleProps) {
       )}
 
       <img
-        src={`${img}?fit=fill&w=400&h=266&fm=webp&q=70`}
+        src={`${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
         alt={title}
         loading={isHighPriority ? 'eager' : 'lazy'}
         decoding={isHighPriority ? 'auto' : 'async'}
-        height="266"
-        width="400"
+        height={IMG_HEIGHT}
+        width={IMG_WIDTH}
         class={styles.article.content.img}
         itemProp="image"
       />
-      <h3 itemProp="name" class={styles.article.content.description.h4}>
+      <h2 itemProp="name" class={styles.article.content.description.h2}>
         {title}
-      </h3>
+      </h2>
       <hr class={styles.hr} />
       <dl class={styles.article.content.description.dl.base}>
         <dt class={styles.article.content.description.dl.dt}>Profil :</dt>

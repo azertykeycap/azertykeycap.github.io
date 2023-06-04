@@ -75,6 +75,7 @@ const newBadge = {
 
 const articleBase = style({
   position: 'relative',
+  overflow: 'hidden',
   maxWidth: '400px',
   margin: '0 auto',
   display: 'flex',
@@ -84,7 +85,6 @@ const articleBase = style({
   transition: `all 0.15s ${animationTiming}`,
   '@media': {
     [mediaQueries.md]: {
-      maxWidth: 'auto',
       margin: 0
     },
     [mediaQueries.dark]: {
@@ -130,10 +130,9 @@ const article = {
     img: style({
       width: '100%',
       backgroundColor: vars.color.slate300,
-      borderTopLeftRadius: '0.58rem',
-      borderTopRightRadius: '0.58rem',
       borderBottom: `1px solid ${vars.color.slate100}`,
       objectFit: 'fill',
+
       '@media': {
         [mediaQueries.dark]: {
           borderBottom: `1px solid ${vars.color.slate800}`,
@@ -143,7 +142,7 @@ const article = {
     }),
 
     description: {
-      h4: style({
+      h2: style({
         padding: '1rem',
         textAlign: 'center',
         fontSize: vars.fontSize.base,

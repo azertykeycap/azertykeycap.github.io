@@ -28,7 +28,7 @@ const header = {
     width: '100%',
     gap: '1rem',
     '@media': {
-      [mediaQueries.lg]: {
+      [mediaQueries.md]: {
         flexDirection: 'row'
       }
     }
