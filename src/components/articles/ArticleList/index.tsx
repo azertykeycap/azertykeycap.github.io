@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from 'preact/hooks';
+import { Image } from '@unpic/preact';
+
 import { styles } from './styles.css';
 
 import Article from '../Article';
 import Checkbox from '../../elements/Checkbox';
-
 import Apagnan from '../../../assets/apagnan.webp';
 
 import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
@@ -50,7 +51,10 @@ export default function ArticleList(props: ArticleListProps) {
       {props.profile.description && (
         <meta itemProp="description" content={props.profile.description} />
       )}
-      <meta itemProp="collectionSize" content={sortedArticles.length.toString()} />
+      <meta
+        itemProp="collectionSize"
+        content={sortedArticles.length.toString()}
+      />
       <header className={styles.header.base}>
         <div className={styles.header.div}>
           <h1 itemProp="name">{props.profile.title}</h1>
@@ -78,7 +82,7 @@ export default function ArticleList(props: ArticleListProps) {
         </section>
       ) : (
         <div className={styles.results.noresults}>
-          <img
+          <Image
             src={(Apagnan as unknown as MediaImage).src}
             width={48}
             height={48}

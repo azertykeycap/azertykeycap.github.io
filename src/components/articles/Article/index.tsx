@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 import { styles } from './styles.css';
-import { useWindowSize } from '../../../lib/hooks';
+import { Image } from '@unpic/preact';
 
 export interface ArticleProps {
   article: KeycapArticleContentfulInterface;
@@ -10,11 +10,6 @@ export interface ArticleProps {
 
 export default function Article(props: ArticleProps) {
   const { article, isHighPriority } = props;
-  const { width } = useWindowSize();
-
-  const isMobile = width ? width < 768 : false;
-  const IMG_WIDTH = isMobile ? 560 : 400;
-  const IMG_HEIGHT = IMG_WIDTH * 0.66;
 
   const {
     img,
@@ -33,7 +28,7 @@ export default function Article(props: ArticleProps) {
 
   return (
     <article
-      class={clsx(isNew ? styles.article.new : styles.article.normal)}
+      className={clsx(isNew ? styles.article.new : styles.article.normal)}
       itemScope
       itemType="https://schema.org/Product"
     >
@@ -53,12 +48,12 @@ export default function Article(props: ArticleProps) {
       {warningText && <meta itemProp="negativeNotes" content={warningText} />}
 
       {isNew && (
-        <div class={styles.newBadge.div}>
+        <div className={styles.newBadge.div}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class={styles.newBadge.svg}
+            className={styles.newBadge.svg}
           >
             <path
               fill-rule="evenodd"
@@ -66,35 +61,37 @@ export default function Article(props: ArticleProps) {
               clip-rule="evenodd"
             />
           </svg>
-          <span class={styles.newBadge.span}>Nouveau</span>
+          <span className={styles.newBadge.span}>Nouveau</span>
         </div>
       )}
 
-      <img
+      <Image
         src={`${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
         alt={title}
         loading={isHighPriority ? 'eager' : 'lazy'}
         decoding={isHighPriority ? 'auto' : 'async'}
-        height={IMG_HEIGHT}
-        width={IMG_WIDTH}
-        class={styles.article.content.img}
+        fetchpriority={isHighPriority ? 'high' : 'low'}
+        layout='fullWidth'
+        className={styles.article.content.img}
         itemProp="image"
+        background="auto"
+        breakpoints={[320, 768]}
       />
-      <h2 itemProp="name" class={styles.article.content.description.h2}>
+      <h2 itemProp="name" className={styles.article.content.description.h2}>
         {title}
       </h2>
-      <hr class={styles.hr} />
-      <dl class={styles.article.content.description.dl.base}>
-        <dt class={styles.article.content.description.dl.dt}>Profil :</dt>
+      <hr className={styles.hr} />
+      <dl className={styles.article.content.description.dl.base}>
+        <dt className={styles.article.content.description.dl.dt}>Profil :</dt>
         <dd
-          class={styles.article.content.description.dl.dd}
+          className={styles.article.content.description.dl.dd}
           itemProp="category"
         >
           {profile.title}
         </dd>
-        <dt class={styles.article.content.description.dl.dt}>Material :</dt>
+        <dt className={styles.article.content.description.dl.dt}>Material :</dt>
         <dd
-          class={styles.article.content.description.dl.dd}
+          className={styles.article.content.description.dl.dd}
           itemProp="material"
         >
           {material}
@@ -102,11 +99,11 @@ export default function Article(props: ArticleProps) {
       </dl>
       {status && (
         <>
-          <hr class={styles.hr} />
-          <dl class={styles.article.content.description.dl.base}>
-            <dt class={styles.article.content.description.dl.dt}>Statut :</dt>
+          <hr className={styles.hr} />
+          <dl className={styles.article.content.description.dl.base}>
+            <dt className={styles.article.content.description.dl.dt}>Statut :</dt>
             <dd
-              class={styles.article.content.description.dl.status.dd}
+              className={styles.article.content.description.dl.status.dd}
               itemProp={'availability'}
             >
               {status}
@@ -114,29 +111,29 @@ export default function Article(props: ArticleProps) {
           </dl>
           {(startDate || endDate) && (
             <>
-              <hr class={styles.hr} />
+              <hr className={styles.hr} />
               <dl
-                class={styles.article.content.description.dl.base}
+                className={styles.article.content.description.dl.base}
                 itemProp={'releaseDate'}
               >
                 {startDate && (
                   <>
-                    <dt class={styles.article.content.description.dl.dt}>
+                    <dt className={styles.article.content.description.dl.dt}>
                       Date début :
                     </dt>
-                    <dd class={styles.article.content.description.dl.dd}>
+                    <time dateTime={startDate} className={styles.article.content.description.dl.dd}>
                       {startDate}
-                    </dd>
+                    </time>
                   </>
                 )}
                 {endDate && (
                   <>
-                    <dt class={styles.article.content.description.dl.dt}>
+                    <dt className={styles.article.content.description.dl.dt}>
                       Date fin :
                     </dt>
-                    <dd class={styles.article.content.description.dl.dd}>
+                    <time dateTime={endDate} className={styles.article.content.description.dl.dd}>
                       {endDate}
-                    </dd>
+                    </time>
                   </>
                 )}
               </dl>
@@ -146,10 +143,10 @@ export default function Article(props: ArticleProps) {
       )}
       {description && (
         <>
-          <hr class={styles.hr} />
+          <hr className={styles.hr} />
           <section
             itemProp={'description'}
-            class={styles.article.content.description.section}
+            className={styles.article.content.description.section}
           >
             {description}
           </section>
@@ -157,22 +154,22 @@ export default function Article(props: ArticleProps) {
       )}
       {warningText && (
         <>
-          <hr class={styles.hr} />
+          <hr className={styles.hr} />
           <span
             itemProp="negativeNotes"
-            class={styles.article.content.description.dl.warning.span}
+            className={styles.article.content.description.dl.warning.span}
           >
             Attention : {warningText}
           </span>
         </>
       )}
-      <hr class={styles.hr} />
-      <div class={styles.article.content.description.dl.additionnalUrl.div}>
+      <hr className={styles.hr} />
+      <div className={styles.article.content.description.dl.additionnalUrl.div}>
         {additionalUrl && (
           <a
             role="button"
             href={additionalUrl}
-            class={
+            className={
               styles.article.content.description.dl.additionnalUrl.button
                 .secondary
             }
@@ -186,7 +183,7 @@ export default function Article(props: ArticleProps) {
           href={url}
           itemProp="url"
           target="_blank"
-          class={
+          className={
             styles.article.content.description.dl.additionnalUrl.button.primary
           }
         >

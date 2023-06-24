@@ -48,7 +48,7 @@ const header = {
       '@media': {
         [mediaQueries.dark]: {
           backgroundColor: convertHexToRGBA(rawVars.color.black, 0.3),
-          color: vars.color.slate100
+          color: vars.color.slate300
         }
       }
     })
@@ -60,7 +60,7 @@ const header = {
     color: vars.color.slate600,
     '@media': {
       [mediaQueries.dark]: {
-        color: vars.color.slate100
+        color: vars.color.slate300
       }
     }
   })
@@ -111,6 +111,11 @@ const results = {
     fontSize: '1.25rem',
     color: vars.color.slate700,
     gap: '1rem',
+    '@media': {
+      [mediaQueries.dark]: {
+        color: vars.color.slate300
+      }
+    }
   })
 };
 

@@ -1,0 +1,16 @@
+---
+import type { ProfileContentfulInterface } from '../../../lib/contentful';
+
+import { styles } from './styles.css';
+
+export interface Props {
+    profile?: ProfileContentfulInterface;
+}
+
+const { profile } = Astro.props;
+---
+
+<>
+    {profile?.title}
+    {profile?.description}
+</>

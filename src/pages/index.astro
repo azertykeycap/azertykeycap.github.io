@@ -1,11 +1,13 @@
 ---
 export const prerender = true;
 
+import DisplayCard from '../components/elements/DisplayCard/DisplayCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { getNavigationLinks } from '../lib/contentful';
+import { getHomepageProfiles, getNavigationLinks } from '../lib/contentful';
 import { NavigationLayoutEnum } from '../types/enum';
 
 const navigationLinks = await getNavigationLinks();
+const homepageProfiles = await getHomepageProfiles();
 
 Astro.response.headers.set(
   'Cache-Control',
@@ -18,5 +20,7 @@ Astro.response.headers.set(
   navigationLinks={navigationLinks}
   title="Annuaire de keycaps françaises"
 >
-  <span slot="main">Home</span>
+  <section class="section" slot="main">
+    {homepageProfiles.map((profile) => <DisplayCard profile={profile} />)}
+  </section>
 </Layout>

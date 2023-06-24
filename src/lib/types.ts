@@ -15,7 +15,6 @@ export type TypeApiOgImagesSkeleton = EntrySkeletonType<
   TypeApiOgImagesFields,
   'apiOgImages'
 >;
-
 export type TypeApiOgImages<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode
@@ -55,7 +54,6 @@ export type TypeArticleSkeleton = EntrySkeletonType<
   TypeArticleFields,
   'article'
 >;
-
 export type TypeArticle<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode
@@ -70,7 +68,6 @@ export type TypeInformation__rich__textSkeleton = EntrySkeletonType<
   TypeInformation__rich__textFields,
   'information-rich-text'
 >;
-
 export type TypeInformation__rich__text<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode
@@ -81,13 +78,14 @@ export interface TypeKeycaps__profileFields {
   slug: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.Text;
   abbreviation: EntryFieldTypes.Symbol;
+  displayHomepage?: EntryFieldTypes.Boolean;
+  thumbnail?: EntryFieldTypes.AssetLink;
 }
 
 export type TypeKeycaps__profileSkeleton = EntrySkeletonType<
   TypeKeycaps__profileFields,
   'keycaps-profile'
 >;
-
 export type TypeKeycaps__profile<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode

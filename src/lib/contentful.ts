@@ -18,6 +18,9 @@ export interface ProfileContentfulInterface {
   readonly title: string;
   readonly slug: string;
   readonly abbreviation: string;
+  readonly description?: string;
+  readonly thumbnail?: string;
+  readonly displayHomePage?: boolean;
 }
 
 export type StatusType =
@@ -30,7 +33,7 @@ export type StatusType =
 export interface KeycapArticleContentfulInterface {
   readonly title: string;
   readonly img: string;
-  readonly profile: { title: string; slug: string, abbreviation: string };
+  readonly profile: { title: string; slug: string; abbreviation: string };
   readonly description?: string;
   readonly material: string;
   readonly status?: StatusType;
@@ -73,6 +76,20 @@ export const getNavigationLinks = async () => {
     const { title, slug, abbreviation } = fields;
     return { title, slug, abbreviation };
   });
+};
+
+export const getHomepageProfiles = async () => {
+  const { items } =
+    await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
+      content_type: 'keycaps-profile',
+      order: ['fields.title'],
+      'fields.displayHomepage': true
+    });
+
+  return items.map(({ fields }) => ({
+    ...fields,
+    thumbnail: (fields.thumbnail as Asset)?.fields.file?.url as string 
+  }));
 };
 
 export const getArticles = async () => {

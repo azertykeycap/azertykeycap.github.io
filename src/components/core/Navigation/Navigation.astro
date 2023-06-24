@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Image } from "@unpic/astro";
 import { clsx } from 'clsx';
 
 import Socials from '../../elements/Socials/index.astro';
@@ -14,8 +14,12 @@ import { srOnly } from '../../../styles/common.css';
 
 export interface Props {
   layout: NavigationLayoutEnum;
-  navigationLinks?: Array<ProfileContentfulInterface>;
-}
+  navigationLinks?: Array<
+    Omit<
+      ProfileContentfulInterface,
+      'description' | 'displayHomePage' | 'thumbnail'
+    >
+  >;}
 
 const { layout, navigationLinks } = Astro.props;
 ---
@@ -29,13 +33,12 @@ const { layout, navigationLinks } = Astro.props;
         <span class={srOnly}>PLAKET INDUSTRIES</span>
         <Image
           src={Logo}
-          aspectRatio={1 / 1}
           width={48}
           height={48}
           alt="Author logo"
-          format={'webp'}
           class={styles.img}
           loading={'eager'}
+          fetchpriority={'high'}
         />
       </a>
       {
@@ -43,7 +46,11 @@ const { layout, navigationLinks } = Astro.props;
           <ul class={styles.common.ul.base}>
             {navigationLinks.map((n) => (
               <li class={styles.common.ul.li}>
-                <a href={`/profil/${n.slug}`} class={styles.common.a} rel="noopener">
+                <a
+                  href={`/profil/${n.slug}`}
+                  class={styles.common.a}
+                  rel="noopener"
+                >
                   {n.abbreviation}
                 </a>
               </li>
@@ -89,11 +96,9 @@ const { layout, navigationLinks } = Astro.props;
     <div class={`${styles.header.mobile.nav.div} ${styles.header.nav.div}`}>
       <Image
         src={Logo}
-        aspectRatio={1 / 1}
         width={48}
         height={48}
         alt="Author logo"
-        format={'webp'}
         class={styles.img}
         loading={'eager'}
       />
