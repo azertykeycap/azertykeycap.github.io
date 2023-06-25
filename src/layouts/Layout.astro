@@ -3,33 +3,86 @@ import Navigation from '../components/core/Navigation/Navigation.astro';
 import { styles } from './styles.css';
 import './../styles/reset.css';
 
-import type { ProfileContentfulInterface } from '../lib/contentful';
+import type {
+  ProfileContentfulInterface,
+  KeycapArticleContentfulInterface
+} from '../lib/contentful';
 import type { NavigationLayoutEnum } from '../types/enum';
+import { Schema } from 'astro-seo-schema';
 
 export interface Props {
   layout: NavigationLayoutEnum;
   title: string;
-  navigationLinks?: Array<ProfileContentfulInterface>;
+  description?: string;
+  navigationLinks?: Array<
+    Omit<
+      ProfileContentfulInterface,
+      'description' | 'displayHomePage' | 'thumbnail'
+    >
+  >;
+  additionalSeoInfo?: Partial<{
+    canonical: string;
+    articles: Array<KeycapArticleContentfulInterface>;
+  }>;
 }
 
-const { title, layout, navigationLinks } = Astro.props;
+const defaultDescription =
+  'Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.';
+
+const { title, description, layout, navigationLinks, additionalSeoInfo } =
+  Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <script
-      async
-      src="https://azertykeycaps-analytics-eehi16tqe-kzm.vercel.app/script.js"
-      data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
-    ></script>
+    {
+      import.meta.env.MODE === 'production' &&
+        import.meta.env.SITE === 'https://azertykeycaps.fr' && (
+          <script
+            async
+            src="https://azertykeycaps-analytics-eehi16tqe-kzm.vercel.app/script.js"
+            data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
+          />
+        )
+    }
+    {
+      additionalSeoInfo?.articles &&
+        additionalSeoInfo?.articles?.length > 0 && (
+          <>
+            {additionalSeoInfo.articles.map((a) => (
+              <Schema
+                item={{
+                  '@context': 'https://schema.org',
+                  '@type': 'Product',
+                  name: `${a.title}`,
+                  image: `${a.img}`,
+                  url: `${a.url}`,
+                  brand: {
+                    '@type': 'Organization',
+                    name: `${a.profile.title}`
+                  },
+                  material: `${a.material}`,
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'USD',
+                    price: '0'
+                  }
+                }}
+              />
+            ))}
+          </>
+        )
+    }
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+      content={description ? description : defaultDescription}
     />
     <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:site_name" content="Azerty Keycaps" />
 
     <meta property="og:image" content={`/api/og.png`} />
     <meta name="twitter:image" content={`/api/og.png`} />
@@ -42,10 +95,12 @@ const { title, layout, navigationLinks } = Astro.props;
       property="og:title"
       content="Azerty Keycaps - Annuaire de keycaps françaises"
     />
+
     <meta
       property="og:description"
-      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+      content={description ? description : defaultDescription}
     />
+
     <meta property="og:locale" content="fr_FR" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -57,17 +112,15 @@ const { title, layout, navigationLinks } = Astro.props;
     />
     <meta
       name="twitter:description"
-      content="Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques."
+      content={description ? description : defaultDescription}
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="canonical"
+      href={`${Astro.site}${additionalSeoInfo && additionalSeoInfo.canonical}`}
     />
-
-    <link rel="icon" href="/favicon.png" />
 
     <title>Azerty Keycaps - {title}</title>
   </head>

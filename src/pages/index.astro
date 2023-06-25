@@ -1,78 +1,23 @@
 ---
 export const prerender = true;
 
-import { group } from 'radash';
+import DisplayCard from '../components/elements/DisplayCard/DisplayCard.astro';
+import Description from '../components/elements/Description';
 import Layout from '../layouts/Layout.astro';
-
-import ArticleList from '../components/articles/ArticleList';
-import GoTop from '../components/elements/GoTop';
-
-import {
-  contentfulClient,
-  KeycapArticleContentfulInterface,
-  KeycapArticleType,
-  ProfileContentfulInterface
-} from '../lib/contentful';
-
+import { getHomePageInformation, getNavigationLinks } from '../lib/contentful';
 import { NavigationLayoutEnum } from '../types/enum';
+import { styles } from './index.styles.css';
 
-import type { ApiOgImage } from './api/og.png';
+const navigationLinks = await getNavigationLinks();
+const homepageContent = await getHomePageInformation();
 
-const articlesEntries =
-  await contentfulClient.getEntries<KeycapArticleContentfulInterface>({
-    content_type: 'article'
-  });
+const [headingHomepageTitle, ...rest] = homepageContent.title.split(' ');
+const remainingHeadingHomepageTitle = rest.join(' ');
 
-const navigationLinksEntries =
-  await contentfulClient.getEntries<ProfileContentfulInterface>({
-    content_type: 'keycaps-profile',
-    order: 'fields.title'
-  });
-
-const navigationLinks: Array<ProfileContentfulInterface> =
-  navigationLinksEntries.items.map((n) => {
-    const { title, slug, abbreviation } = n.fields;
-    return { title, slug, abbreviation };
-  });
-
-const articles: Array<KeycapArticleType> = articlesEntries.items.map((e) => {
-  const {
-    img,
-    title,
-    profile,
-    description,
-    material,
-    status,
-    startDate,
-    endDate,
-    url,
-    additionalUrl,
-    warningText,
-    isNew
-  } = e.fields;
-
-  return {
-    img: img.fields.file.url,
-    title,
-    profile: profile.fields.title,
-    profileId: profile.fields.slug,
-    description,
-    material,
-    status,
-    startDate: startDate
-      ? new Date(startDate).toLocaleDateString('fr-FR')
-      : undefined,
-    endDate: endDate
-      ? new Date(endDate).toLocaleDateString('fr-FR')
-      : undefined,
-    url,
-    additionalUrl,
-    warningText,
-    isNew
-  };
-});
-
-const articlesByProfile = group(articles, (a) => a.profile);
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+);
 ---
 
 <Layout
@@ -80,11 +25,18 @@ const articlesByProfile = group(articles, (a) => a.profile);
   navigationLinks={navigationLinks}
   title="Annuaire de keycaps françaises"
 >
-  <ArticleList
-    slot="main"
-    articles={articlesByProfile}
-    navigationLinks={navigationLinks}
-    client:load
-  />
-  <GoTop slot="goto" client:load />
+  <section slot="main" class={styles.index.base}>
+    <h1 class={styles.index.h1.text}>
+      <span class={styles.index.h1.heading}>{headingHomepageTitle}</span>
+      {remainingHeadingHomepageTitle}
+    </h1>
+    <Description client:load input={homepageContent.description} />
+    <section class={styles.index.section}>
+      {
+        homepageContent.profileCards.map((profile) => (
+          <DisplayCard profile={profile} />
+        ))
+      }
+    </section>
+  </section>
 </Layout>

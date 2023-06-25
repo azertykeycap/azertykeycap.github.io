@@ -11,16 +11,16 @@ export default function Checkbox({ variant, checked, onClick }: CheckboxProps) {
   return (
     <>
       <span class={styles.input.span}>Filtres</span>
-      <input
-        id="filter"
-        aria-describedby="filter-description"
-        name="filter"
-        type="checkbox"
-        checked={checked}
-        onClick={onClick}
-        class={clsx(styles.input.label, styles.input.styles[variant])}
-      />
-      <label htmlFor="filter" class={styles.input.title}>
+      <label class={styles.input.label}>
+        <input
+          id="filter"
+          aria-describedby="filter-description"
+          name="filter"
+          type="checkbox"
+          checked={checked}
+          onClick={onClick}
+          class={clsx(styles.input.styles[variant])}
+        />
         Articles en stock
       </label>
     </>

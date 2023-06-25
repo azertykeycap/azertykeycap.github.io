@@ -4,6 +4,7 @@ export const rawVars = {
   color: {
     black: '#000000',
     white: '#ffffff',
+    slate50: '#f8fafc',
     teal700: '#0f766e',
     slate900: '#0f172a',
     red600: '#dc2626',
@@ -23,7 +24,7 @@ export const vars = createGlobalTheme(':root', {
   color: {
     black: rawVars.color.black,
     white: rawVars.color.white,
-    slate50: '#f8fafc',
+    slate50: rawVars.color.slate50,
     slate100: '#f1f5f9',
     slate200: '#e2e8f0',
     slate300: '#cbd5e1',

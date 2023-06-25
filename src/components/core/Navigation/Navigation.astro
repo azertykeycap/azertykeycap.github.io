@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Image } from '@unpic/astro';
 import { clsx } from 'clsx';
 
 import Socials from '../../elements/Socials/index.astro';
@@ -14,7 +14,9 @@ import { srOnly } from '../../../styles/common.css';
 
 export interface Props {
   layout: NavigationLayoutEnum;
-  navigationLinks?: Array<ProfileContentfulInterface>;
+  navigationLinks?: Array<
+    Omit<ProfileContentfulInterface, 'description' | 'thumbnail'>
+  >;
 }
 
 const { layout, navigationLinks } = Astro.props;
@@ -25,27 +27,33 @@ const { layout, navigationLinks } = Astro.props;
     class={clsx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
   >
     <div class={styles.header.nav.div}>
-      <a
-        class={styles.common.a}
-        href={layout === NavigationLayoutEnum.MAIN ? '#' : '/'}
-      >
+      <a class={styles.common.a} href={'/'}>
         <span class={srOnly}>PLAKET INDUSTRIES</span>
         <Image
           src={Logo}
-          aspectRatio={1 / 1}
-          width={32}
-          height={32}
+          width={48}
+          height={48}
           alt="Author logo"
-          format={'webp'}
           class={styles.img}
+          loading={'eager'}
+          fetchpriority={'high'}
         />
       </a>
+
       {
         layout === NavigationLayoutEnum.MAIN && navigationLinks && (
           <ul class={styles.common.ul.base}>
             {navigationLinks.map((n) => (
-              <li class={styles.common.ul.li}>
-                <a href={`#${n.slug}`} class={styles.common.a}>
+              <li
+                class={styles.common.ul.li}
+                data-umami-event={'Navigation link click'}
+                data-umami-event-title={n.title}
+              >
+                <a
+                  href={`/profil/${n.slug}`}
+                  class={styles.common.a}
+                  rel="noopener"
+                >
                   {n.abbreviation}
                 </a>
               </li>
@@ -83,20 +91,16 @@ const { layout, navigationLinks } = Astro.props;
   </nav>
 </section>
 
-<section
-  id="mobile-menu"
-  class={clsx(`hidden ${styles.header.mobile.base} ${styles.header.section}`)}
->
+<section id="mobile-menu" class={clsx(`hidden ${styles.header.section}`)}>
   <nav class={styles.header.mobile.nav.base}>
     <div class={`${styles.header.mobile.nav.div} ${styles.header.nav.div}`}>
       <Image
         src={Logo}
-        aspectRatio={1 / 1}
-        width={32}
-        height={32}
+        width={48}
+        height={48}
         alt="Author logo"
-        format={'webp'}
         class={styles.img}
+        loading={'eager'}
       />
       <button type="button" id="btn-close" class={styles.header.mobile.button}>
         <span class={srOnly}>Close menu</span>
@@ -121,7 +125,7 @@ const { layout, navigationLinks } = Astro.props;
         <ul id="mobile-ul" class={styles.common.ul.mobile.base}>
           {navigationLinks.map((n) => (
             <li class={styles.common.ul.li}>
-              <a href={`#${n.slug}`} class={styles.common.a}>
+              <a href={`/profil/${n.slug}`} class={styles.common.a}>
                 {n.title}
               </a>
             </li>

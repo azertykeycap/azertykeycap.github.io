@@ -1,4 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css';
+import { mediaQueries, vars } from './vars.css';
 const svgToDataUri = require('mini-svg-data-uri');
 
 export const animationTiming = 'cubic-bezier(0.4, 0, 0.2, 1)';
@@ -24,4 +25,16 @@ globalStyle('input:checked', {
   backgroundSize: '100% 100%',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat'
+});
+
+globalStyle('h1', {
+  fontSize: '2.25rem',
+  fontWeight: '700',
+  lineHeight: '1.1111',
+  color: vars.color.slate700,
+  '@media': {
+    [mediaQueries.dark]: {
+      color: vars.color.slate100
+    }
+  }
 });

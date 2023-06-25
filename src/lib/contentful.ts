@@ -1,5 +1,11 @@
-import contentful, { Asset, Entry } from 'contentful';
+import contentful, { Asset, Entry, EntrySkeletonType } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
+import type {
+  TypeArticleSkeleton,
+  TypeHomepageSkeleton,
+  TypeKeycaps__profileSkeleton
+} from './types';
+import { title } from 'radash';
 export interface InformationContentfulInterface {
   title: string;
   informationRichText: Document;
@@ -14,25 +20,26 @@ export interface ProfileContentfulInterface {
   readonly title: string;
   readonly slug: string;
   readonly abbreviation: string;
+  readonly description?: string;
+  readonly thumbnail?: string;
 }
 
-export enum StatusEnum {
-  IN_STOCK = 'En stock',
-  GB_RUNNING = 'GB en cours',
-  GB_OVER = 'GB terminé',
-  IC = 'Interest Check',
-  OUT_STOCK = 'Out Of Stock'
-}
+export type StatusType =
+  | 'En stock'
+  | 'GB en cours'
+  | 'GB terminé'
+  | 'Interest Check'
+  | 'Out Of Stock';
 
 export interface KeycapArticleContentfulInterface {
-  readonly img: Asset;
   readonly title: string;
-  readonly profile: Entry<ProfileContentfulInterface>;
+  readonly img: string;
+  readonly profile: { title: string; slug: string; abbreviation: string };
   readonly description?: string;
   readonly material: string;
-  readonly status?: StatusEnum;
-  readonly startDate?: Date;
-  readonly endDate?: Date;
+  readonly status?: StatusType;
+  readonly startDate?: string;
+  readonly endDate?: string;
   readonly url: string;
   readonly additionalUrl?: string;
   readonly warningText?: string;
@@ -44,16 +51,113 @@ export type KeycapArticleType = Omit<
   'img' | 'profile' | 'startDate' | 'endDate'
 > & {
   img: string;
-  profile: string;
+  profile: { title: string; slug: string };
   profileId: string;
   startDate?: string;
   endDate?: string;
 };
 
 export const contentfulClient = contentful.createClient({
+  environment: import.meta.env.CONTENTFUL_ENVIRONMENT,
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
     : import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
   host: import.meta.env.DEV ? 'preview.contentful.com' : 'cdn.contentful.com'
 });
+
+export const getNavigationLinks = async () => {
+  const navigationLinksEntries =
+    await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
+      content_type: 'keycaps-profile',
+      order: ['fields.title']
+    });
+
+  return navigationLinksEntries.items.map(({ fields }) => {
+    const { title, slug, abbreviation } = fields;
+    return { title, slug, abbreviation };
+  });
+};
+
+export const getHomePageInformation = async () => {
+  const { items } = await contentfulClient.getEntries<TypeHomepageSkeleton>({
+    content_type: 'homepage',
+    limit: 1
+  });
+
+  const homePageContent: {
+    title: string;
+    description: string;
+    profileCards: Array<ProfileContentfulInterface>;
+  } = {
+    title: items[0].fields.title,
+    description: items[0].fields.description,
+    profileCards: items[0].fields.profileCards.map(({ fields }: any) => ({
+      title: fields.title,
+      slug: fields.slug,
+      description: fields.description,
+      abbreviation: fields.abbreviation,
+      thumbnail: fields.thumbnail?.fields.file.url
+    }))
+  };
+
+  return homePageContent;
+};
+
+export const getArticles = async () => {
+  const articlesEntries =
+    await contentfulClient.getEntries<TypeArticleSkeleton>({
+      content_type: 'article'
+    });
+
+  return articlesEntries.items.map(({ fields }) => {
+    const {
+      title,
+      img,
+      slug,
+      profile,
+      material,
+      description,
+      status,
+      startDate,
+      endDate,
+      url,
+      additionalUrl,
+      warningText,
+      isNew
+    } = fields;
+
+    return {
+      title,
+      img: (img as Asset).fields.file?.url as string,
+      slug,
+      profile: {
+        title: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.title,
+        slug: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.slug,
+        description: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.description,
+        abbreviation: (
+          profile as Entry<TypeKeycaps__profileSkeleton, undefined, string>
+        ).fields?.abbreviation
+      },
+      material,
+      description,
+      status,
+      startDate: startDate
+        ? new Date(startDate).toLocaleDateString('fr-FR')
+        : undefined,
+      endDate: endDate
+        ? new Date(endDate).toLocaleDateString('fr-FR')
+        : undefined,
+      url,
+      additionalUrl,
+      warningText,
+      isNew
+    };
+  });
+};

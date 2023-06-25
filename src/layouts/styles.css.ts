@@ -29,10 +29,11 @@ const layout = {
     marginTop: '1rem',
     marginBottom: '3rem',
     maxWidth: '80rem',
-    padding: '1.5rem',
+    padding: '1rem',
     '@media': {
       [mediaQueries.lg]: {
-        rowGap: '1rem',
+        padding: '1.5rem',
+        rowGap: '1.5rem',
         paddingLeft: '2rem',
         paddingRight: '2rem'
       }

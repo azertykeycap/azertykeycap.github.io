@@ -1,14 +1,16 @@
 import { clsx } from 'clsx';
-import type { KeycapArticleType } from '../../../lib/contentful';
+import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 import { styles } from './styles.css';
+import { Image } from '@unpic/preact';
 
 export interface ArticleProps {
-  article: KeycapArticleType;
+  article: KeycapArticleContentfulInterface;
   isHighPriority: boolean;
 }
 
 export default function Article(props: ArticleProps) {
   const { article, isHighPriority } = props;
+
   const {
     img,
     profile,
@@ -25,14 +27,33 @@ export default function Article(props: ArticleProps) {
   } = article;
 
   return (
-    <article class={clsx(isNew ? styles.article.new : styles.article.normal)}>
+    <article
+      className={clsx(isNew ? styles.article.new : styles.article.normal)}
+      itemScope
+      itemType="https://schema.org/Product"
+    >
+      <meta itemProp="name" content={title} />
+      <meta itemProp="description" content={description} />
+      <meta itemProp="url" content={url} />
+      <meta itemProp="image" content={img} />
+      <meta itemProp="material" content={material} />
+      <meta itemProp="brand" content={profile.abbreviation} />
+
+      {profile && <meta itemProp="category" content={profile.abbreviation} />}
+
+      {startDate && endDate && (
+        <meta itemProp="releaseDate" content={`${startDate} - ${endDate}`} />
+      )}
+
+      {warningText && <meta itemProp="negativeNotes" content={warningText} />}
+
       {isNew && (
-        <div class={styles.newBadge.div}>
+        <div className={styles.newBadge.div}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class={styles.newBadge.svg}
+            className={styles.newBadge.svg}
           >
             <path
               fill-rule="evenodd"
@@ -40,56 +61,80 @@ export default function Article(props: ArticleProps) {
               clip-rule="evenodd"
             />
           </svg>
-          <span class={styles.newBadge.span}>Nouveau</span>
+          <span className={styles.newBadge.span}>Nouveau</span>
         </div>
       )}
 
-      <img
-        src={`${img}?fit=fill&w=400&h=266&fm=webp&q=70`}
+      <Image
+        src={`https://${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
         alt={title}
         loading={isHighPriority ? 'eager' : 'lazy'}
         decoding={isHighPriority ? 'auto' : 'async'}
-        height="266"
-        width="400"
-        class={styles.article.content.img}
+        fetchpriority={isHighPriority ? 'high' : 'low'}
+        layout="constrained"
+        className={styles.article.content.img}
+        itemProp="image"
+        background="auto"
+        height={370}
+        width={560}
       />
-      <h3 class={styles.article.content.description.h4}>{title}</h3>
-      <hr class={styles.hr} />
-      <dl class={styles.article.content.description.dl.base}>
-        <dt class={styles.article.content.description.dl.dt}>Profil :</dt>
-        <dd class={styles.article.content.description.dl.dd}>{profile}</dd>
-        <dt class={styles.article.content.description.dl.dt}>Material :</dt>
-        <dd class={styles.article.content.description.dl.dd}>{material}</dd>
+      <h2 itemProp="name" className={styles.article.content.description.h2}>
+        {title}
+      </h2>
+      <hr className={styles.hr} />
+      <dl className={styles.article.content.description.dl.base}>
+        <dt className={styles.article.content.description.dl.dt}>Profil :</dt>
+        <dd
+          className={styles.article.content.description.dl.dd}
+          itemProp="category"
+        >
+          {profile.title}
+        </dd>
+        <dt className={styles.article.content.description.dl.dt}>Material :</dt>
+        <dd
+          className={styles.article.content.description.dl.dd}
+          itemProp="material"
+        >
+          {material}
+        </dd>
       </dl>
       {status && (
         <>
-          <hr class={styles.hr} />
-          <dl class={styles.article.content.description.dl.base}>
-            <dt class={styles.article.content.description.dl.dt}>Statut :</dt>
-            <dd class={styles.article.content.description.dl.status.dd}>
+          <hr className={styles.hr} />
+          <dl className={styles.article.content.description.dl.base}>
+            <dt className={styles.article.content.description.dl.dt}>
+              Statut :
+            </dt>
+            <dd
+              className={styles.article.content.description.dl.status.dd}
+              itemProp={'availability'}
+            >
               {status}
             </dd>
           </dl>
           {(startDate || endDate) && (
             <>
-              <hr class={styles.hr} />
-              <dl class={styles.article.content.description.dl.base}>
+              <hr className={styles.hr} />
+              <dl
+                className={styles.article.content.description.dl.base}
+                itemProp={'releaseDate'}
+              >
                 {startDate && (
                   <>
-                    <dt class={styles.article.content.description.dl.dt}>
+                    <dt className={styles.article.content.description.dl.dt}>
                       Date début :
                     </dt>
-                    <dd class={styles.article.content.description.dl.dd}>
+                    <dd className={styles.article.content.description.dl.dd}>
                       {startDate}
                     </dd>
                   </>
                 )}
                 {endDate && (
                   <>
-                    <dt class={styles.article.content.description.dl.dt}>
+                    <dt className={styles.article.content.description.dl.dt}>
                       Date fin :
                     </dt>
-                    <dd class={styles.article.content.description.dl.dd}>
+                    <dd className={styles.article.content.description.dl.dd}>
                       {endDate}
                     </dd>
                   </>
@@ -101,31 +146,49 @@ export default function Article(props: ArticleProps) {
       )}
       {description && (
         <>
-          <hr class={styles.hr} />
-          <section class={styles.article.content.description.section}>
+          <hr className={styles.hr} />
+          <section
+            itemProp={'description'}
+            className={styles.article.content.description.section}
+          >
             {description}
           </section>
         </>
       )}
       {warningText && (
         <>
-          <hr class={styles.hr} />
-          <span class={styles.article.content.description.dl.warning.span}>
+          <hr className={styles.hr} />
+          <span
+            itemProp="negativeNotes"
+            className={styles.article.content.description.dl.warning.span}
+          >
             Attention : {warningText}
           </span>
         </>
       )}
-      <hr class={styles.hr} />
-      <div class={styles.article.content.description.dl.additionnalUrl.div}>
+      <hr className={styles.hr} />
+      <div className={styles.article.content.description.dl.additionnalUrl.div}>
         {additionalUrl && (
           <a
             role="button"
             href={additionalUrl}
-            class={
+            className={
               styles.article.content.description.dl.additionnalUrl.button
                 .secondary
             }
             target="_blank"
+            onClick={() => {
+              window.umami.track(
+                `Secondary button click - ${title} - ${profile.title}`,
+                {
+                  profile: profile.title,
+                  title: title,
+                  material: material,
+                  url: url,
+                  isNew: isNew
+                }
+              );
+            }}
           >
             Kit secondaire
           </a>
@@ -133,10 +196,23 @@ export default function Article(props: ArticleProps) {
         <a
           role="button"
           href={url}
+          itemProp="url"
           target="_blank"
-          class={
+          className={
             styles.article.content.description.dl.additionnalUrl.button.primary
           }
+          onClick={() => {
+            window.umami.track(
+              `See more button click - ${title} - ${profile.title}`,
+              {
+                profile: profile.title,
+                title: title,
+                material: material,
+                url: url,
+                isNew: isNew
+              }
+            );
+          }}
         >
           En savoir +
         </a>

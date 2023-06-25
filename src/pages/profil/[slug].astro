@@ -1,0 +1,51 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+
+import ArticleList from '../../components/articles/ArticleList';
+import GoTop from '../../components/elements/GoTop';
+
+import { getArticles, getNavigationLinks } from '../../lib/contentful';
+
+import { NavigationLayoutEnum } from '../../types/enum';
+
+const navigationLinks = await getNavigationLinks();
+const articles = await getArticles();
+
+export async function getStaticPaths() {
+  const navigationLinks = await getNavigationLinks();
+  return navigationLinks.map(({ slug }) => ({
+    params: { slug: slug }
+  }));
+}
+
+const { slug } = Astro.params;
+
+const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
+const profile = articlesByProfile[0].profile;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+);
+---
+
+<Layout
+  layout={NavigationLayoutEnum.MAIN}
+  navigationLinks={navigationLinks}
+  title={profile.title}
+  description={profile.description}
+  additionalSeoInfo={{
+    canonical: `profil/${profile.slug}`,
+    articles: articlesByProfile
+  }}
+>
+  <ArticleList
+    slot="main"
+    articles={articlesByProfile}
+    profile={profile}
+    client:load
+  />
+  <GoTop slot="goto" client:load />
+</Layout>

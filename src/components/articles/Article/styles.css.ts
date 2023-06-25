@@ -1,5 +1,5 @@
 import { rawVars } from './../../../styles/vars.css';
-import { convertHexToRGBA } from './../../../lib/utils';
+import { convertHexToRGBA } from '../../../lib/utils';
 import { animationTiming } from './../../../styles/common.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 import { vars, mediaQueries } from '../../../styles/vars.css';
@@ -32,20 +32,17 @@ const hr = style({
 const newBadge = {
   div: style({
     position: 'absolute',
-    top: '-1rem',
-    right: '-1rem',
-    bottom: '-1rem',
-    left: '-1rem',
+    top: '0.5rem',
+    left: '0.5rem',
     display: 'flex',
     height: 'fit-content',
     width: 'fit-content',
     flexShrink: 0,
-    alignItems: 'center',
     columnGap: '0.5rem',
-    borderRadius: '9999px',
+    borderRadius: '999px',
     backgroundColor: vars.color.amber500,
     fill: vars.color.white,
-    padding: '0.75rem',
+    padding: '0.5rem',
     fontSize: vars.fontSize.xs,
     fontWeight: vars.fontWeight.bold,
     textTransform: 'uppercase',
@@ -53,14 +50,21 @@ const newBadge = {
 
     '@media': {
       [mediaQueries.lg]: {
-        padding: '0.5rem 1rem 0.5rem 0.75rem'
+        padding: '0.5rem 0.75rem 0.5rem 0.5rem',
+        borderRadius: '4px'
       }
     }
   }),
 
   svg: style({
     height: '1.5rem',
-    width: '1.5rem'
+    width: '1.5rem',
+    '@media': {
+      [mediaQueries.lg]: {
+        height: '1rem',
+        width: '1rem'
+      }
+    }
   }),
 
   span: style({
@@ -75,6 +79,7 @@ const newBadge = {
 
 const articleBase = style({
   position: 'relative',
+  overflow: 'hidden',
   maxWidth: '400px',
   margin: '0 auto',
   display: 'flex',
@@ -84,7 +89,6 @@ const articleBase = style({
   transition: `all 0.15s ${animationTiming}`,
   '@media': {
     [mediaQueries.md]: {
-      maxWidth: 'auto',
       margin: 0
     },
     [mediaQueries.dark]: {
@@ -130,10 +134,9 @@ const article = {
     img: style({
       width: '100%',
       backgroundColor: vars.color.slate300,
-      borderTopLeftRadius: '0.58rem',
-      borderTopRightRadius: '0.58rem',
       borderBottom: `1px solid ${vars.color.slate100}`,
       objectFit: 'fill',
+
       '@media': {
         [mediaQueries.dark]: {
           borderBottom: `1px solid ${vars.color.slate800}`,
@@ -143,7 +146,7 @@ const article = {
     }),
 
     description: {
-      h4: style({
+      h2: style({
         padding: '1rem',
         textAlign: 'center',
         fontSize: vars.fontSize.base,

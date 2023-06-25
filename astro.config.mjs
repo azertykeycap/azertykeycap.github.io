@@ -1,13 +1,15 @@
 import { defineConfig } from 'astro/config';
-
 import preact from '@astrojs/preact';
-import image from '@astrojs/image';
 import compress from 'astro-compress';
 import vanillaExtract from 'astro-vanilla-extract';
-import vercel from '@astrojs/vercel/serverless';
+import sitemap from '@astrojs/sitemap';
 
+import vercel from "@astrojs/vercel/serverless";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), image(), vanillaExtract(), compress()],
+  integrations: [vanillaExtract(), compress(), sitemap(), preact()],
   output: 'server',
-  adapter: vercel({ analytics: true })
+  site: 'https://azertykeycaps.fr',
+  adapter: vercel()
 });
