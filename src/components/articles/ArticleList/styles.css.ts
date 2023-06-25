@@ -56,7 +56,7 @@ const header = {
 
   p: style({
     fontSize: '1rem',
-    lineHeight: '1.5rem',
+    lineHeight: '2rem',
     color: vars.color.slate600,
     '@media': {
       [mediaQueries.dark]: {

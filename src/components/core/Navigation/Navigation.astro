@@ -15,10 +15,7 @@ import { srOnly } from '../../../styles/common.css';
 export interface Props {
   layout: NavigationLayoutEnum;
   navigationLinks?: Array<
-    Omit<
-      ProfileContentfulInterface,
-      'description' | 'displayHomePage' | 'thumbnail'
-    >
+    Omit<ProfileContentfulInterface, 'description' | 'thumbnail'>
   >;
 }
 
@@ -43,14 +40,15 @@ const { layout, navigationLinks } = Astro.props;
         />
       </a>
 
-      <!-- todo : add navbar rofile tracking but must finish homepage first -->
-      <!-- also todo : add microdat aand schema org info  for the homepage  -->
-      
       {
         layout === NavigationLayoutEnum.MAIN && navigationLinks && (
           <ul class={styles.common.ul.base}>
             {navigationLinks.map((n) => (
-              <li class={styles.common.ul.li}>
+              <li
+                class={styles.common.ul.li}
+                data-umami-event={'Navigation link click'}
+                data-umami-event-title={n.title}
+              >
                 <a
                   href={`/profil/${n.slug}`}
                   class={styles.common.a}

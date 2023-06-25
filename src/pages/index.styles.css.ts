@@ -59,7 +59,7 @@ const index = {
     text: style([
       headingBase,
       {
-        color: vars.color.slate600,
+        color: vars.color.slate800,
 
         '@media': {
           [mediaQueries.dark]: {
