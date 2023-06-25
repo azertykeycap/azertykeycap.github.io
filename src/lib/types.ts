@@ -59,6 +59,24 @@ export type TypeArticle<
   Locales extends LocaleCode
 > = Entry<TypeArticleSkeleton, Modifiers, Locales>;
 
+export interface TypeHomepageFields {
+  title: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+  profileCards: EntryFieldTypes.Array<
+    EntryFieldTypes.EntryLink<TypeKeycaps__profileSkeleton>
+  >;
+}
+
+export type TypeHomepageSkeleton = EntrySkeletonType<
+  TypeHomepageFields,
+  'homepage'
+>;
+
+export type TypeHomepage<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;
+
 export interface TypeInformation__rich__textFields {
   title?: EntryFieldTypes.Symbol;
   informationRichText: EntryFieldTypes.RichText;
@@ -78,7 +96,6 @@ export interface TypeKeycaps__profileFields {
   slug: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.Text;
   abbreviation: EntryFieldTypes.Symbol;
-  displayHomepage?: EntryFieldTypes.Boolean;
   thumbnail?: EntryFieldTypes.AssetLink;
 }
 

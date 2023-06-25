@@ -1,5 +1,5 @@
 ---
-import { Image } from "@unpic/astro";
+import { Image } from '@unpic/astro';
 import { clsx } from 'clsx';
 
 import Socials from '../../elements/Socials/index.astro';
@@ -19,7 +19,8 @@ export interface Props {
       ProfileContentfulInterface,
       'description' | 'displayHomePage' | 'thumbnail'
     >
-  >;}
+  >;
+}
 
 const { layout, navigationLinks } = Astro.props;
 ---
@@ -41,6 +42,10 @@ const { layout, navigationLinks } = Astro.props;
           fetchpriority={'high'}
         />
       </a>
+
+      <!-- todo : add navbar rofile tracking but must finish homepage first -->
+      <!-- also todo : add microdat aand schema org info  for the homepage  -->
+      
       {
         layout === NavigationLayoutEnum.MAIN && navigationLinks && (
           <ul class={styles.common.ul.base}>
@@ -88,10 +93,7 @@ const { layout, navigationLinks } = Astro.props;
   </nav>
 </section>
 
-<section
-  id="mobile-menu"
-  class={clsx(`hidden ${styles.header.mobile.base} ${styles.header.section}`)}
->
+<section id="mobile-menu" class={clsx(`hidden ${styles.header.section}`)}>
   <nav class={styles.header.mobile.nav.base}>
     <div class={`${styles.header.mobile.nav.div} ${styles.header.nav.div}`}>
       <Image

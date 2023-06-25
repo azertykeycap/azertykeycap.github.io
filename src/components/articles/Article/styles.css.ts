@@ -1,5 +1,5 @@
 import { rawVars } from './../../../styles/vars.css';
-import { convertHexToRGBA } from './../../../lib/utils';
+import { convertHexToRGBA } from '../../../lib/utils';
 import { animationTiming } from './../../../styles/common.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 import { vars, mediaQueries } from '../../../styles/vars.css';

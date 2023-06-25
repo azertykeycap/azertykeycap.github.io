@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 import { srOnly, animationTiming } from './../../../styles/common.css';
 import { rawVars, mediaQueries, vars } from './../../../styles/vars.css';
-import { convertHexToRGBA } from './../../../lib/utils';
+import { convertHexToRGBA } from '../../../lib/utils';
 
 const img = style({
   height: '2rem',
@@ -41,7 +41,7 @@ const header = {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 30,
+        zIndex: 40,
         margin: '0.5rem',
         padding: '0.5rem',
         transformOrigin: 'top',
@@ -165,18 +165,6 @@ const header = {
   }),
 
   mobile: {
-    base: style({
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 30,
-      margin: '0.5rem',
-      padding: '0.5rem',
-      overflow: 'hidden',
-      borderRadius: '0.5rem',
-      transition: `all 0.15s ${animationTiming}`
-    }),
 
     button: style({
       marginRight: '-0.5rem'
@@ -189,7 +177,7 @@ const header = {
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        padding: '1rem 1.25rem 0 1.25rem'
+        padding: '0.5rem 1.25rem 0 1.25rem'
       }),
 
       div: style({

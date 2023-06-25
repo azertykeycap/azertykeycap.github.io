@@ -71,7 +71,7 @@ export default function Article(props: ArticleProps) {
         loading={isHighPriority ? 'eager' : 'lazy'}
         decoding={isHighPriority ? 'auto' : 'async'}
         fetchpriority={isHighPriority ? 'high' : 'low'}
-        layout='fullWidth'
+        layout="fullWidth"
         className={styles.article.content.img}
         itemProp="image"
         background="auto"
@@ -101,7 +101,9 @@ export default function Article(props: ArticleProps) {
         <>
           <hr className={styles.hr} />
           <dl className={styles.article.content.description.dl.base}>
-            <dt className={styles.article.content.description.dl.dt}>Statut :</dt>
+            <dt className={styles.article.content.description.dl.dt}>
+              Statut :
+            </dt>
             <dd
               className={styles.article.content.description.dl.status.dd}
               itemProp={'availability'}
@@ -121,7 +123,10 @@ export default function Article(props: ArticleProps) {
                     <dt className={styles.article.content.description.dl.dt}>
                       Date début :
                     </dt>
-                    <time dateTime={startDate} className={styles.article.content.description.dl.dd}>
+                    <time
+                      dateTime={startDate}
+                      className={styles.article.content.description.dl.dd}
+                    >
                       {startDate}
                     </time>
                   </>
@@ -131,7 +136,10 @@ export default function Article(props: ArticleProps) {
                     <dt className={styles.article.content.description.dl.dt}>
                       Date fin :
                     </dt>
-                    <time dateTime={endDate} className={styles.article.content.description.dl.dd}>
+                    <time
+                      dateTime={endDate}
+                      className={styles.article.content.description.dl.dd}
+                    >
                       {endDate}
                     </time>
                   </>
@@ -174,6 +182,15 @@ export default function Article(props: ArticleProps) {
                 .secondary
             }
             target="_blank"
+            onClick={() => {
+              window.umami.track('Additional button clicked', {
+                profile: profile.title,
+                title: title,
+                material: material,
+                url: url,
+                isNew: isNew
+              });
+            }}
           >
             Kit secondaire
           </a>
@@ -186,6 +203,15 @@ export default function Article(props: ArticleProps) {
           className={
             styles.article.content.description.dl.additionnalUrl.button.primary
           }
+          onClick={() => {
+            window.umami.track('See more button clicked', {
+              profile: profile.title,
+              title: title,
+              material: material,
+              url: url,
+              isNew: isNew
+            });
+          }}
         >
           En savoir +
         </a>

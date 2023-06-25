@@ -2,8 +2,10 @@ import contentful, { Asset, Entry, EntrySkeletonType } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type {
   TypeArticleSkeleton,
+  TypeHomepageSkeleton,
   TypeKeycaps__profileSkeleton
 } from './types';
+import { title } from 'radash';
 export interface InformationContentfulInterface {
   title: string;
   informationRichText: Document;
@@ -20,7 +22,6 @@ export interface ProfileContentfulInterface {
   readonly abbreviation: string;
   readonly description?: string;
   readonly thumbnail?: string;
-  readonly displayHomePage?: boolean;
 }
 
 export type StatusType =
@@ -78,18 +79,29 @@ export const getNavigationLinks = async () => {
   });
 };
 
-export const getHomepageProfiles = async () => {
-  const { items } =
-    await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
-      content_type: 'keycaps-profile',
-      order: ['fields.title'],
-      'fields.displayHomepage': true
-    });
+export const getHomePageInformation = async () => {
+  const { items } = await contentfulClient.getEntries<TypeHomepageSkeleton>({
+    content_type: 'homepage',
+    limit: 1
+  });
 
-  return items.map(({ fields }) => ({
-    ...fields,
-    thumbnail: (fields.thumbnail as Asset)?.fields.file?.url as string 
-  }));
+  const homePageContent: {
+    title: string;
+    description: string;
+    profileCards: Array<ProfileContentfulInterface>;
+  } = {
+    title: items[0].fields.title,
+    description: items[0].fields.description,
+    profileCards: items[0].fields.profileCards.map(({ fields }: any) => ({
+      title: fields.title,
+      slug: fields.slug,
+      description: fields.description,
+      abbreviation: fields.abbreviation,
+      thumbnail: fields.thumbnail?.fields.file.url
+    }))
+  };
+
+  return homePageContent;
 };
 
 export const getArticles = async () => {
