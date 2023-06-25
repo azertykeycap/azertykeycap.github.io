@@ -1,5 +1,5 @@
 ---
-import { Image } from '@unpic/preact';
+import { Image } from '@unpic/astro';
 import type { ProfileContentfulInterface } from '../../../lib/contentful';
 import { styles } from './styles.css';
 
@@ -14,13 +14,15 @@ const { profile } = Astro.props;
     {
         profile?.thumbnail && (
             <Image
-                src={`${profile?.thumbnail}?fit=fill&w=600&h=600&fm=webp&q=80`}
+                src={`https://${profile?.thumbnail}?fit=fill&w=600&h=600&fm=webp&q=80`}
                 alt={profile.title}
                 loading={'eager'}
                 decoding={'auto'}
                 fetchpriority={'high'}
                 alt="Author logo"
                 layout="fullWidth"
+                width={600}
+                height={600}
                 itemProp="image"
                 class={styles.card.image}
             />
@@ -30,9 +32,9 @@ const { profile } = Astro.props;
     <div class={styles.card.gradient.top}></div>
     <div class={styles.card.gradient.bottom}></div>
 
-    <h3 class={styles.card.h3}>
+    <h2 class={styles.card.h2}>
         {profile?.title}
-    </h3>
+    </h2>
 
     <p class={styles.card.p}>{profile?.description}</p>
     <a

@@ -83,9 +83,11 @@ export default function ArticleList(props: ArticleListProps) {
       ) : (
         <div className={styles.results.noresults}>
           <Image
-            src={(Apagnan as unknown as MediaImage).src}
+            src={Apagnan}
             width={48}
             height={48}
+            alt="Aucun article disponible"
+            layout="fixed"
           />
           Aucun article disponible...
         </div>

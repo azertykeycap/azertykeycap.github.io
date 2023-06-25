@@ -66,16 +66,17 @@ export default function Article(props: ArticleProps) {
       )}
 
       <Image
-        src={`${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
+        src={`https://${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
         alt={title}
         loading={isHighPriority ? 'eager' : 'lazy'}
         decoding={isHighPriority ? 'auto' : 'async'}
         fetchpriority={isHighPriority ? 'high' : 'low'}
-        layout="fullWidth"
+        layout="constrained"
         className={styles.article.content.img}
         itemProp="image"
         background="auto"
-        breakpoints={[320, 768]}
+        height={370}
+        width={560}
       />
       <h2 itemProp="name" className={styles.article.content.description.h2}>
         {title}
@@ -123,12 +124,9 @@ export default function Article(props: ArticleProps) {
                     <dt className={styles.article.content.description.dl.dt}>
                       Date début :
                     </dt>
-                    <time
-                      dateTime={startDate}
-                      className={styles.article.content.description.dl.dd}
-                    >
+                    <dd className={styles.article.content.description.dl.dd}>
                       {startDate}
-                    </time>
+                    </dd>
                   </>
                 )}
                 {endDate && (
@@ -136,12 +134,9 @@ export default function Article(props: ArticleProps) {
                     <dt className={styles.article.content.description.dl.dt}>
                       Date fin :
                     </dt>
-                    <time
-                      dateTime={endDate}
-                      className={styles.article.content.description.dl.dd}
-                    >
+                    <dd className={styles.article.content.description.dl.dd}>
                       {endDate}
-                    </time>
+                    </dd>
                   </>
                 )}
               </dl>
