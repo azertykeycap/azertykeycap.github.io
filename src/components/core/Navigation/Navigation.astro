@@ -46,7 +46,7 @@ const { layout, navigationLinks } = Astro.props;
             {navigationLinks.map((n) => (
               <li
                 class={styles.common.ul.li}
-                data-umami-event={'Navigation link click'}
+                data-umami-event={`Navigation link click - ${n.title}`}
                 data-umami-event-title={n.title}
               >
                 <a
