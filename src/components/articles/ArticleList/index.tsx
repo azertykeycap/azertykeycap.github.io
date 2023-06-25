@@ -5,7 +5,7 @@ import { styles } from './styles.css';
 
 import Article from '../Article';
 import Checkbox from '../../elements/Checkbox';
-import Apagnan from '../../../assets/apagnan.webp';
+import Logo from '../../../assets/logo.png';
 
 import type { KeycapArticleContentfulInterface } from '../../../lib/contentful';
 
@@ -83,7 +83,7 @@ export default function ArticleList(props: ArticleListProps) {
       ) : (
         <div className={styles.results.noresults}>
           <Image
-            src={Apagnan}
+            src={Logo}
             width={48}
             height={48}
             alt="Aucun article disponible"
