@@ -178,13 +178,16 @@ export default function Article(props: ArticleProps) {
             }
             target="_blank"
             onClick={() => {
-              window.umami.track('Additional button clicked', {
-                profile: profile.title,
-                title: title,
-                material: material,
-                url: url,
-                isNew: isNew
-              });
+              window.umami.track(
+                `Secondary button click - ${title} - ${profile.title}`,
+                {
+                  profile: profile.title,
+                  title: title,
+                  material: material,
+                  url: url,
+                  isNew: isNew
+                }
+              );
             }}
           >
             Kit secondaire
@@ -199,13 +202,16 @@ export default function Article(props: ArticleProps) {
             styles.article.content.description.dl.additionnalUrl.button.primary
           }
           onClick={() => {
-            window.umami.track('See more button clicked', {
-              profile: profile.title,
-              title: title,
-              material: material,
-              url: url,
-              isNew: isNew
-            });
+            window.umami.track(
+              `See more button click - ${title} - ${profile.title}`,
+              {
+                profile: profile.title,
+                title: title,
+                material: material,
+                url: url,
+                isNew: isNew
+              }
+            );
           }}
         >
           En savoir +
