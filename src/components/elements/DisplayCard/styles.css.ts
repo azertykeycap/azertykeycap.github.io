@@ -89,7 +89,7 @@ const card = {
     ]
   }),
 
-  h3: style({
+  h2: style({
     marginTop: '0.75rem',
     fontSize: '1.25rem',
     lineHeight: '1.75rem',
