@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/preact": "^2.2.1",
     "@astrojs/sitemap": "^1.3.3",
+    "@astrojs/vercel": "^3.5.0",
     "@contentful/rich-text-html-renderer": "^16.1.0",
     "@unpic/astro": "^0.0.18",
     "@unpic/preact": "^0.0.18",
