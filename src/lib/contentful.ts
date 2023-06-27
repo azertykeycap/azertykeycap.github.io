@@ -26,6 +26,8 @@ export interface ProfileContentfulInterface {
 
 export type StatusType =
   | 'En stock'
+  | 'Extras GB'
+  | 'Extras In-Stock'
   | 'GB en cours'
   | 'GB terminé'
   | 'Interest Check'
