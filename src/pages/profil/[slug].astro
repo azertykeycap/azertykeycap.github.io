@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+export const prerender = false;
 
 import Layout from '../../layouts/Layout.astro';
 
@@ -13,17 +13,34 @@ import { NavigationLayoutEnum } from '../../types/enum';
 const navigationLinks = await getNavigationLinks();
 const articles = await getArticles();
 
-export async function getStaticPaths() {
-  const navigationLinks = await getNavigationLinks();
-  return navigationLinks.map(({ slug }) => ({
-    params: { slug: slug }
-  }));
-}
+// export async function getStaticPaths() {
+//   const navigationLinks = await getNavigationLinks();
+//   return navigationLinks.map(({ slug }) => ({
+//     params: { slug: slug }
+//   }));
+// }
 
 const { slug } = Astro.params;
 
-const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
-const profile = articlesByProfile[0].profile;
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffledArray = [...array];
+
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+
+  return shuffledArray;
+}
+
+// const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
+
+const shuffledArticlesByProfile = shuffleArray(
+  articles.filter((a) => a.profile.slug === slug)
+);
+
+const profile = shuffledArticlesByProfile[0].profile;
 
 Astro.response.headers.set(
   'Cache-Control',
@@ -38,12 +55,12 @@ Astro.response.headers.set(
   description={profile.description}
   additionalSeoInfo={{
     canonical: `profil/${profile.slug}`,
-    articles: articlesByProfile
+    articles: shuffledArticlesByProfile
   }}
 >
   <ArticleList
     slot="main"
-    articles={articlesByProfile}
+    articles={shuffledArticlesByProfile}
     profile={profile}
     client:load
   />
