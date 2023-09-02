@@ -10,7 +10,5 @@ export default defineConfig({
   integrations: [vanillaExtract(), sitemap(), preact()],
   output: 'server',
   site: 'https://azertykeycaps.fr',
-  adapter: vercel({
-    imageService: true
-  })
+  adapter: vercel({})
 });
