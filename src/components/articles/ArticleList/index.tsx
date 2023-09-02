@@ -29,8 +29,7 @@ export default function ArticleList(props: ArticleListProps) {
   );
 
   useEffect(() => {
-    if (checked) setArticlesDisplay(filteredArticles);
-    else setArticlesDisplay(props.articles);
+    setArticlesDisplay(checked ? filteredArticles : props.articles);
   }, [checked, filteredArticles, props.articles]);
 
   const switchChecked = (): void => {
