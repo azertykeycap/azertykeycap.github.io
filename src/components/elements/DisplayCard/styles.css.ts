@@ -112,7 +112,7 @@ const card = {
     primary: [
       buttonBase,
       {
-        marginTop: "0.5rem",
+        marginTop: '0.5rem',
         backgroundColor: vars.color.white,
         color: vars.color.slate600,
         ':hover': {
