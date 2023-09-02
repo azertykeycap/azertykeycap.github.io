@@ -83,7 +83,7 @@ export default function ArticleList(props: ArticleListProps) {
       ) : (
         <div className={styles.results.noresults}>
           <Image
-            src={Logo}
+            src={Logo.src}
             width={48}
             height={48}
             alt="Aucun article disponible"
