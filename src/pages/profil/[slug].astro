@@ -1,50 +1,34 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
-import ArticleList from '../../components/articles/ArticleList';
-import GoTop from '../../components/elements/GoTop';
+import ArticleList from "../../components/articles/ArticleList";
+import GoTop from "../../components/elements/GoTop";
 
-import { getArticles, getNavigationLinks } from '../../lib/contentful';
+import { getArticles, getNavigationLinks } from "../../lib/contentful";
 
-import { NavigationLayoutEnum } from '../../types/enum';
+import { NavigationLayoutEnum } from "../../types/enum";
 
 const navigationLinks = await getNavigationLinks();
 const articles = await getArticles();
 
-// export async function getStaticPaths() {
-//   const navigationLinks = await getNavigationLinks();
-//   return navigationLinks.map(({ slug }) => ({
-//     params: { slug: slug }
-//   }));
-// }
+export async function getStaticPaths() {
+  const navigationLinks = await getNavigationLinks();
+  return navigationLinks.map(({ slug }) => ({
+    params: { slug: slug },
+  }));
+}
 
 const { slug } = Astro.params;
 
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffledArray = [...array];
+const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
 
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-
-  return shuffledArray;
-}
-
-// const articlesByProfile = articles.filter((a) => a.profile.slug === slug);
-
-const shuffledArticlesByProfile = shuffleArray(
-  articles.filter((a) => a.profile.slug === slug)
-);
-
-const profile = shuffledArticlesByProfile[0].profile;
+const profile = articlesByProfile[0].profile;
 
 Astro.response.headers.set(
-  'Cache-Control',
-  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+  "Cache-Control",
+  "public, max-age=0, s-maxage=3600, stale-while-revalidate=5400"
 );
 ---
 
@@ -55,12 +39,12 @@ Astro.response.headers.set(
   description={profile.description}
   additionalSeoInfo={{
     canonical: `profil/${profile.slug}`,
-    articles: shuffledArticlesByProfile
+    articles: articlesByProfile,
   }}
 >
   <ArticleList
     slot="main"
-    articles={shuffledArticlesByProfile}
+    articles={articlesByProfile}
     profile={profile}
     client:load
   />
