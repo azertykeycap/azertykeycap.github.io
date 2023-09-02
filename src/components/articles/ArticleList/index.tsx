@@ -29,8 +29,7 @@ export default function ArticleList(props: ArticleListProps) {
   );
 
   useEffect(() => {
-    if (checked) setArticlesDisplay(filteredArticles);
-    else setArticlesDisplay(props.articles);
+    setArticlesDisplay(checked ? filteredArticles : props.articles);
   }, [checked, filteredArticles, props.articles]);
 
   const switchChecked = (): void => {
@@ -83,7 +82,7 @@ export default function ArticleList(props: ArticleListProps) {
       ) : (
         <div className={styles.results.noresults}>
           <Image
-            src={Logo}
+            src={Logo.src}
             width={48}
             height={48}
             alt="Aucun article disponible"

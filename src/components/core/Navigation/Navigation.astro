@@ -1,21 +1,21 @@
 ---
-import { Image } from '@unpic/astro';
-import { clsx } from 'clsx';
+import { Image } from "astro:assets";
+import { clsx } from "clsx";
 
-import Socials from '../../elements/Socials/index.astro';
+import Socials from "../../elements/Socials/index.astro";
 
-import Logo from '../../../assets/logo.png';
+import Logo from "../../../assets/logo.png";
 
-import type { ProfileContentfulInterface } from '../../../lib/contentful';
-import { NavigationLayoutEnum } from '../../../types/enum';
+import type { ProfileContentfulInterface } from "../../../lib/contentful";
+import { NavigationLayoutEnum } from "../../../types/enum";
 
-import { styles } from './styles.css';
-import { srOnly } from '../../../styles/common.css';
+import { styles } from "./styles.css";
+import { srOnly } from "../../../styles/common.css";
 
 export interface Props {
   layout: NavigationLayoutEnum;
   navigationLinks?: Array<
-    Omit<ProfileContentfulInterface, 'description' | 'thumbnail'>
+    Omit<ProfileContentfulInterface, "description" | "thumbnail">
   >;
 }
 
@@ -27,7 +27,7 @@ const { layout, navigationLinks } = Astro.props;
     class={clsx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
   >
     <div class={styles.header.nav.div}>
-      <a class={styles.common.a} href={'/'}>
+      <a class={styles.common.a} href={"/"}>
         <span class={srOnly}>PLAKET INDUSTRIES</span>
         <Image
           src={Logo}
@@ -35,8 +35,8 @@ const { layout, navigationLinks } = Astro.props;
           height={48}
           alt="Author logo"
           class={styles.img}
-          loading={'eager'}
-          fetchpriority={'high'}
+          loading={"eager"}
+          fetchpriority={"high"}
         />
       </a>
 
@@ -100,7 +100,7 @@ const { layout, navigationLinks } = Astro.props;
         height={48}
         alt="Author logo"
         class={styles.img}
-        loading={'eager'}
+        loading={"eager"}
       />
       <button type="button" id="btn-close" class={styles.header.mobile.button}>
         <span class={srOnly}>Close menu</span>
@@ -139,23 +139,23 @@ const { layout, navigationLinks } = Astro.props;
 </section>
 
 <script>
-  const btnClose = document.getElementById('btn-close');
-  const btnOpen = document.getElementById('btn-open');
-  const menuMobile = document.getElementById('mobile-menu');
-  const ulMobile = document.getElementById('mobile-ul');
+  const btnClose = document.getElementById("btn-close");
+  const btnOpen = document.getElementById("btn-open");
+  const menuMobile = document.getElementById("mobile-menu");
+  const ulMobile = document.getElementById("mobile-ul");
 
-  ulMobile?.addEventListener('click', () => {
-    menuMobile?.classList.remove('block');
-    menuMobile?.classList.add('hidden');
+  ulMobile?.addEventListener("click", () => {
+    menuMobile?.classList.remove("block");
+    menuMobile?.classList.add("hidden");
   });
 
-  btnClose?.addEventListener('click', () => {
-    menuMobile?.classList.remove('block');
-    menuMobile?.classList.add('hidden');
+  btnClose?.addEventListener("click", () => {
+    menuMobile?.classList.remove("block");
+    menuMobile?.classList.add("hidden");
   });
 
-  btnOpen?.addEventListener('click', () => {
-    menuMobile?.classList.remove('hidden');
-    menuMobile?.classList.add('block');
+  btnOpen?.addEventListener("click", () => {
+    menuMobile?.classList.remove("hidden");
+    menuMobile?.classList.add("block");
   });
 </script>
