@@ -1,22 +1,22 @@
 ---
 export const prerender = true;
 
-import DisplayCard from '../components/elements/DisplayCard/DisplayCard.astro';
-import Description from '../components/elements/Description';
-import Layout from '../layouts/Layout.astro';
-import { getHomePageInformation, getNavigationLinks } from '../lib/contentful';
-import { NavigationLayoutEnum } from '../types/enum';
-import { styles } from './index.styles.css';
+import DisplayCard from "../components/elements/DisplayCard/DisplayCard.astro";
+import Description from "../components/elements/Description";
+import Layout from "../layouts/Layout.astro";
+import { getHomePageInformation, getNavigationLinks } from "../lib/contentful";
+import { NavigationLayoutEnum } from "../types/enum";
+import { styles } from "./index.styles.css";
 
 const navigationLinks = await getNavigationLinks();
 const homepageContent = await getHomePageInformation();
 
-const [headingHomepageTitle, ...rest] = homepageContent.title.split(' ');
-const remainingHeadingHomepageTitle = rest.join(' ');
+const [headingHomepageTitle, ...rest] = homepageContent.title.split(" ");
+const remainingHeadingHomepageTitle = rest.join(" ");
 
 Astro.response.headers.set(
-  'Cache-Control',
-  'public, max-age=0, s-maxage=3600, stale-while-revalidate=5400'
+  "Cache-Control",
+  "public, max-age=0, s-maxage=3600, stale-while-revalidate=5400"
 );
 ---
 
@@ -27,7 +27,7 @@ Astro.response.headers.set(
 >
   <section slot="main" class={styles.index.base}>
     <h1 class={styles.index.h1.text}>
-      <span class={styles.index.h1.heading}>{headingHomepageTitle}</span>
+      <span class={styles.index.h1.heading}>{headingHomepageTitle}</span>{" "}
       {remainingHeadingHomepageTitle}
     </h1>
     <Description client:load input={homepageContent.description} />
