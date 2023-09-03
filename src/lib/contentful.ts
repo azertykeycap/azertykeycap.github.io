@@ -1,19 +1,18 @@
-import contentful, { Asset, Entry, EntrySkeletonType } from 'contentful';
+import contentful, { type Asset, type Entry } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type {
   TypeArticleSkeleton,
   TypeHomepageSkeleton,
   TypeKeycaps__profileSkeleton
 } from './types';
-import { title } from 'radash';
 export interface InformationContentfulInterface {
   title: string;
   informationRichText: Document;
 }
 
 export interface SocialNetworkContentfulInterface {
-  title: string;
-  url: string;
+  fields: { title: string; url: string };
+  contentTypeId: string;
 }
 
 export interface ProfileContentfulInterface {
@@ -26,6 +25,8 @@ export interface ProfileContentfulInterface {
 
 export type StatusType =
   | 'En stock'
+  | 'Extras GB'
+  | 'Extras In-Stock'
   | 'GB en cours'
   | 'GB terminé'
   | 'Interest Check'

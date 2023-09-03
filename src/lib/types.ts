@@ -37,6 +37,8 @@ export interface TypeArticleFields {
   description?: EntryFieldTypes.Text;
   status?: EntryFieldTypes.Symbol<
     | 'En stock'
+    | 'Extras GB'
+    | 'Extras In-Stock'
     | 'GB en cours'
     | 'GB terminé'
     | 'Interest Check'
@@ -71,7 +73,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<
   TypeHomepageFields,
   'homepage'
 >;
-
 export type TypeHomepage<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode

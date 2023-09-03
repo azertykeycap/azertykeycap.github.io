@@ -7,6 +7,7 @@ globalStyle('html', {
   backgroundColor: vars.color.slate50,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
+  overflowY: 'scroll',
   '@media': {
     [mediaQueries.dark]: {
       backgroundColor: vars.color.slate900

@@ -1,12 +1,10 @@
 ---
-import Svg from '@jasikpark/astro-svg-loader';
-
-import { styles } from './styles.css';
+import { styles } from "./styles.css";
 
 import {
   contentfulClient,
-  SocialNetworkContentfulInterface
-} from '../../../lib/contentful';
+  type SocialNetworkContentfulInterface,
+} from "../../../lib/contentful";
 
 interface SocialIconInterface {
   title: string;
@@ -15,7 +13,7 @@ interface SocialIconInterface {
 
 const socialLinksEntries =
   await contentfulClient.getEntries<SocialNetworkContentfulInterface>({
-    content_type: 'socialNetwork'
+    content_type: "socialNetwork",
   });
 
 const socialLinks: Array<SocialIconInterface> = socialLinksEntries.items.map(
@@ -24,20 +22,62 @@ const socialLinks: Array<SocialIconInterface> = socialLinksEntries.items.map(
     return { title, url };
   }
 );
+
+import DiscordIcon from "/src/assets/discord.svg?raw";
+import GithubIcon from "/src/assets/github.svg?raw";
+import InstagramIcon from "/src/assets/instagram.svg?raw";
+import TwitterIcon from "/src/assets/twitter.svg?raw";
+import WebsiteIcon from "/src/assets/website.svg?raw";
+import { capitalize } from "radash";
+
+const iconMapping = [
+  {
+    title: "discord",
+    icon: DiscordIcon,
+  },
+  {
+    title: "github",
+    icon: GithubIcon,
+  },
+  {
+    title: "instagram",
+    icon: InstagramIcon,
+  },
+  {
+    title: "twitter",
+    icon: TwitterIcon,
+  },
+  {
+    title: "website",
+    icon: WebsiteIcon,
+  },
+];
 ---
 
 <section class={styles.section.base}>
   <a href="/informations/" class={styles.section.a}>Informations</a>
   <div class={styles.section.div}>
     {
-      socialLinks.map((s) => (
-        <a href={s.url} target="_blank" aria-label={`${s.title} link`}>
-          <Svg
-            src={import(`../../../assets/${s.title}.svg?raw`)}
-            class={styles.section.svg}
-          />
-        </a>
-      ))
+      socialLinks.map((s) => {
+        const correspondingImage = iconMapping.find((i) =>
+          i.title.includes(s.title)
+        );
+        return (
+          <>
+            {correspondingImage && (
+              <a
+                href={s.url}
+                target="_blank"
+                aria-label={`${capitalize(s.title)} link`}
+              >
+                <div class={styles.section.svg}>
+                  <Fragment set:html={correspondingImage.icon} />
+                </div>
+              </a>
+            )}
+          </>
+        );
+      })
     }
   </div>
 </section>
