@@ -13,12 +13,12 @@ import { NavigationLayoutEnum } from "../../types/enum";
 const navigationLinks = await getNavigationLinks();
 const articles = await getArticles();
 
-export async function getStaticPaths() {
-  const navigationLinks = await getNavigationLinks();
-  return navigationLinks.map(({ slug }) => ({
-    params: { slug: slug },
-  }));
-}
+// export async function getStaticPaths() {
+//   const navigationLinks = await getNavigationLinks();
+//   return navigationLinks.map(({ slug }) => ({
+//     params: { slug: slug },
+//   }));
+// }
 
 const { slug } = Astro.params;
 

@@ -10,9 +10,5 @@ export default defineConfig({
   integrations: [vanillaExtract(), sitemap(), preact()],
   output: 'server',
   site: 'https://azertykeycaps.fr',
-  adapter: vercel({
-    imagesConfig: {
-      sizes: [320, 640, 1280]
-    }
-  })
+  adapter: vercel({})
 });

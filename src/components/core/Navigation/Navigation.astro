@@ -22,7 +22,7 @@ export interface Props {
 const { layout, navigationLinks } = Astro.props;
 ---
 
-<section class={styles.header.section}>
+<section class={styles.header.section} transition:persist>
   <nav
     class={clsx(`${styles.header.nav.desktop.base} ${styles.header.nav.base}`)}
   >
