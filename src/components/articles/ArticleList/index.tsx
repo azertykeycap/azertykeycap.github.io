@@ -37,10 +37,7 @@ export default function ArticleList(props: ArticleListProps) {
   };
 
   const sortedArticles = useMemo(
-    () =>
-      articlesDisplay.sort((a, b) =>
-        a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1
-      ),
+    () => articlesDisplay.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)),
     [articlesDisplay]
   );
 
