@@ -40,7 +40,6 @@ export default function ArticleList(props: ArticleListProps) {
     () => articlesDisplay.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)),
     [articlesDisplay]
   );
-
   return (
     <section itemScope itemType="https://schema.org/ProductCollection">
       <meta itemProp="name" content={props.profile.title} />
