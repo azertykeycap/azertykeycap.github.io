@@ -17,7 +17,7 @@
     "@contentful/rich-text-html-renderer": "^16.1.1",
     "@unpic/preact": "^0.0.23",
     "@vanilla-extract/dynamic": "^2.0.3",
-    "astro": "^3.0.7",
+    "astro": "^3.0.8",
     "astro-vanilla-extract": "^3.0.0",
     "clsx": "^2.0.0",
     "contentful": "^10.5.1",
