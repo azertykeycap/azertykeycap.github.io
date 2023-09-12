@@ -108,7 +108,8 @@ export const getHomePageInformation = async () => {
 export const getArticles = async () => {
   const articlesEntries =
     await contentfulClient.getEntries<TypeArticleSkeleton>({
-      content_type: 'article'
+      content_type: 'article',
+      limit: 300
     });
 
   return articlesEntries.items.map(({ fields }) => {
