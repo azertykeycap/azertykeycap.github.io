@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import type { ProfileContentfulInterface } from "../../../lib/contentful";
 import { styles } from "./styles.css";
 
@@ -13,17 +13,18 @@ const { profile } = Astro.props;
 <article class={styles.card.base}>
   {
     profile?.thumbnail && (
-      <Image
+      <Picture
+      formats={["webp", "avif"]}
         src={`https://${profile?.thumbnail}?fit=fill&w=600&h=600&fm=webp&q=80`}
         alt={profile.title}
         loading={"eager"}
         decoding={"auto"}
         fetchpriority={"high"}
-        alt="Author logo"
         width={600}
         height={600}
         itemprop="image"
         class={styles.card.image}
+        alt="Author logo"
       />
     )
   }
