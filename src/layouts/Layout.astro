@@ -1,14 +1,14 @@
 ---
-import Navigation from '../components/core/Navigation/Navigation.astro';
-import { styles } from './styles.css';
-import './../styles/reset.css';
+import Navigation from "../components/core/Navigation/Navigation.astro";
+import { styles } from "./styles.css";
+import "./../styles/reset.css";
 
 import type {
   ProfileContentfulInterface,
-  KeycapArticleContentfulInterface
-} from '../lib/contentful';
-import type { NavigationLayoutEnum } from '../types/enum';
-import { Schema } from 'astro-seo-schema';
+  KeycapArticleContentfulInterface,
+} from "../lib/contentful";
+import type { NavigationLayoutEnum } from "../types/enum";
+import { Schema } from "astro-seo-schema";
 
 export interface Props {
   layout: NavigationLayoutEnum;
@@ -17,7 +17,7 @@ export interface Props {
   navigationLinks?: Array<
     Omit<
       ProfileContentfulInterface,
-      'description' | 'displayHomePage' | 'thumbnail'
+      "description" | "displayHomePage" | "thumbnail"
     >
   >;
   additionalSeoInfo?: Partial<{
@@ -27,18 +27,19 @@ export interface Props {
 }
 
 const defaultDescription =
-  'Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.';
+  "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.";
 
 const { title, description, layout, navigationLinks, additionalSeoInfo } =
   Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
+    <meta charset="UTF-8" />
     {
-      import.meta.env.MODE === 'production' &&
-        import.meta.env.SITE === 'https://azertykeycaps.fr' && (
+      import.meta.env.MODE === "production" &&
+        import.meta.env.SITE === "https://azertykeycaps.fr" && (
           <script
             async
             src="https://analytics.azertykeycaps.fr/script.js"
@@ -53,28 +54,27 @@ const { title, description, layout, navigationLinks, additionalSeoInfo } =
             {additionalSeoInfo.articles.map((a) => (
               <Schema
                 item={{
-                  '@context': 'https://schema.org',
-                  '@type': 'Product',
+                  "@context": "https://schema.org",
+                  "@type": "Product",
                   name: `${a.title}`,
                   image: `${a.img}`,
                   url: `${a.url}`,
                   brand: {
-                    '@type': 'Organization',
-                    name: `${a.profile.title}`
+                    "@type": "Organization",
+                    name: `${a.profile.title}`,
                   },
                   material: `${a.material}`,
                   offers: {
-                    '@type': 'Offer',
-                    priceCurrency: 'USD',
-                    price: '0'
-                  }
+                    "@type": "Offer",
+                    priceCurrency: "USD",
+                    price: "0",
+                  },
                 }}
               />
             ))}
           </>
         )
     }
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -119,7 +119,11 @@ const { title, description, layout, navigationLinks, additionalSeoInfo } =
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="canonical"
-      href={`${Astro.site}${additionalSeoInfo && additionalSeoInfo.canonical}`}
+      href={`${Astro.site}${
+        additionalSeoInfo && additionalSeoInfo.canonical
+          ? additionalSeoInfo.canonical
+          : ""
+      }`}
     />
 
     <title>Azerty Keycaps - {title}</title>

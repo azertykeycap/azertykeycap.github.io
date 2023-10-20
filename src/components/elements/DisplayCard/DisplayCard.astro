@@ -1,46 +1,46 @@
 ---
-import { Image } from '@unpic/astro';
-import type { ProfileContentfulInterface } from '../../../lib/contentful';
-import { styles } from './styles.css';
+import { Picture } from "astro:assets";
+import type { ProfileContentfulInterface } from "../../../lib/contentful";
+import { styles } from "./styles.css";
 
 export interface Props {
-    profile?: ProfileContentfulInterface;
+  profile?: ProfileContentfulInterface;
 }
 
 const { profile } = Astro.props;
 ---
 
 <article class={styles.card.base}>
-    {
-        profile?.thumbnail && (
-            <Image
-                src={`https://${profile?.thumbnail}?fit=fill&w=600&h=600&fm=webp&q=80`}
-                alt={profile.title}
-                loading={'eager'}
-                decoding={'auto'}
-                fetchpriority={'high'}
-                alt="Author logo"
-                layout="fullWidth"
-                width={600}
-                height={600}
-                itemProp="image"
-                class={styles.card.image}
-            />
-        )
-    }
+  {
+    profile?.thumbnail && (
+      <Picture
+      formats={["webp", "avif"]}
+        src={`https://${profile?.thumbnail}?fit=fill&w=600&h=600&fm=webp&q=80`}
+        alt={profile.title}
+        loading={"eager"}
+        decoding={"auto"}
+        fetchpriority={"high"}
+        width={600}
+        height={600}
+        itemprop="image"
+        class={styles.card.image}
+        alt="Author logo"
+      />
+    )
+  }
 
-    <div class={styles.card.gradient.top}></div>
-    <div class={styles.card.gradient.bottom}></div>
+  <div class={styles.card.gradient.top}></div>
+  <div class={styles.card.gradient.bottom}></div>
 
-    <h2 class={styles.card.h2}>
-        {profile?.title}
-    </h2>
+  <h2 class={styles.card.h2}>
+    {profile?.title}
+  </h2>
 
-    <p class={styles.card.p}>{profile?.description}</p>
-    <a
-        role="button"
-        href={`/profil/${profile?.slug}`}
-        itemprop="url"
-        class={styles.card.button.primary}>Voir les sets</a
-    >
+  <p class={styles.card.p}>{profile?.description}</p>
+  <a
+    role="button"
+    href={`/profil/${profile?.slug}`}
+    itemprop="url"
+    class={styles.card.button.primary}>Voir les sets</a
+  >
 </article>

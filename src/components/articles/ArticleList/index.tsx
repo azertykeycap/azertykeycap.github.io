@@ -29,8 +29,7 @@ export default function ArticleList(props: ArticleListProps) {
   );
 
   useEffect(() => {
-    if (checked) setArticlesDisplay(filteredArticles);
-    else setArticlesDisplay(props.articles);
+    setArticlesDisplay(checked ? filteredArticles : props.articles);
   }, [checked, filteredArticles, props.articles]);
 
   const switchChecked = (): void => {
@@ -38,13 +37,9 @@ export default function ArticleList(props: ArticleListProps) {
   };
 
   const sortedArticles = useMemo(
-    () =>
-      articlesDisplay.sort((a, b) =>
-        a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1
-      ),
+    () => articlesDisplay.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)),
     [articlesDisplay]
   );
-
   return (
     <section itemScope itemType="https://schema.org/ProductCollection">
       <meta itemProp="name" content={props.profile.title} />
@@ -83,7 +78,7 @@ export default function ArticleList(props: ArticleListProps) {
       ) : (
         <div className={styles.results.noresults}>
           <Image
-            src={Logo}
+            src={Logo.src}
             width={48}
             height={48}
             alt="Aucun article disponible"
