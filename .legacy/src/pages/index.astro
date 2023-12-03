@@ -1,0 +1,42 @@
+---
+export const prerender = true;
+
+import DisplayCard from "../components/elements/DisplayCard/DisplayCard.astro";
+import Description from "../components/elements/Description";
+import Layout from "../layouts/Layout.astro";
+import { getHomePageInformation, getNavigationLinks } from "../lib/contentful";
+import { NavigationLayoutEnum } from "../types/enum";
+import { styles } from "./index.styles.css";
+
+const navigationLinks = await getNavigationLinks();
+const homepageContent = await getHomePageInformation();
+
+const [headingHomepageTitle, ...rest] = homepageContent.title.split(" ");
+const remainingHeadingHomepageTitle = rest.join(" ");
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, s-maxage=3600, stale-while-revalidate=5400"
+);
+---
+
+<Layout
+  layout={NavigationLayoutEnum.MAIN}
+  navigationLinks={navigationLinks}
+  title="Annuaire de keycaps françaises"
+>
+  <section slot="main" class={styles.index.base}>
+    <h1 class={styles.index.h1.text}>
+      <span class={styles.index.h1.heading}>{headingHomepageTitle}</span>{" "}
+      {remainingHeadingHomepageTitle}
+    </h1>
+    <Description client:load input={homepageContent.description} />
+    <section class={styles.index.section}>
+      {
+        homepageContent.profileCards.map((profile) => (
+          <DisplayCard profile={profile} />
+        ))
+      }
+    </section>
+  </section>
+</Layout>

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://azertykeycaps.fr/sitemap-index.xml

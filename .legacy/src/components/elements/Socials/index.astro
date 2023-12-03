@@ -1,0 +1,83 @@
+---
+import { styles } from "./styles.css";
+
+import {
+  contentfulClient,
+  type SocialNetworkContentfulInterface,
+} from "../../../lib/contentful";
+
+interface SocialIconInterface {
+  title: string;
+  url: string;
+}
+
+const socialLinksEntries =
+  await contentfulClient.getEntries<SocialNetworkContentfulInterface>({
+    content_type: "socialNetwork",
+  });
+
+const socialLinks: Array<SocialIconInterface> = socialLinksEntries.items.map(
+  (n) => {
+    const { title, url } = n.fields;
+    return { title, url };
+  }
+);
+
+import DiscordIcon from "/src/assets/discord.svg?raw";
+import GithubIcon from "/src/assets/github.svg?raw";
+import InstagramIcon from "/src/assets/instagram.svg?raw";
+import TwitterIcon from "/src/assets/twitter.svg?raw";
+import WebsiteIcon from "/src/assets/website.svg?raw";
+import { capitalize } from "radash";
+
+const iconMapping = [
+  {
+    title: "discord",
+    icon: DiscordIcon,
+  },
+  {
+    title: "github",
+    icon: GithubIcon,
+  },
+  {
+    title: "instagram",
+    icon: InstagramIcon,
+  },
+  {
+    title: "twitter",
+    icon: TwitterIcon,
+  },
+  {
+    title: "website",
+    icon: WebsiteIcon,
+  },
+];
+---
+
+<section class={styles.section.base}>
+  <a href="/informations/" class={styles.section.a}>Informations</a>
+  <div class={styles.section.div}>
+    {
+      socialLinks.map((s) => {
+        const correspondingImage = iconMapping.find((i) =>
+          i.title.includes(s.title)
+        );
+        return (
+          <>
+            {correspondingImage && (
+              <a
+                href={s.url}
+                target="_blank"
+                aria-label={`${capitalize(s.title)} link`}
+              >
+                <div class={styles.section.svg}>
+                  <Fragment set:html={correspondingImage.icon} />
+                </div>
+              </a>
+            )}
+          </>
+        );
+      })
+    }
+  </div>
+</section>
