@@ -1,7 +1,11 @@
 import { getArticles, getProfileSlugs } from "@/lib/api/contentful";
 
-async function generateStaticParams() {
-  return getProfileSlugs();
+export async function generateStaticParams() {
+  const allProfileSlugs = await getProfileSlugs();
+
+  return allProfileSlugs.map((profile) => ({
+    slug: profile,
+  }));
 }
 
 async function getData(slug: string) {

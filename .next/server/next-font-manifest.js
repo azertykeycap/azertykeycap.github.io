@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/home/kzm/documents/personal/azertykeycaps-website/app/layout\":[\"static/media/edd7f9209fa73e41.p.woff2\",\"static/media/d82a8a076d0105b5-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/home/kzm/documents/personal/azertykeycaps-website/app/layout":["static/media/edd7f9209fa73e41.p.woff2","static/media/d82a8a076d0105b5-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';

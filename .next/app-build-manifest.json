@@ -1,30 +1,48 @@
 {
   "pages": {
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+    "/_not-found": [
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/app/_not-found-0bb230c52a544207.js"
     ],
-    "/informations/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/informations/page.js"
+    "/layout": [
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/764-0aa46d39ac0e8a5c.js",
+      "static/css/bff12ea24dfcf301.css",
+      "static/chunks/app/layout-68976388674939d7.js"
     ],
     "/dropshipping/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dropshipping/page.js"
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/app/dropshipping/page-3f82f2a02b9fcece.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/app/page-a5637a0e76f770da.js"
+    ],
+    "/informations/page": [
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/app/informations/page-76885a5127888ad3.js"
     ],
     "/profil/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/profil/[slug]/page.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/webpack-d42e0041dc546c42.js",
+      "static/chunks/fd9d1056-be406264a9350eec.js",
+      "static/chunks/472-ee45ded669985823.js",
+      "static/chunks/main-app-a71dc284a1d298cb.js",
+      "static/chunks/app/profil/[slug]/page-a9a6688f48af6104.js"
     ]
   }
 }
