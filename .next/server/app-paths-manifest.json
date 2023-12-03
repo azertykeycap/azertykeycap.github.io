@@ -1,8 +1,0 @@
-{
-  "/_not-found": "app/_not-found.js",
-  "/dropshipping/page": "app/dropshipping/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
-  "/informations/page": "app/informations/page.js",
-  "/profil/[slug]/page": "app/profil/[slug]/page.js"
-}
