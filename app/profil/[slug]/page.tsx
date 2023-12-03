@@ -1,3 +1,4 @@
+import ArticleList from "@/components/articles/ArticleList";
 import { getArticles, getProfileSlugs } from "@/lib/api/contentful";
 
 export async function generateStaticParams() {
@@ -17,6 +18,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { articlesBySlug } = await getData(params.slug);
 
   return (
-    <main className="container mt-12">{JSON.stringify(articlesBySlug)}</main>
+    <main className="container mt-12">
+      <ArticleList
+        articles={articlesBySlug}
+        profile={articlesBySlug[0].profile}
+      />
+    </main>
   );
 }

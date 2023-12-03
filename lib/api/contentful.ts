@@ -1,4 +1,6 @@
 import { createClient, type Asset, type Entry } from "contentful";
+import { group } from "radash";
+
 import type { Document } from "@contentful/rich-text-types";
 import type {
   TypeArticleSkeleton,
@@ -19,10 +21,10 @@ export interface NavigationLinksInterface {
   description?: string;
 }
 
-export interface ShapedNavigationLinksInterface {
-  uniform: NavigationLinksInterface[];
-  sculpted: NavigationLinksInterface[];
-}
+export type ShapedNavigationLinksInterface = Record<
+  string,
+  NavigationLinksInterface[]
+>;
 
 export interface SocialNetworkContentfulInterface {
   fields: { title: string; url: string };
@@ -95,10 +97,7 @@ export const getNavigationLinks =
       return { title, slug, abbreviation, description, shape };
     });
 
-    return {
-      uniform: links.filter(({ shape }) => shape === "Sculpté"),
-      sculpted: links.filter(({ shape }) => shape === "Uniforme"),
-    };
+    return group(links, (l) => l.shape);
   };
 
 export const getProfileSlugs = async (): Promise<string[]> => {
