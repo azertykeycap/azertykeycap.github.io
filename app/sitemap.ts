@@ -1,4 +1,4 @@
-import { getArticles, getProfileSlugs } from "@/lib/api/contentful";
+import { getProfileSlugs } from "@/lib/api/contentful";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

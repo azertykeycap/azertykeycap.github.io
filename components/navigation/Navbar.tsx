@@ -4,6 +4,7 @@ import { NavigationMenuNavbar } from "./Menu";
 import { ShapedNavigationLinksInterface } from "@/lib/api/contentful";
 import { cn } from "@/lib/utils";
 import { ActiveLink } from "./ActiveLink";
+import { CommandDialogDemo } from "../core/CommandDialog";
 
 export function Navbar({ links }: { links: ShapedNavigationLinksInterface }) {
   return (
@@ -35,6 +36,7 @@ export function Navbar({ links }: { links: ShapedNavigationLinksInterface }) {
           >
             Dropshipping
           </ActiveLink>
+          <CommandDialogDemo />
           <ModeToggle />
         </div>
       </div>
