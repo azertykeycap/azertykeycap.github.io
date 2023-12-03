@@ -148,7 +148,14 @@ export const getArticles = async (profile?: string) => {
 
   if (profile)
     articlesEntries.items = articlesEntries.items.filter(
-      ({ fields }) => fields.profile?.fields.slug === profile
+      ({ fields }) =>
+        (
+          fields.profile as Entry<
+            TypeKeycaps__profileSkeleton,
+            undefined,
+            string
+          >
+        ).fields.slug === profile
     );
 
   return articlesEntries.items.map(({ fields }) => {

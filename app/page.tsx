@@ -1,6 +1,3 @@
-import { Navbar } from "@/components/navigation/navbar";
-import { getNavigationLinks } from "@/lib/api/contentful";
-
 export default async function Home() {
   return (
     <>
