@@ -20,22 +20,24 @@ export function Navbar({ links }: { links: ShapedNavigationLinksInterface }) {
           <NavigationMenuNavbar links={links} />
         </div>
         <div className="flex gap-x-4 items-center">
-          <ActiveLink
-            href="/informations"
-            className={cn(
-              "transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
-            )}
-          >
-            Informations
-          </ActiveLink>
-          <ActiveLink
-            href="/dropshipping"
-            className={
-              "transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
-            }
-          >
-            Dropshipping
-          </ActiveLink>
+          <div className="mx-4 flex gap-x-4">
+            <ActiveLink
+              href="/informations"
+              className={cn(
+                "transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+              )}
+            >
+              Informations
+            </ActiveLink>
+            <ActiveLink
+              href="/dropshipping"
+              className={
+                "transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+              }
+            >
+              Dropshipping
+            </ActiveLink>
+          </div>
           <CommandDialogDemo />
           <ModeToggle />
         </div>
