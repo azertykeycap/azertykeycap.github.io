@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { articlesBySlug } = await getData(params.slug);
 
   return (
-    <main className="container mt-12">
+    <main className="container my-12">
       <ArticleList
         articles={articlesBySlug}
         profile={articlesBySlug[0].profile}

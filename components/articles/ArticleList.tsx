@@ -4,6 +4,8 @@ import * as React from "react";
 import SingleArticle from "./SingleArticle";
 
 import type { KeycapArticleContentfulInterface } from "@/lib/api/contentful";
+import { TypographyH1 } from "../core/typography/h1";
+import { TypographyP } from "../core/typography/p";
 
 interface ArticleListProps {
   articles: Array<KeycapArticleContentfulInterface>;
@@ -42,13 +44,13 @@ export default function ArticleList({ articles, profile }: ArticleListProps) {
         itemProp="collectionSize"
         content={sortedArticles.length.toString()}
       />
-      <h1 itemProp="name">{profile.title}</h1>
+      <TypographyH1 itemProp="name">{profile.title}</TypographyH1>
       {/* <Checkbox variant="primary" checked={checked} onClick={switchChecked} /> */}
       {profile.description && (
-        <p itemProp="description">{profile.description}</p>
+        <TypographyP itemProp="description">{profile.description}</TypographyP>
       )}
       {sortedArticles.length > 0 ? (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 mt-8">
           {sortedArticles.map((article, i) => (
             <SingleArticle key={i} article={article} isHighPriority={i < 4} />
           ))}
