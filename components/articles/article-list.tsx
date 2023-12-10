@@ -58,7 +58,12 @@ export default function ArticleList({ articles, profile }: ArticleListProps) {
       {sortedArticles.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-8">
           {sortedArticles.map((article, i) => (
-            <SingleArticle key={i} article={article} isHighPriority={i < 4} />
+            <SingleArticle
+              key={i}
+              article={article}
+              isHighPriority={i < 4}
+              className="h-fit"
+            />
           ))}
         </div>
       ) : (

@@ -111,7 +111,7 @@ export default async function Home() {
                   article={e}
                   key={e.title}
                   isHighPriority={i === 0}
-                  className="shrink-0 snap-center w-fit"
+                  className="shrink-0 snap-center w-fit h-fit"
                 />
               ))}
             </div>

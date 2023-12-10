@@ -42,6 +42,7 @@ export default function SheetMobileMenu({
             <ActiveLink
               href={"/"}
               className="font-bold tracking-tight text-lg mr-4"
+              onClick={() => setOpen(false)}
             >
               Azertykeycaps
             </ActiveLink>
