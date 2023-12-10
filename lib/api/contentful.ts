@@ -7,6 +7,7 @@ import type {
   TypeHomepageSkeleton,
   TypeKeycaps__profileSkeleton,
 } from "@/types/content-types";
+import dynamicIconImports from "lucide-react/dynamicIconImports";
 
 export interface InformationContentfulInterface {
   title: string;
@@ -19,6 +20,8 @@ export interface NavigationLinksInterface {
   abbreviation: string;
   shape: "Uniforme" | "Sculpté";
   description?: string;
+  navbarDescription: string;
+  navbarIconName?: string;
 }
 
 export type ShapedNavigationLinksInterface = Record<
@@ -26,9 +29,19 @@ export type ShapedNavigationLinksInterface = Record<
   NavigationLinksInterface[]
 >;
 
+export type homePageContentType = {
+  [key: string]: KeycapArticleContentfulInterface[];
+};
+
 export interface SocialNetworkContentfulInterface {
-  fields: { title: string; url: string };
+  fields: { title: string; url: string; iconText: string };
   contentTypeId: string;
+}
+
+interface SocialIconInterface {
+  title: string;
+  url: string;
+  iconText: keyof typeof dynamicIconImports;
 }
 
 export interface ProfileContentfulInterface {
@@ -37,6 +50,8 @@ export interface ProfileContentfulInterface {
   readonly abbreviation: string;
   readonly description?: string;
   readonly thumbnail?: string;
+  readonly navbarDescription: string;
+  readonly navbarIconName?: string;
 }
 
 export type StatusType =
@@ -93,8 +108,24 @@ export const getNavigationLinks =
       });
 
     const links = navigationLinksEntries.items.map(({ fields }) => {
-      const { title, slug, abbreviation, description, shape } = fields;
-      return { title, slug, abbreviation, description, shape };
+      const {
+        title,
+        slug,
+        abbreviation,
+        description,
+        shape,
+        navbarDescription,
+        navbarIconName,
+      } = fields;
+      return {
+        title,
+        slug,
+        abbreviation,
+        description,
+        shape,
+        navbarDescription,
+        navbarIconName,
+      };
     });
 
     return group(links, (l) => l.shape);
@@ -132,10 +163,26 @@ export const getHomePageInformation = async () => {
       description: fields.description,
       abbreviation: fields.abbreviation,
       thumbnail: fields.thumbnail?.fields.file.url,
+      navbarDescription: fields.navbarDescription,
+      navbarIconName: fields.navbarIconName,
     })),
   };
 
   return homePageContent;
+};
+
+export const getSocialLinksEntries = async () => {
+  const entries =
+    await contentfulClient.getEntries<SocialNetworkContentfulInterface>({
+      content_type: "socialNetwork",
+    });
+
+  const socialLinks: Array<SocialIconInterface> = entries.items.map((n) => {
+    const { title, url, iconText } = n.fields;
+    return { title, url, iconText };
+  });
+
+  return socialLinks;
 };
 
 export const getArticles = async (profile?: string) => {

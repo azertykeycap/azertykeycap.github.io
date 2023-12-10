@@ -97,8 +97,10 @@ export interface TypeKeycaps__profileFields {
   slug: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.Text;
   abbreviation: EntryFieldTypes.Symbol;
+  navbarDescription: EntryFieldTypes.Symbol;
   thumbnail?: EntryFieldTypes.AssetLink;
   shape: EntryFieldTypes.Symbol<"Sculpté" | "Uniforme">;
+  navbarIconName?: EntryFieldTypes.Symbol;
 }
 
 export type TypeKeycaps__profileSkeleton = EntrySkeletonType<
@@ -113,6 +115,7 @@ export type TypeKeycaps__profile<
 export interface TypeSocialNetworkFields {
   title: EntryFieldTypes.Symbol;
   url: EntryFieldTypes.Symbol;
+  iconText?: EntryFieldTypes.Symbol;
 }
 
 export type TypeSocialNetworkSkeleton = EntrySkeletonType<

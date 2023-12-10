@@ -15,7 +15,6 @@ import {
   SheetTitle,
 } from "../ui/sheet";
 import { ActiveLink } from "./active-link";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export default function SheetMobileMenu({
@@ -28,7 +27,12 @@ export default function SheetMobileMenu({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" className="flex xl:hidden" size="icon">
+        <Button
+          variant="outline"
+          className="flex xl:hidden"
+          size="icon"
+          aria-label="Open menu"
+        >
           <Menu className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </SheetTrigger>
@@ -43,7 +47,7 @@ export default function SheetMobileMenu({
             </ActiveLink>
           </SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col mt-8 gap-y-3">
+        <div className="flex flex-col mt-8 gap-y-4">
           {Object.entries(links).map(([link, subLinks]) => (
             <React.Fragment key={link}>
               {(subLinks as NavigationLinksInterface[]).map((subLink) => (
@@ -51,7 +55,7 @@ export default function SheetMobileMenu({
                   key={subLink.title}
                   href={`/profil/${subLink.slug}`}
                   onClick={() => setOpen(false)}
-                  className="inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+                  className="inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
                 >
                   {subLink.title}
                 </ActiveLink>
@@ -61,16 +65,18 @@ export default function SheetMobileMenu({
           <ActiveLink
             href="/informations"
             className={cn(
-              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
             )}
+            onClick={() => setOpen(false)}
           >
             Informations
           </ActiveLink>
           <ActiveLink
             href="/dropshipping"
             className={
-              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
             }
+            onClick={() => setOpen(false)}
           >
             Dropshipping
           </ActiveLink>

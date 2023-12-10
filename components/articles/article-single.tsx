@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Image } from "@unpic/react/nextjs";
 import type { KeycapArticleContentfulInterface } from "@/lib/api/contentful";
 import {
   Card,
@@ -15,15 +14,19 @@ import ArticleDd from "./lists/description-data";
 import { AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
+import { Badge } from "../ui/badge";
+import Image from "next/image";
 
 export interface ArticleProps {
   article: KeycapArticleContentfulInterface;
   isHighPriority: boolean;
+  className?: string;
 }
 
 export default function SingleArticle({
   article,
   isHighPriority,
+  className,
 }: ArticleProps) {
   const {
     img,
@@ -42,7 +45,7 @@ export default function SingleArticle({
 
   return (
     <Card
-      className={cn(isNew ? "" : "", "h-fit")}
+      className={cn("relative", className)}
       itemScope
       itemType="https://schema.org/Product"
     >
@@ -61,18 +64,28 @@ export default function SingleArticle({
 
       {warningText && <meta itemProp="negativeNotes" content={warningText} />}
 
-      <CardHeader>
+      <CardHeader className="relative">
+        {isNew && (
+          <div className="absolute top-2 left-2 z-10">
+            <Badge variant="default" className="flex items-center gap-x-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground/75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground"></span>
+              </span>
+              <span>Nouveau</span>
+            </Badge>
+          </div>
+        )}
         <Image
           src={`https:${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
           alt={title}
           loading={isHighPriority ? "eager" : "lazy"}
           decoding={isHighPriority ? "auto" : "async"}
-          fetchpriority={isHighPriority ? "high" : "low"}
-          layout="constrained"
           itemProp="image"
           height={370}
           width={560}
-          className="border-b"
+          className="border-b -mt-2"
+          fetchPriority={isHighPriority ? "high" : "low"}
         />
         <CardTitle className="text-lg px-6 py-2 truncate text-center">
           {title}
@@ -89,8 +102,10 @@ export default function SingleArticle({
         <Separator />
         <ArticleDl>
           <ArticleDt>Statut :</ArticleDt>
-          <ArticleDd variant="status" itemProp={"availability"}>
-            {status}
+          <ArticleDd itemProp={"availability"}>
+            <Badge variant="secondary" className="uppercase">
+              {status}
+            </Badge>
           </ArticleDd>
         </ArticleDl>
         {(startDate || endDate) && (
@@ -117,7 +132,7 @@ export default function SingleArticle({
             <Separator />
             <section
               itemProp={"description"}
-              className="px-6 py-2 text-sm text-muted-foreground"
+              className="px-6 text-sm text-muted-foreground"
             >
               Description : {description}
             </section>
@@ -128,7 +143,7 @@ export default function SingleArticle({
             <Separator />
             <div
               itemProp="negativeNotes"
-              className="w-fit flex items-center gap-x-3 px-4 py-1.5 mx-6 my-4 rounded-md bg-destructive font-medium"
+              className="w-fit flex items-center gap-x-3 px-4 py-1.5 mx-6 my-4 rounded-md bg-red-600 font-medium"
             >
               <AlertTriangle
                 width="16"
@@ -150,7 +165,7 @@ export default function SingleArticle({
               href={additionalUrl}
               target="_blank"
               className={cn(
-                buttonVariants({ variant: "secondary" }),
+                buttonVariants({ variant: "outline" }),
                 "flex-1 w-full"
               )}
             >

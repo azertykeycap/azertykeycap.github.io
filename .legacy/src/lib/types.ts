@@ -98,6 +98,7 @@ export interface TypeKeycaps__profileFields {
   description?: EntryFieldTypes.Text;
   abbreviation: EntryFieldTypes.Symbol;
   thumbnail?: EntryFieldTypes.AssetLink;
+  navbarIconName: EntryFieldTypes.Symbol;
 }
 
 export type TypeKeycaps__profileSkeleton = EntrySkeletonType<
