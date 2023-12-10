@@ -46,7 +46,7 @@ export function CommandDialogDemo({
         className="font-normal grow xl:grow-0 xl:font-medium"
         onClick={() => setOpen(true)}
       >
-        Recherche un keyset...
+        Rechercher un keyset
         <kbd className="hidden pointer-events-none xl:inline-flex h-5 ml-4 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
           <span className="text-xs">⌘</span>J
         </kbd>

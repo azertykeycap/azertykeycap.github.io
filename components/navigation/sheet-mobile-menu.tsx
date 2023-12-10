@@ -16,6 +16,8 @@ import {
 } from "../ui/sheet";
 import { ActiveLink } from "./active-link";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { Separator } from "../ui/separator";
 
 export default function SheetMobileMenu({
   links,
@@ -56,13 +58,24 @@ export default function SheetMobileMenu({
                   key={subLink.title}
                   href={`/profil/${subLink.slug}`}
                   onClick={() => setOpen(false)}
-                  className="inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+                  className="flex items-center gap-x-2 transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
                 >
+                  {subLink.navbarIconName && (
+                    <div className="flex-shrink-0 bg-secondary p-2 rounded-md">
+                      <Image
+                        src={`/profiles/${subLink.navbarIconName}.svg`}
+                        alt={subLink.title}
+                        width={16}
+                        height={16}
+                      />
+                    </div>
+                  )}
                   {subLink.title}
                 </ActiveLink>
               ))}
             </React.Fragment>
           ))}
+          <Separator />
           <ActiveLink
             href="/informations"
             className={cn(

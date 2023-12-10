@@ -13,6 +13,7 @@ import Link from "next/link";
 import Icon from "@/components/core/icon";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -31,7 +32,7 @@ export default async function RootLayout({
 
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="fr">
-      <body>
+      <body className="min-h-screen flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -40,7 +41,7 @@ export default async function RootLayout({
         >
           <Navbar links={navigationLinks} articles={articles} />
           {children}
-          <footer className="py-6 md:px-8 md:py-0 border-t">
+          <footer className="py-6 md:px-8 md:py-0 border-t mt-auto">
             <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
               <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                 Construit par{" "}
@@ -75,6 +76,7 @@ export default async function RootLayout({
             </div>
           </footer>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

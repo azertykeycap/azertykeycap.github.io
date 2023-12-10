@@ -1,4 +1,6 @@
 import ArticleList from "@/components/articles/article-list";
+import { TypographyH1 } from "@/components/core/typography/h1";
+import { TypographyP } from "@/components/core/typography/p";
 import { getArticles, getProfileSlugs } from "@/lib/api/contentful";
 import { Metadata } from "next";
 
@@ -33,10 +35,28 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <main className="container my-12">
-      <ArticleList
-        articles={articlesBySlug}
-        profile={articlesBySlug[0].profile}
-      />
+      <section itemScope itemType="https://schema.org/ProductCollection">
+        <meta itemProp="name" content={articlesBySlug[0].profile.title} />
+
+        {articlesBySlug[0].profile.description && (
+          <meta
+            itemProp="description"
+            content={articlesBySlug[0].profile.description}
+          />
+        )}
+
+        <TypographyH1 itemProp="name">
+          {articlesBySlug[0].profile.title}
+        </TypographyH1>
+
+        {articlesBySlug[0].profile.description && (
+          <TypographyP itemProp="description">
+            {articlesBySlug[0].profile.description}
+          </TypographyP>
+        )}
+
+        <ArticleList articles={articlesBySlug} />
+      </section>
     </main>
   );
 }
