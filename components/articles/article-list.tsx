@@ -61,9 +61,12 @@ export default function ArticleList({ articles }: ArticleListProps) {
         </h4>
         <div className="flex items-center space-x-2">
           <div className="flex flex-col gap-y-2">
-            {/* <Label htmlFor="status">Statut</Label> */}
             <Select value={status} onValueChange={setStatus}>
-              <SelectTrigger className="w-[260px]" id="status">
+              <SelectTrigger
+                className="w-[260px]"
+                id="status"
+                aria-label="select-status"
+              >
                 <SelectValue placeholder="Sélectionner un statut." />
               </SelectTrigger>
               <SelectContent>

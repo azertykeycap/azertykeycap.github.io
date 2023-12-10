@@ -3,6 +3,7 @@ import { TypographyH1 } from "@/components/core/typography/h1";
 import { TypographyP } from "@/components/core/typography/p";
 import { getArticles, getProfileSlugs } from "@/lib/api/contentful";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { slug: string };
@@ -21,17 +22,24 @@ async function getData(slug: string) {
   return { articlesBySlug };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata | undefined> {
   const { articlesBySlug } = await getData(params.slug);
 
-  return {
-    title: `Azerty Keycaps - ${articlesBySlug[0].profile.title}`,
-    description: articlesBySlug[0].profile.description,
-  };
+  if (articlesBySlug.length > 0)
+    return {
+      title: `Azerty Keycaps - ${articlesBySlug[0].profile.title ?? ""}`,
+      description: articlesBySlug[0].profile.description ?? "",
+    };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { articlesBySlug } = await getData(params.slug);
+
+  if (!(articlesBySlug.length > 0)) {
+    notFound();
+  }
 
   return (
     <main className="container my-12">

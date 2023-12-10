@@ -45,17 +45,26 @@ export default async function RootLayout({
             <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
               <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                 Construit par{" "}
-                <a
+                <Link
                   href="https://github.com/theosenoussaoui"
                   target="_blank"
                   rel="noreferrer"
                   className="font-medium underline underline-offset-4"
                 >
                   @theosenoussaoui
-                </a>
+                </Link>{" "}
+                &{" "}
+                <Link
+                  href="https://twitter.com/hegoom"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium underline underline-offset-4"
+                >
+                  @plaketdebeur
+                </Link>
               </p>
               {socialLinks && (
-                <div className="flex items-center gap-2 md:flex-row flex-col">
+                <div className="flex items-center gap-1 md:flex-row flex-col">
                   {socialLinks.map((socialLink) => (
                     <Link
                       key={socialLink.url}
