@@ -14,6 +14,7 @@ import Icon from "@/components/core/icon";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/toaster";
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -84,6 +85,7 @@ export default async function RootLayout({
               )}
             </div>
           </footer>
+          <Toaster />
         </ThemeProvider>
         <SpeedInsights />
       </body>

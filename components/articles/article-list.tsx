@@ -19,6 +19,7 @@ import {
 } from "../ui/select";
 import { TypographyH2 } from "../core/typography/h2";
 import { Label } from "../ui/label";
+import { statusList } from "@/lib/utils";
 
 interface ArticleListProps {
   articles: Array<KeycapArticleContentfulInterface>;
@@ -41,16 +42,6 @@ export default function ArticleList({ articles }: ArticleListProps) {
     () => articlesDisplay.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)),
     [articlesDisplay]
   );
-
-  const statusList: Array<StatusType> = [
-    "En stock",
-    "Extras GB",
-    "Extras In-Stock",
-    "GB en cours",
-    "GB terminé",
-    "Interest Check",
-    "Out Of Stock",
-  ];
 
   return (
     <>

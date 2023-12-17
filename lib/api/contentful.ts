@@ -1,4 +1,6 @@
 import { createClient, type Asset, type Entry } from "contentful";
+import { createClient as createManagementClient } from "contentful-management";
+
 import { group } from "radash";
 
 import type { Document } from "@contentful/rich-text-types";
@@ -63,6 +65,15 @@ export type StatusType =
   | "Interest Check"
   | "Out Of Stock";
 
+export type MaterialType =
+  | "ABS Double-Shot"
+  | "ABS Pad-Printed"
+  | "ABS Simple"
+  | "Aluminium"
+  | "PBT Double-Shot"
+  | "PBT Dye-Sub"
+  | "PBT Laser printed";
+
 export interface KeycapArticleContentfulInterface {
   readonly title: string;
   readonly img: string;
@@ -98,6 +109,19 @@ export const contentfulClient = createClient({
       : process.env.CONTENTFUL_DELIVERY_TOKEN) || "",
   host: process.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
 });
+
+export const contentfulManagementClient = createManagementClient(
+  {
+    accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN || "",
+  },
+  {
+    type: "plain",
+    defaults: {
+      environmentId: process.env.CONTENTFUL_ENVIRONMENT,
+      spaceId: process.env.CONTENTFUL_SPACE_ID || "",
+    },
+  }
+);
 
 export const getNavigationLinks =
   async (): Promise<ShapedNavigationLinksInterface> => {
@@ -141,6 +165,19 @@ export const getProfileSlugs = async (): Promise<string[]> => {
   return navigationLinksEntries.items.map(({ fields }) => {
     const { slug } = fields;
     return slug;
+  });
+};
+
+export const getProfileTitles = async (): Promise<string[]> => {
+  const navigationLinksEntries =
+    await contentfulClient.getEntries<TypeKeycaps__profileSkeleton>({
+      content_type: "keycaps-profile",
+      order: ["fields.title"],
+    });
+
+  return navigationLinksEntries.items.map(({ fields }) => {
+    const { title } = fields;
+    return title;
   });
 };
 

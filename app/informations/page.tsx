@@ -21,7 +21,7 @@ export default async function Informations() {
   const { informationContent } = await getData();
 
   return (
-    <main className="container mt-12">
+    <main className="container my-12">
       <article
         className="prose dark:prose-invert"
         dangerouslySetInnerHTML={{

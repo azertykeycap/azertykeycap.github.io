@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { group } from "radash";
 
