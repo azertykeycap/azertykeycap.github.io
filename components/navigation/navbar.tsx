@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { ActiveLink } from "./active-link";
 import { CommandDialogDemo } from "../core/command-dialog";
 import { group } from "radash";
-
 import SheetMobileMenu from "./sheet-mobile-menu";
 
 export function Navbar({
@@ -50,6 +49,14 @@ export function Navbar({
             }
           >
             Dropshipping
+          </ActiveLink>
+          <ActiveLink
+            href="/suggestion"
+            className={
+              "hidden xl:inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+            }
+          >
+            Contact
           </ActiveLink>
           <CommandDialogDemo groupedArticles={groupedArticles} />
           <ModeToggle />

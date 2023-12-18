@@ -77,6 +77,15 @@ export default function SheetMobileMenu({
           ))}
           <Separator />
           <ActiveLink
+            href="/suggestion"
+            className={cn(
+              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+            )}
+            onClick={() => setOpen(false)}
+          >
+            Suggestion
+          </ActiveLink>
+          <ActiveLink
             href="/informations"
             className={cn(
               "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"

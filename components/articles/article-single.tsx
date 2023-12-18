@@ -85,7 +85,7 @@ export default function SingleArticle({
           height={370}
           width={560}
           className="border-b -mt-2"
-          fetchPriority={isHighPriority ? "high" : "low"}
+          priority={isHighPriority}
         />
         <CardTitle className="text-lg px-6 py-2 truncate text-center">
           {title}

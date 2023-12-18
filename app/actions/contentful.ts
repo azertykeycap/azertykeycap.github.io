@@ -13,6 +13,7 @@ export async function serverAction(data: any) {
       body: validatedData.error,
     };
   } else {
+    console.log(validatedData.data);
     try {
       const e = await contentfulManagementClient.entry.create(
         { contentTypeId: "article" },

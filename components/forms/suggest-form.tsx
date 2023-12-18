@@ -7,12 +7,12 @@ import { serverAction } from "@/app/actions/contentful";
 import { type ClassNameValue } from "tailwind-merge";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { z } from "zod";
 
 export function SuggestForm({ className }: { className?: ClassNameValue }) {
-  const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
   const { toast } = useToast();
+  const router = useRouter();
 
   return (
     <section className={cn(className)}>
@@ -20,14 +20,13 @@ export function SuggestForm({ className }: { className?: ClassNameValue }) {
         formSchema={formSchema}
         onSubmit={async (data) => {
           const res = await serverAction(data);
-
           if (res.status === 200) {
-            setValues({});
             toast({
               title: "Suggestion envoyée !",
               description:
                 "Votre suggestion a bien été envoyée, et sera traitée dans les plus brefs délais.",
             });
+            router.push("/");
           }
         }}
         fieldConfig={{
