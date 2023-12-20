@@ -8,27 +8,43 @@ import { type ClassNameValue } from "tailwind-merge";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useReCaptcha } from "next-recaptcha-v3";
+import { useCallback } from "react";
 
 export function SuggestForm({ className }: { className?: ClassNameValue }) {
   const { toast } = useToast();
   const router = useRouter();
+  const { executeRecaptcha } = useReCaptcha();
+
+  const handleSubmit = useCallback(
+    async (data: any) => {
+      const token = await executeRecaptcha("form_submit");
+      const res = await serverAction({ data, token });
+
+      if (res.status === 200) {
+        toast({
+          title: "Suggestion envoyée !",
+          description:
+            "Votre suggestion a bien été envoyée, et sera traitée dans les plus brefs délais.",
+        });
+        router.push("/");
+      } else {
+        toast({
+          title: "Erreur lors de l'envoi de la suggestion.",
+          description:
+            "Une erreur est survenue lors de l'envoi de votre suggestion, veuillez réessayer.",
+          variant: "destructive",
+        });
+      }
+    },
+    [executeRecaptcha, router, toast]
+  );
 
   return (
     <section className={cn(className)}>
       <AutoForm
         formSchema={formSchema}
-        onSubmit={async (data) => {
-          const res = await serverAction(data);
-          if (res.status === 200) {
-            toast({
-              title: "Suggestion envoyée !",
-              description:
-                "Votre suggestion a bien été envoyée, et sera traitée dans les plus brefs délais.",
-            });
-            router.push("/");
-          }
-        }}
+        onSubmit={(data) => handleSubmit(data)}
         fieldConfig={{
           title: {
             description:

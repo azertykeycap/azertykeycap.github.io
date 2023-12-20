@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -34,59 +35,67 @@ export default async function RootLayout({
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="fr">
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+        <ReCaptchaProvider
+          reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
         >
-          <Navbar links={navigationLinks} articles={articles} />
-          {children}
-          <footer className="py-6 md:px-8 md:py-0 border-t mt-auto">
-            <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-              <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                Construit par{" "}
-                <Link
-                  href="https://github.com/theosenoussaoui"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-medium underline underline-offset-4"
-                >
-                  @theosenoussaoui
-                </Link>{" "}
-                &{" "}
-                <Link
-                  href="https://twitter.com/hegoom"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-medium underline underline-offset-4"
-                >
-                  @plaketdebeur
-                </Link>
-              </p>
-              {socialLinks && (
-                <div className="flex items-center gap-1 md:flex-row flex-col">
-                  {socialLinks.map((socialLink) => (
-                    <Link
-                      key={socialLink.url}
-                      href={socialLink.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={cn(
-                        buttonVariants({ variant: "ghost" }),
-                        "gap-x-2 text-sm leading-loose text-muted-foreground"
-                      )}
-                    >
-                      <Icon name={socialLink.iconText} width={16} height={16} />
-                      {socialLink.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          </footer>
-          <Toaster />
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar links={navigationLinks} articles={articles} />
+            {children}
+            <footer className="py-6 md:px-8 md:py-0 border-t mt-auto">
+              <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+                <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+                  Construit par{" "}
+                  <Link
+                    href="https://github.com/theosenoussaoui"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium underline underline-offset-4"
+                  >
+                    @theosenoussaoui
+                  </Link>{" "}
+                  &{" "}
+                  <Link
+                    href="https://twitter.com/hegoom"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium underline underline-offset-4"
+                  >
+                    @plaketdebeur
+                  </Link>
+                </p>
+                {socialLinks && (
+                  <div className="flex items-center gap-1 md:flex-row flex-col md:gap-0">
+                    {socialLinks.map((socialLink) => (
+                      <Link
+                        key={socialLink.url}
+                        href={socialLink.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={cn(
+                          buttonVariants({ variant: "ghost" }),
+                          "gap-x-2 text-sm leading-loose text-muted-foreground"
+                        )}
+                      >
+                        <Icon
+                          name={socialLink.iconText}
+                          width={16}
+                          height={16}
+                        />
+                        {socialLink.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </footer>
+            <Toaster />
+          </ThemeProvider>
+        </ReCaptchaProvider>
         <SpeedInsights />
       </body>
     </html>
