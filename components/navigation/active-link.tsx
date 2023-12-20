@@ -12,9 +12,9 @@ export const ActiveLink = ({
   onClick,
   ...props
 }: {
-  className: string;
   href: string;
   children: React.ReactNode;
+  className?: string;
   onClick?: () => void;
 }) => {
   const pathname = usePathname();
@@ -22,7 +22,11 @@ export const ActiveLink = ({
   return (
     <Link
       href={href}
-      className={cn(className, pathname === href ? "text-foreground/80" : "")}
+      className={cn(
+        "hidden xl:inline-block transition-colors hover:text-foreground text-foreground/60 text-sm font-medium",
+        className,
+        pathname === href ? "text-foreground" : ""
+      )}
       onClick={onClick}
       {...props}
     >

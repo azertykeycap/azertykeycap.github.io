@@ -10,6 +10,7 @@ import { ActiveLink } from "./active-link";
 import { CommandDialogDemo } from "../core/command-dialog";
 import { group } from "radash";
 import SheetMobileMenu from "./sheet-mobile-menu";
+import Image from "next/image";
 
 export function Navbar({
   links,
@@ -27,37 +28,19 @@ export function Navbar({
         <div className="hidden xl:flex xl:gap-x-4 xl:items-center">
           <ActiveLink
             href={"/"}
-            className="font-bold tracking-tight text-base mr-4"
+            className="mr-4 xl:flex items-center gap-x-4 text-foreground"
           >
-            Azertykeycaps
+            <Image src={"/logo.png"} width={28} height={28} alt={"Logo"} />
+            <span className="font-bold tracking-tight text-base">
+              Azertykeycaps
+            </span>
           </ActiveLink>
           <NavigationMenuNavbar links={links} />
         </div>
         <div className="flex grow xl:grow-0 gap-x-4 items-center xl:mx-4">
-          <ActiveLink
-            href="/informations"
-            className={cn(
-              "hidden xl:inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
-            )}
-          >
-            Informations
-          </ActiveLink>
-          <ActiveLink
-            href="/dropshipping"
-            className={
-              "hidden xl:inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
-            }
-          >
-            Dropshipping
-          </ActiveLink>
-          <ActiveLink
-            href="/suggestion"
-            className={
-              "hidden xl:inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
-            }
-          >
-            Contact
-          </ActiveLink>
+          <ActiveLink href="/dropshipping">Dropshipping</ActiveLink>
+          <ActiveLink href="/suggestion">Contact</ActiveLink>
+          <ActiveLink href="/informations">Informations</ActiveLink>
           <CommandDialogDemo groupedArticles={groupedArticles} />
           <ModeToggle />
         </div>
