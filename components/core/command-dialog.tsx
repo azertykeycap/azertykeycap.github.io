@@ -59,14 +59,17 @@ export function CommandDialogDemo({
             <React.Fragment key={group}>
               <CommandGroup heading={group}>
                 {groupedArticles[group]?.map((article) => (
-                  <Link href={article.url} key={article.url} target="_blank">
-                    <CommandItem>
-                      <span>{article.title}</span>
-                      <CommandShortcut>
-                        <ArrowUpRightIcon className="text-primary" />
-                      </CommandShortcut>
-                    </CommandItem>
-                  </Link>
+                  <CommandItem
+                    key={article.url}
+                    onSelect={() =>
+                      window.open(article.url, "_blank", "noreferrer")
+                    }
+                  >
+                    <span>{article.title}</span>
+                    <CommandShortcut>
+                      <ArrowUpRightIcon className="text-primary" />
+                    </CommandShortcut>
+                  </CommandItem>
                 ))}
               </CommandGroup>
               <CommandSeparator />
