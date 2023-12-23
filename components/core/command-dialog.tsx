@@ -55,12 +55,12 @@ export function CommandDialogDemo({
         <CommandInput placeholder="Rechercher votre set de touches..." />
         <CommandList>
           <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
-          {Object.keys(groupedArticles).map((group) => (
+          {Object.keys(groupedArticles).map((group, i) => (
             <React.Fragment key={group}>
               <CommandGroup heading={group}>
-                {groupedArticles[group]?.map((article) => (
+                {groupedArticles[group]?.map((article, j) => (
                   <CommandItem
-                    key={article.url}
+                    key={`${article.url}-${i}-${j}`}
                     onSelect={() =>
                       window.open(article.url, "_blank", "noreferrer")
                     }

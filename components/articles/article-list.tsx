@@ -3,10 +3,7 @@
 import * as React from "react";
 import SingleArticle from "./article-single";
 
-import type {
-  KeycapArticleContentfulInterface,
-  StatusType,
-} from "@/lib/api/contentful";
+import type { KeycapArticleContentfulInterface } from "@/lib/api/contentful";
 import { Separator } from "../ui/separator";
 import {
   Select,
@@ -18,7 +15,6 @@ import {
   SelectItem,
 } from "../ui/select";
 import { TypographyH2 } from "../core/typography/h2";
-import { Label } from "../ui/label";
 import { statusList } from "@/lib/utils";
 
 interface ArticleListProps {

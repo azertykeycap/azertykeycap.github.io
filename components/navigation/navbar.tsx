@@ -11,6 +11,16 @@ import { CommandDialogDemo } from "../core/command-dialog";
 import { group } from "radash";
 import SheetMobileMenu from "./sheet-mobile-menu";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export function Navbar({
   links,
@@ -37,12 +47,28 @@ export function Navbar({
           </ActiveLink>
           <NavigationMenuNavbar links={links} />
         </div>
-        <div className="flex grow xl:grow-0 gap-x-4 items-center xl:mx-4">
-          <ActiveLink href="/dropshipping">Dropshipping</ActiveLink>
-          <ActiveLink href="/suggestion">Contact</ActiveLink>
-          <ActiveLink href="/informations">Informations</ActiveLink>
+        <div className="flex grow xl:grow-0 gap-x-3 items-center xl:mx-4">
           <CommandDialogDemo groupedArticles={groupedArticles} />
           <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" className="hidden xl:flex">
+                <Plus className="h-[1.2rem] w-[1.2rem] text-foreground" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link className="w-full cursor-pointer" href="/suggestion">
+                  Contact
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link className="w-full cursor-pointer" href="/informations">
+                  Informations
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </nav>

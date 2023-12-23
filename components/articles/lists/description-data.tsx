@@ -10,7 +10,7 @@ interface DDProps extends VariantProps<typeof DDVariants> {
 const DDVariants = cva("text-sm", {
   variants: {
     variant: {
-      default: "text-muted-foreground",
+      default: "flex gap-2 text-muted-foreground",
       status:
         "flex w-fit items-center bg-secondary/90 text-secondary-foreground rounded-md px-2 py-1 text-xs font-bold uppercase",
     },

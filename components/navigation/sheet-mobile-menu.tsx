@@ -95,13 +95,22 @@ export default function SheetMobileMenu({
             Informations
           </ActiveLink>
           <ActiveLink
-            href="/dropshipping"
+            href="/dropshipping/sites"
             className={
               "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
             }
             onClick={() => setOpen(false)}
           >
-            Dropshipping
+            Sites de dropshipping
+          </ActiveLink>
+          <ActiveLink
+            href="/dropshipping/howto"
+            className={
+              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+            }
+            onClick={() => setOpen(false)}
+          >
+            &quot;Howto&quot; dropshipping
           </ActiveLink>
         </div>
       </SheetContent>

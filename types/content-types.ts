@@ -61,6 +61,65 @@ export type TypeArticle<
   Locales extends LocaleCode
 > = Entry<TypeArticleSkeleton, Modifiers, Locales>;
 
+export interface TypeDropshippingInformationPageFields {
+  title: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+  youtubeUrl: EntryFieldTypes.Symbol;
+}
+
+export type TypeDropshippingInformationPageSkeleton = EntrySkeletonType<
+  TypeDropshippingInformationPageFields,
+  "dropshippingInformationPage"
+>;
+export type TypeDropshippingInformationPage<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeDropshippingInformationPageSkeleton, Modifiers, Locales>;
+
+export interface TypeDropshippingSitesPageFields {
+  title: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+}
+
+export type TypeDropshippingSitesPageSkeleton = EntrySkeletonType<
+  TypeDropshippingSitesPageFields,
+  "dropshippingSitesPage"
+>;
+export type TypeDropshippingSitesPage<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeDropshippingSitesPageSkeleton, Modifiers, Locales>;
+
+export interface TypeDropshippingWebsiteFields {
+  title: EntryFieldTypes.Symbol;
+  slug: EntryFieldTypes.Symbol;
+  banner?: EntryFieldTypes.AssetLink;
+  description?: EntryFieldTypes.Text;
+  examples?: EntryFieldTypes.Text;
+  categories?: EntryFieldTypes.Array<
+    EntryFieldTypes.Symbol<
+      | "Accessoires"
+      | "Artisans"
+      | "Claviers"
+      | "Câbles"
+      | "Keycaps"
+      | "PCB"
+      | "Plates"
+      | "Switches"
+    >
+  >;
+  url: EntryFieldTypes.Symbol;
+}
+
+export type TypeDropshippingWebsiteSkeleton = EntrySkeletonType<
+  TypeDropshippingWebsiteFields,
+  "dropshippingWebsite"
+>;
+export type TypeDropshippingWebsite<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeDropshippingWebsiteSkeleton, Modifiers, Locales>;
+
 export interface TypeHomepageFields {
   title: EntryFieldTypes.Symbol;
   description: EntryFieldTypes.Text;

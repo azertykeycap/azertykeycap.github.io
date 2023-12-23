@@ -6,6 +6,7 @@ import { group } from "radash";
 import type { Document } from "@contentful/rich-text-types";
 import type {
   TypeArticleSkeleton,
+  TypeDropshippingWebsiteSkeleton,
   TypeHomepageSkeleton,
   TypeKeycaps__profileSkeleton,
 } from "@/types/content-types";
@@ -87,6 +88,15 @@ export interface KeycapArticleContentfulInterface {
   readonly additionalUrl?: string;
   readonly warningText?: string;
   readonly isNew?: boolean;
+}
+
+export interface DropshippingWebsiteInterface {
+  title: string;
+  img: string;
+  url: string;
+  examples: string | undefined;
+  categories: string[] | undefined;
+  description?: string;
 }
 
 export type KeycapArticleType = Omit<
@@ -289,6 +299,27 @@ export const getArticles = async (profile?: string) => {
       additionalUrl,
       warningText,
       isNew,
+    };
+  });
+};
+
+export const getDropshippingSites = async () => {
+  const dropshippingSitesEntries =
+    await contentfulClient.getEntries<TypeDropshippingWebsiteSkeleton>({
+      content_type: "dropshippingWebsite",
+      limit: 300,
+    });
+
+  return dropshippingSitesEntries.items.map(({ fields }) => {
+    const { title, banner, url, examples, categories, description } = fields;
+
+    return {
+      title,
+      img: (banner as Asset).fields.file?.url as string,
+      url,
+      examples,
+      categories,
+      description,
     };
   });
 };
