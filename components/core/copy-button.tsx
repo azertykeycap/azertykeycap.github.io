@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { toast, useToast } from "../ui/use-toast";
+import { toast } from "sonner";
 
 type CopyButtonProps = {
   url: string;
@@ -19,10 +19,8 @@ type CopyButtonProps = {
 };
 
 function CopyButton({ url, className }: CopyButtonProps) {
-  const { toast } = useToast();
-
   return (
-    <TooltipProvider delayDuration={0}>
+    <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
@@ -30,9 +28,7 @@ function CopyButton({ url, className }: CopyButtonProps) {
             size="icon"
             onClick={() => {
               navigator.clipboard.writeText(url);
-              toast({
-                description: "URL copiée dans le presse-papier avec succès.",
-              });
+              toast.success("URL copiée dans le presse-papier avec succès.");
             }}
             className={cn(className)}
           >

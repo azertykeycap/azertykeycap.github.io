@@ -18,7 +18,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -38,9 +38,12 @@ export function Navbar({
         <div className="hidden xl:flex xl:gap-x-4 xl:items-center">
           <ActiveLink
             href={"/"}
-            className="mr-4 xl:flex items-center gap-x-4 text-foreground"
+            className={cn(
+              "mr-4 xl:flex items-center gap-x-4 text-foreground",
+              buttonVariants({ variant: "ghost" })
+            )}
           >
-            <Image src={"/logo.png"} width={28} height={28} alt={"Logo"} />
+            <Image src={"/logo.png"} width={24} height={24} alt={"Logo"} />
             <span className="font-bold tracking-tight text-base">
               Azertykeycaps
             </span>
@@ -59,7 +62,7 @@ export function Navbar({
             <DropdownMenuContent align="end">
               <DropdownMenuItem asChild>
                 <Link className="w-full cursor-pointer" href="/suggestion">
-                  Contact
+                  Suggérer un keyset
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>

@@ -134,7 +134,7 @@ export default function SingleArticle({
               itemProp={"description"}
               className="px-6 text-sm text-muted-foreground"
             >
-              Description : {description}
+              <p className="text-balance">Description : {description}</p>
             </section>
           </>
         )}

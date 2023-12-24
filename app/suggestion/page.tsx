@@ -2,6 +2,7 @@ import * as React from "react";
 import { SuggestForm } from "@/components/forms/suggest-form";
 import { TypographyH1 } from "@/components/core/typography/h1";
 import { TypographyP } from "@/components/core/typography/p";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 export default async function Informations() {
   return (
@@ -12,7 +13,11 @@ export default async function Informations() {
         Vous pouvez le suggérer ici, et nous l&apos;ajouterons si il correspond
         aux critères de sélection.
       </TypographyP>
-      <SuggestForm className="mt-16" />
+      <ReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      >
+        <SuggestForm className="mt-16" />
+      </ReCaptchaProvider>
     </main>
   );
 }

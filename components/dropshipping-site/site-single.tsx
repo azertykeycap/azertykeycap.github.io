@@ -68,7 +68,7 @@ export default function SingleDropshippingWebsite({
           <>
             <section
               itemProp={"description"}
-              className="px-6 text-sm text-card-foreground"
+              className="px-6 text-sm text-muted-foreground"
             >
               <p className="text-balance">{description}</p>
             </section>
@@ -92,8 +92,8 @@ export default function SingleDropshippingWebsite({
           <>
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1" className="px-6">
-                <AccordionTrigger className="pt-0">
-                  Exemples de contenu
+                <AccordionTrigger className="pt-0 font-semibold">
+                  Quelques articles dropshippés
                 </AccordionTrigger>
                 <AccordionContent>
                   <article

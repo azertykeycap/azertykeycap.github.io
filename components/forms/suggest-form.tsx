@@ -6,13 +6,12 @@ import { cn } from "@/lib/utils";
 import { serverAction } from "@/app/actions/contentful";
 import { type ClassNameValue } from "tailwind-merge";
 import { Button } from "../ui/button";
-import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import { useReCaptcha } from "next-recaptcha-v3";
 import { useCallback } from "react";
+import { toast } from "sonner";
 
 export function SuggestForm({ className }: { className?: ClassNameValue }) {
-  const { toast } = useToast();
   const router = useRouter();
   const { executeRecaptcha } = useReCaptcha();
 
@@ -22,22 +21,17 @@ export function SuggestForm({ className }: { className?: ClassNameValue }) {
       const res = await serverAction({ data, token });
 
       if (res.status === 200) {
-        toast({
-          title: "Suggestion envoyée !",
-          description:
-            "Votre suggestion a bien été envoyée, et sera traitée dans les plus brefs délais.",
-        });
+        toast.success(
+          "Votre suggestion a bien été envoyée, et sera traitée dans les plus brefs délais."
+        );
         router.push("/");
       } else {
-        toast({
-          title: "Erreur lors de l'envoi de la suggestion.",
-          description:
-            "Une erreur est survenue lors de l'envoi de votre suggestion, veuillez réessayer.",
-          variant: "destructive",
-        });
+        toast.error(
+          "Une erreur est survenue lors de l'envoi de votre suggestion, veuillez réessayer."
+        );
       }
     },
-    [executeRecaptcha, router, toast]
+    [executeRecaptcha, router]
   );
 
   return (
