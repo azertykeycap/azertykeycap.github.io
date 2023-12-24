@@ -4,6 +4,7 @@ import { TypographyH1 } from "@/components/core/typography/h1";
 import { TypographyH2 } from "@/components/core/typography/h2";
 import { buttonVariants } from "@/components/ui/button";
 import {
+  KeycapArticleContentfulInterface,
   getArticles,
   getHomePageInformation,
   homePageContentType,
@@ -57,11 +58,29 @@ async function getData() {
   );
 
   const groupedArticles = group(articlesBySlug, (a) => a.profile.title);
+
+  // Specify the desired order
+  const desiredOrder: string[] = homepageContent.profileCards.map(
+    (e) => e.title
+  );
+
+  // Reorder the grouped articles based on the desired order
+  const reorderedArticles: Record<string, KeycapArticleContentfulInterface[]> =
+    desiredOrder.reduce(
+      (result: Record<string, KeycapArticleContentfulInterface[]>, profile) => {
+        if (groupedArticles.hasOwnProperty(profile)) {
+          result[profile] = groupedArticles[profile]!;
+        }
+        return result;
+      },
+      {}
+    );
+
   const displayedArticles: homePageContentType = {};
 
-  Object.keys(groupedArticles).map(
+  Object.keys(reorderedArticles).map(
     (key: string) =>
-      (displayedArticles[key] = groupedArticles[key]?.slice(0, 4) ?? [])
+      (displayedArticles[key] = reorderedArticles[key]?.slice(0, 4) ?? [])
   );
 
   return {

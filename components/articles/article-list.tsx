@@ -46,7 +46,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Filtres :
         </h4>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 sticky top-0 z-50">
           <div className="flex flex-col gap-y-2">
             <Select value={status} onValueChange={setStatus}>
               <SelectTrigger

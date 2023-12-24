@@ -15,21 +15,22 @@ import {
 
 import { Button } from "../ui/button";
 import { getArticles } from "@/lib/api/contentful";
-import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
 
 export function CommandDialogDemo({
   groupedArticles,
+  operatingSystem,
 }: {
   groupedArticles: Partial<
     Record<string, Awaited<ReturnType<typeof getArticles>>>
   >;
+  operatingSystem?: string;
 }) {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
@@ -48,7 +49,13 @@ export function CommandDialogDemo({
       >
         Rechercher un keyset
         <kbd className="hidden pointer-events-none xl:inline-flex h-5 ml-4 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>J
+          <span className="text-xs">
+            {operatingSystem &&
+            operatingSystem.toLowerCase().includes("windows")
+              ? "Ctrl"
+              : "⌘"}
+          </span>
+          K
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>

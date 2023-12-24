@@ -16,6 +16,18 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "../ui/accordion";
 
 export interface ArticleProps {
   article: KeycapArticleContentfulInterface;
@@ -45,7 +57,7 @@ export default function SingleArticle({
 
   return (
     <Card
-      className={cn("relative", className)}
+      className={cn(className)}
       itemScope
       itemType="https://schema.org/Product"
     >
@@ -65,8 +77,8 @@ export default function SingleArticle({
       {warningText && <meta itemProp="negativeNotes" content={warningText} />}
 
       <CardHeader className="relative">
-        {isNew && (
-          <div className="absolute top-2 left-2 z-10">
+        <div className="absolute inset-2 bottom-auto z-10 flex justify-between">
+          {isNew && (
             <Badge variant="default" className="flex items-center gap-x-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground/75"></span>
@@ -74,8 +86,29 @@ export default function SingleArticle({
               </span>
               <span>Nouveau</span>
             </Badge>
-          </div>
-        )}
+          )}
+          {warningText && (
+            <TooltipProvider delayDuration={200}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Badge
+                    variant="destructive"
+                    className="flex items-center gap-x-2"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground/75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground"></span>
+                    </span>
+                    <span>Avertissement</span>
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-[280px] text-center py-2 bg-destructive text-destructive-foreground">
+                  {warningText}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
         <Image
           src={`https:${img}?fit=fill&w=560&h=370&fm=webp&q=70`}
           alt={title}
@@ -108,57 +141,30 @@ export default function SingleArticle({
             </Badge>
           </ArticleDd>
         </ArticleDl>
-        {(startDate || endDate) && (
-          <>
-            <Separator />
-            <ArticleDl itemProp={"releaseDate"}>
-              {startDate && (
-                <>
-                  <ArticleDt>Date début :</ArticleDt>
-                  <ArticleDd>{startDate}</ArticleDd>
-                </>
-              )}
-              {endDate && (
-                <>
-                  <ArticleDt>Date fin :</ArticleDt>
-                  <ArticleDd>{endDate}</ArticleDd>
-                </>
-              )}
-            </ArticleDl>
-          </>
-        )}
-        {description && (
-          <>
-            <Separator />
-            <section
-              itemProp={"description"}
-              className="px-6 text-sm text-muted-foreground"
-            >
-              <p className="text-balance">Description : {description}</p>
-            </section>
-          </>
-        )}
-        {warningText && (
-          <>
-            <Separator />
-            <div
-              itemProp="negativeNotes"
-              className="w-fit flex items-center gap-x-3 px-4 py-1.5 mx-6 my-4 rounded-md bg-red-600 font-medium"
-            >
-              <AlertTriangle
-                width="16"
-                height="16"
-                className="text-destructive-foreground"
-              />
-              <span className="inline-block text-sm text-destructive-foreground">
-                Attention : {warningText}
-              </span>
-            </div>
-          </>
-        )}
+        <>
+          <Separator />
+          <ArticleDl itemProp={"releaseDate"}>
+            <ArticleDt>Date début :</ArticleDt>
+            <ArticleDd>{startDate ?? "Aucune"}</ArticleDd>
+            <ArticleDt>Date fin :</ArticleDt>
+            <ArticleDd>{endDate ?? "Aucune"}</ArticleDd>
+          </ArticleDl>
+        </>
         <Separator />
+        <Accordion
+          type="single"
+          collapsible
+          disabled={!description || description?.length === 0}
+        >
+          <AccordionItem value="item-1" className="px-6">
+            <AccordionTrigger className="pt-0 font-semibold disabled:cursor-not-allowed">
+              Description du keyset
+            </AccordionTrigger>
+            <AccordionContent>{description}</AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </CardContent>
-      <CardFooter className="pb-4">
+      <CardFooter className="pb-4 pt-auto">
         <div className="flex flex-col gap-2 text-sm xl:flex-row w-full">
           {additionalUrl && (
             <Link

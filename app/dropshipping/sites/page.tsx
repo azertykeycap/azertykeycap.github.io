@@ -46,7 +46,6 @@ export default async function DropshippingSites() {
             key={i}
             site={site}
             isHighPriority={i < 4}
-            className="h-fit"
           />
         ))}
       </div>

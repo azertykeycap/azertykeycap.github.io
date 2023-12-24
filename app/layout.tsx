@@ -11,11 +11,11 @@ import {
 } from "@/lib/api/contentful";
 import Link from "next/link";
 import Icon from "@/components/core/icon";
-import { cn } from "@/lib/utils";
+import { cn, getOperatingSystem } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
+import { headers } from "next/headers";
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -31,6 +31,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { navigationLinks, articles, socialLinks } = await getData();
+  const operatingSystem = getOperatingSystem(headers().get("user-agent") ?? "");
 
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="fr">
@@ -41,7 +42,13 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar links={navigationLinks} articles={articles} />
+          <Navbar
+            links={navigationLinks}
+            articles={articles}
+            operatingSystem={
+              operatingSystem.length > 0 ? operatingSystem : undefined
+            }
+          />
           {children}
           <footer className="py-6 md:px-8 md:py-0 border-t mt-auto">
             <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
