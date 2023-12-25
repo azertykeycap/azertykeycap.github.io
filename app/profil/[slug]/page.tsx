@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   if (articlesBySlug.length > 0)
     return {
-      title: `Azerty Keycaps - ${articlesBySlug[0].profile.title ?? ""}`,
+      title: `Azertykeycaps - ${articlesBySlug[0].profile.title ?? ""}`,
       description: articlesBySlug[0].profile.description ?? "",
     };
 }

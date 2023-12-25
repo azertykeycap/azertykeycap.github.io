@@ -21,12 +21,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Azerty Keycaps - Annuaire de keycaps françaises",
+  title: "Azertykeycaps - Annuaire de keycaps françaises",
   description:
     "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
   icons: "/favicon.png",
   openGraph: {
-    title: "Azerty Keycaps - Annuaire de keycaps françaises",
+    title: "Azertykeycaps - Annuaire de keycaps françaises",
     description:
       "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
     locale: "fr_FR",

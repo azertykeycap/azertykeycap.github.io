@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["lucide-react"], // add this
+  transpilePackages: ["lucide-react"],
   images: {
     remotePatterns: [
       {

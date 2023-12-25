@@ -13,6 +13,8 @@ import {
   ShapedNavigationLinksInterface,
 } from "@/lib/api/contentful";
 import Image from "next/image";
+import { Separator } from "../ui/separator";
+import Link from "next/link";
 
 interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
   title: string;
@@ -82,6 +84,27 @@ export function NavigationMenuNavbar({
                   </ListItem>
                 ))}
               </ul>
+              <Separator className="px-4" />
+              <div className="p-4 text-xs text-muted-foreground">
+                Envie d&apos;en savoir plus sur les profils ? N&apos;hésitez pas
+                à aller sur{" "}
+                <Link
+                  href="https://www.keycaps.info"
+                  target="_blank"
+                  className="text-primary underline"
+                >
+                  keycaps.info
+                </Link>{" "}
+                ou{" "}
+                <Link
+                  href="https://www.keyboard.university/100-courses/keycaps-101-ydy8j"
+                  target="_blank"
+                  className="text-primary underline"
+                >
+                  keyboard.university
+                </Link>{" "}
+                pour en apprendre plus !
+              </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}

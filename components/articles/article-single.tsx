@@ -11,7 +11,7 @@ import { Separator } from "../ui/separator";
 import ArticleDl from "./lists/description-list";
 import ArticleDt from "./lists/description-term";
 import ArticleDd from "./lists/description-data";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -168,7 +168,7 @@ export default function SingleArticle({
         {!description || description?.length === 0 ? (
           <section>
             <div className="flex flex-1 items-center justify-between pb-4 text-sm font-medium px-6">
-              Aucune description fournie.
+              Aucune indication sur ce keyset.
             </div>
             <Separator />
           </section>
@@ -177,7 +177,7 @@ export default function SingleArticle({
             <Accordion type="single" collapsible>
               <AccordionItem value="description" className="px-6">
                 <AccordionTrigger className="pt-0 font-semibold disabled:cursor-not-allowed">
-                  Description du keyset
+                  Indications sur le keyset
                 </AccordionTrigger>
                 <AccordionContent>{description}</AccordionContent>
               </AccordionItem>
@@ -205,10 +205,11 @@ export default function SingleArticle({
             itemProp="url"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "flex-1 w-full"
+              "flex-1 w-full flex items-center gap-x-2"
             )}
           >
-            En savoir +
+            <span>Voir le set</span>
+            <ArrowUpRight className="h-5 w-5" />
           </Link>
         </div>
       </CardFooter>

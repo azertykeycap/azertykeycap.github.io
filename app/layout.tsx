@@ -16,6 +16,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
 import { headers } from "next/headers";
+import Script from "next/script";
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -35,6 +36,14 @@ export default async function RootLayout({
 
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="fr">
+      {process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_SITE_URL === "https://azertykeycaps.fr" && (
+          <Script
+            async
+            src="https://analytics.azertykeycaps.fr/script.js"
+            data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
+          />
+        )}
       <body className="min-h-screen flex flex-col">
         <ThemeProvider
           attribute="class"

@@ -1,5 +1,0 @@
-{
-	"runtime": "nodejs18.x",
-	"handler": "home/kzm/documents/personal/azertykeycaps-astro/dist/pages/entry.index.styles.css.astro.mjs",
-	"launcherType": "Nodejs"
-}

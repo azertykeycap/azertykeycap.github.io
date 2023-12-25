@@ -51,6 +51,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
   const handleMaterialChange = React.useCallback((value: string) => {
     setMaterial(value);
   }, []);
+
   return (
     <>
       <Separator className="my-8" />
@@ -65,7 +66,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
               id="status"
               aria-label="select-status"
             >
-              <SelectValue placeholder="Sélectionner un statut." />
+              <SelectValue placeholder="Statut" />
             </SelectTrigger>
             <SelectContent>
               {statusList.map((s) => (
@@ -97,7 +98,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
               id="material"
               aria-label="select-material"
             >
-              <SelectValue placeholder="Sélectionner une matière." />
+              <SelectValue placeholder="Matière" />
             </SelectTrigger>
             <SelectContent>
               {materialList.map((s) => (
