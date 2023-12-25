@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button, buttonVariants } from "../ui/button";
-import { Plus } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import Link from "next/link";
 
 export function Navbar({
@@ -64,7 +64,7 @@ export function Navbar({
                 <Plus className="h-[1.2rem] w-[1.2rem] text-foreground" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-[200px]">
               <DropdownMenuItem asChild>
                 <Link className="w-full cursor-pointer" href="/suggestion">
                   Suggérer un keyset
@@ -73,6 +73,15 @@ export function Navbar({
               <DropdownMenuItem asChild>
                 <Link className="w-full cursor-pointer" href="/informations">
                   Informations
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  className="w-full cursor-pointer flex items-center justify-between"
+                  href="https://www.keycaps.info/"
+                >
+                  <span>Comparer les profils</span>
+                  <ArrowUpRight className="h-[1.2rem] w-[1.2rem] text-primary" />
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
