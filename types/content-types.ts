@@ -35,7 +35,7 @@ export interface TypeArticleFields {
     | "PBT Laser printed"
   >;
   description?: EntryFieldTypes.Text;
-  status?: EntryFieldTypes.Symbol<
+  status: EntryFieldTypes.Symbol<
     | "En stock"
     | "Extras GB"
     | "Extras In-Stock"

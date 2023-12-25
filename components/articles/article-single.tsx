@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, getStatusColor } from "@/lib/utils";
 import type { KeycapArticleContentfulInterface } from "@/lib/api/contentful";
 import {
   Card,
@@ -54,6 +54,12 @@ export default function SingleArticle({
     additionalUrl,
     isNew,
   } = article;
+
+  const {
+    bg: bgStatusColor,
+    text: textStatusColor,
+    bgHover: bgHoverStatusColor,
+  } = getStatusColor(status);
 
   return (
     <Card
@@ -136,7 +142,15 @@ export default function SingleArticle({
         <ArticleDl>
           <ArticleDt>Statut :</ArticleDt>
           <ArticleDd itemProp={"availability"}>
-            <Badge variant="secondary" className="uppercase">
+            <Badge
+              variant="secondary"
+              className={cn(
+                "uppercase",
+                bgStatusColor,
+                textStatusColor,
+                bgHoverStatusColor
+              )}
+            >
               {status}
             </Badge>
           </ArticleDd>
@@ -151,18 +165,25 @@ export default function SingleArticle({
           </ArticleDl>
         </>
         <Separator />
-        <Accordion
-          type="single"
-          collapsible
-          disabled={!description || description?.length === 0}
-        >
-          <AccordionItem value="item-1" className="px-6">
-            <AccordionTrigger className="pt-0 font-semibold disabled:cursor-not-allowed">
-              Description du keyset
-            </AccordionTrigger>
-            <AccordionContent>{description}</AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        {!description || description?.length === 0 ? (
+          <section>
+            <div className="flex flex-1 items-center justify-between pb-4 text-sm font-medium px-6">
+              Aucune description fournie.
+            </div>
+            <Separator />
+          </section>
+        ) : (
+          description?.length > 0 && (
+            <Accordion type="single" collapsible>
+              <AccordionItem value="description" className="px-6">
+                <AccordionTrigger className="pt-0 font-semibold disabled:cursor-not-allowed">
+                  Description du keyset
+                </AccordionTrigger>
+                <AccordionContent>{description}</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          )
+        )}
       </CardContent>
       <CardFooter className="pb-4 pt-auto">
         <div className="flex flex-col gap-2 text-sm xl:flex-row w-full">

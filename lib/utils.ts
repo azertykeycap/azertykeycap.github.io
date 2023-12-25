@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const statusList: Array<StatusType | string> = [
+export const statusList: Array<StatusType> = [
   "En stock",
   "Extras GB",
   "Extras In-Stock",
@@ -17,7 +17,7 @@ export const statusList: Array<StatusType | string> = [
   "Out Of Stock",
 ];
 
-export const materialList: Array<MaterialType | string> = [
+export const materialList: Array<MaterialType> = [
   "ABS Double-Shot",
   "ABS Pad-Printed",
   "ABS Simple",
@@ -49,20 +49,55 @@ export const getOperatingSystem = (userAgent: string): string => {
 
 export const getStatusColor = (
   status: StatusType
-): { bg: ClassNameValue; text: ClassNameValue } => {
+): { bg: ClassNameValue; text: ClassNameValue; bgHover: ClassNameValue } => {
   switch (status) {
     case "En stock":
-      return { bg: "bg-green-500", text: "text-green-50" };
+      return {
+        bgHover: "hover:bg-green-700",
+        bg: "bg-green-500",
+        text: "text-green-50",
+      };
     case "Extras In-Stock":
-      return { bg: "bg-green-500", text: "text-green-50" };
+      return {
+        bgHover: "hover:bg-sky-700",
+        bg: "bg-sky-500",
+        text: "text-sky-50",
+      };
     case "Extras GB":
+      return {
+        bgHover: "hover:bg-blue-700",
+        bg: "bg-blue-500",
+        text: "text-blue-50",
+      };
     case "GB en cours":
+      return {
+        bgHover: "hover:bg-emerald-700",
+        bg: "bg-emerald-500",
+        text: "text-emerald-50",
+      };
     case "Interest Check":
-      return { bg: "bg-orange-500", text: "text-orange-50" };
+      return {
+        bgHover: "hover:bg-orange-700",
+        bg: "bg-orange-500",
+        text: "text-orange-50",
+      };
     case "GB terminé":
+      return {
+        bgHover: "hover:bg-red-700",
+        bg: "bg-red-500",
+        text: "text-red-50",
+      };
     case "Out Of Stock":
-      return { bg: "bg-red-500", text: "text-red-50" };
+      return {
+        bgHover: "hover:bg-gray-700",
+        bg: "bg-gray-500",
+        text: "text-gray-50",
+      };
     default:
-      return "gray";
+      return {
+        bgHover: "hover:bg-slate-700",
+        bg: "bg-slate-500",
+        text: "text-slate-50",
+      };
   }
 };

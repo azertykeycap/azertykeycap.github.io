@@ -81,7 +81,7 @@ export interface KeycapArticleContentfulInterface {
   readonly profile: { title: string; slug: string; abbreviation: string };
   readonly description?: string;
   readonly material: string;
-  readonly status?: StatusType;
+  readonly status: StatusType;
   readonly startDate?: string;
   readonly endDate?: string;
   readonly url: string;

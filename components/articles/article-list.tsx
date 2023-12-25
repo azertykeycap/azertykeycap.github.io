@@ -15,7 +15,7 @@ import {
   SelectItem,
 } from "../ui/select";
 import { TypographyH2 } from "../core/typography/h2";
-import { statusList } from "@/lib/utils";
+import { cn, getStatusColor, statusList } from "@/lib/utils";
 
 interface ArticleListProps {
   articles: Array<KeycapArticleContentfulInterface>;
@@ -57,14 +57,27 @@ export default function ArticleList({ articles }: ArticleListProps) {
                 <SelectValue placeholder="Sélectionner un statut." />
               </SelectTrigger>
               <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Statuts</SelectLabel>
-                  {statusList.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {s}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
+                {statusList.map((s) => (
+                  <SelectItem key={s} value={s} className="w-full">
+                    <div className="w-full flex items-center">
+                      <span className="relative flex h-2 w-2 mr-3">
+                        <span
+                          className={cn(
+                            "animate-ping absolute inline-flex h-full w-full rounded-full bg-opacity-75",
+                            getStatusColor(s).bg
+                          )}
+                        ></span>
+                        <span
+                          className={cn(
+                            "relative inline-flex rounded-full h-2 w-2",
+                            getStatusColor(s).bg
+                          )}
+                        ></span>
+                      </span>
+                      <span>{s}</span>
+                    </div>
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
