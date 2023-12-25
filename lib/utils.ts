@@ -91,13 +91,13 @@ export const getStatusColor = (
       return {
         bgHover: "hover:bg-gray-700 dark:hover:bg-gray-300/30",
         bg: "bg-gray-500 dark:bg-gray-300/20 border border-gray-500 dark:border-gray-300",
-        text: "text-gray-50 dark:text-gray-800",
+        text: "text-gray-50 dark:text-gray-300",
       };
     default:
       return {
         bgHover: "hover:bg-slate-700 dark:hover:bg-slate-300/30",
         bg: "bg-slate-500 dark:bg-slate-300/20 border border-slate-500 dark:border-slate-300",
-        text: "text-slate-50 dark:text-slate-800",
+        text: "text-slate-50 dark:text-slate-300",
       };
   }
 };
