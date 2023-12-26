@@ -53,6 +53,7 @@
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "ua-parser-js": "^2.0.0-beta.1",
+    "vaul": "^0.8.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
