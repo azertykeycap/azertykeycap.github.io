@@ -7,6 +7,7 @@ import {
   KeycapArticleContentfulInterface,
   getArticles,
   getHomePageInformation,
+  getRandomOgApiImg,
   homePageContentType,
 } from "@/lib/api/contentful";
 import { cn } from "@/lib/utils";
@@ -20,33 +21,35 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export const metadata: Metadata = {
-  title: "Azertykeycaps - Annuaire de keycaps françaises",
-  description:
-    "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-  icons: "/favicon.png",
-  openGraph: {
+export async function generateMetadata({}) {
+  return {
     title: "Azertykeycaps - Annuaire de keycaps françaises",
     description:
       "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-    locale: "fr_FR",
-    // images: [
-    //   {
-    //     url: "https://azertykeycaps.fr/og.png",
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Azerty Keycaps - Annuaire de keycaps françaises",
-    //   },
-    // ],
-  },
-  // twitter: {
-  //   title: "Azerty Keycaps - Annuaire de keycaps françaises",
-  //   description:
-  //     "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-  //   site: process.env.NEXT_PUBLIC_SITE_URL,
-  //   card: "summary_large_image",
-  // },
-};
+    icons: "/favicon.png",
+    openGraph: {
+      title: "Azertykeycaps - Annuaire de keycaps françaises",
+      description:
+        "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
+      locale: "fr_FR",
+      images: [
+        {
+          url: `/og?imgUrl=${await getRandomOgApiImg()}`,
+          width: 1200,
+          height: 630,
+          alt: "Azerty Keycaps - Annuaire de keycaps françaises",
+        },
+      ],
+    },
+    // twitter: {
+    //   title: "Azerty Keycaps - Annuaire de keycaps françaises",
+    //   description:
+    //     "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
+    //   site: process.env.NEXT_PUBLIC_SITE_URL,
+    //   card: "summary_large_image",
+    // },
+  };
+}
 
 async function getData() {
   const homepageContent = await getHomePageInformation();

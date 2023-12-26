@@ -5,6 +5,7 @@ import { group } from "radash";
 
 import type { Document } from "@contentful/rich-text-types";
 import type {
+  TypeApiOgImagesSkeleton,
   TypeArticleSkeleton,
   TypeDropshippingWebsiteSkeleton,
   TypeHomepageSkeleton,
@@ -322,4 +323,17 @@ export const getDropshippingSites = async () => {
       description,
     };
   });
+};
+
+export const getRandomOgApiImg = async () => {
+  const ogApiEntries =
+    await contentfulClient.getEntries<TypeApiOgImagesSkeleton>({
+      content_type: "apiOgImages",
+      limit: 20,
+    });
+
+  const randomApiOgEntry =
+    ogApiEntries.items[Math.floor(Math.random() * ogApiEntries.items.length)];
+
+  return (randomApiOgEntry.fields.img as Asset).fields.file?.url as string;
 };
