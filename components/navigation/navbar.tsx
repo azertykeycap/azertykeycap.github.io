@@ -15,7 +15,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button, buttonVariants } from "../ui/button";
@@ -25,11 +24,9 @@ import Link from "next/link";
 export function Navbar({
   links,
   articles,
-  operatingSystem,
 }: {
   links: ShapedNavigationLinksInterface;
   articles: Awaited<ReturnType<typeof getArticles>>;
-  operatingSystem?: string;
 }) {
   const groupedArticles = group(articles, (a) => a.profile.title);
 
@@ -53,10 +50,7 @@ export function Navbar({
           <NavigationMenuNavbar links={links} />
         </div>
         <div className="flex grow xl:grow-0 gap-x-3 items-center xl:mx-4">
-          <CommandDialogDemo
-            groupedArticles={groupedArticles}
-            operatingSystem={operatingSystem}
-          />
+          <CommandDialogDemo groupedArticles={groupedArticles} />
           <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

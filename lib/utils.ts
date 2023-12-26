@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { ClassNameValue, twMerge } from "tailwind-merge";
 import { MaterialType, StatusType } from "./api/contentful";
-import UAParser from "ua-parser-js";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -40,12 +39,6 @@ export function wrapValuesWithFr(
 
   return resultObject;
 }
-
-export const getOperatingSystem = (userAgent: string): string => {
-  const parser = new UAParser();
-  const result = parser.setUA(userAgent).getOS();
-  return result.name || "Unknown OS";
-};
 
 export const getStatusColor = (
   status: StatusType
