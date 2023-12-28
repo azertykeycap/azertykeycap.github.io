@@ -67,7 +67,7 @@ export function NavigationMenuNavbar({
 }) {
   return (
     <NavigationMenu>
-      <NavigationMenuList className="gap-x-1">
+      <NavigationMenuList className="gap-x-0.5">
         {Object.entries(links).map(([link, subLinks]) => (
           <NavigationMenuItem key={link}>
             <NavigationMenuTrigger>{link}</NavigationMenuTrigger>

@@ -38,7 +38,7 @@ export function Navbar({
           <ActiveLink
             href={"/"}
             className={cn(
-              "mr-4 xl:flex items-center gap-x-4 text-foreground",
+              "xl:flex items-center gap-x-4 text-foreground",
               buttonVariants({ variant: "ghost" })
             )}
           >

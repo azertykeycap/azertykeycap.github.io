@@ -73,7 +73,7 @@ export function CommandDialogDemo({
                       window.open(article.url, "_blank", "noreferrer")
                     }
                   >
-                    <span>{article.title}</span>
+                    {article.title}
                     <CommandShortcut>
                       <ArrowUpRightIcon className="text-primary" />
                     </CommandShortcut>
