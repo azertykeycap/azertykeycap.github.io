@@ -62,6 +62,9 @@ export async function generateMetadata({
         }/og?imgUrl=${randomOgApi}&title=${
           articlesBySlug[0].profile.title ?? ""
         }`,
+        card: "summary_large_image",
+        creator: "@theosenoussaoui",
+        creatorId: "1294263126481874944",
       },
     };
 }

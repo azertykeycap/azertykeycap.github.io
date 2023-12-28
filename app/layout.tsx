@@ -94,14 +94,6 @@ export default async function RootLayout({
 
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="fr">
-      {process.env.NODE_ENV === "production" &&
-        process.env.NEXT_PUBLIC_SITE_URL === "https://azertykeycaps.fr" && (
-          <Script
-            async
-            src="https://analytics.azertykeycaps.fr/script.js"
-            data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
-          />
-        )}
       <body className="min-h-screen flex flex-col">
         <ThemeProvider
           attribute="class"
@@ -163,6 +155,13 @@ export default async function RootLayout({
           />
         </ThemeProvider>
       </body>
+      {process.env.NODE_ENV === "production" && (
+        <Script
+          async
+          src="https://analytics.azertykeycaps.fr/script.js"
+          data-website-id="767b5e54-5d36-4f30-b703-9f42086dfbc7"
+        />
+      )}
     </html>
   );
 }

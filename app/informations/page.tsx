@@ -30,6 +30,9 @@ export async function generateMetadata({}) {
       description:
         "Informations techniques générales concernant le site Azertykeycaps.",
       image: `${process.env.NEXT_PUBLIC_URL}/og?imgUrl=${randomOgApi}&title=Informations`,
+      card: "summary_large_image",
+      creator: "@theosenoussaoui",
+      creatorId: "1294263126481874944",
     },
   };
 }
