@@ -7,49 +7,12 @@ import {
   KeycapArticleContentfulInterface,
   getArticles,
   getHomePageInformation,
-  getRandomOgApiImg,
   homePageContentType,
 } from "@/lib/api/contentful";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { group } from "radash";
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-};
-
-export async function generateMetadata({}) {
-  return {
-    title: "Azertykeycaps - Annuaire de keycaps françaises",
-    description:
-      "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-    icons: "/favicon.png",
-    openGraph: {
-      title: "Azertykeycaps - Annuaire de keycaps françaises",
-      description:
-        "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-      locale: "fr_FR",
-      images: [
-        {
-          url: `/og?imgUrl=${await getRandomOgApiImg()}`,
-          width: 1200,
-          height: 630,
-          alt: "Azerty Keycaps - Annuaire de keycaps françaises",
-        },
-      ],
-    },
-    // twitter: {
-    //   title: "Azerty Keycaps - Annuaire de keycaps françaises",
-    //   description:
-    //     "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
-    //   site: process.env.NEXT_PUBLIC_SITE_URL,
-    //   card: "summary_large_image",
-    // },
-  };
-}
 
 async function getData() {
   const homepageContent = await getHomePageInformation();
@@ -62,12 +25,10 @@ async function getData() {
 
   const groupedArticles = group(articlesBySlug, (a) => a.profile.title);
 
-  // Specify the desired order
   const desiredOrder: string[] = homepageContent.profileCards.map(
     (e) => e.title
   );
 
-  // Reorder the grouped articles based on the desired order
   const reorderedArticles: Record<string, KeycapArticleContentfulInterface[]> =
     desiredOrder.reduce(
       (result: Record<string, KeycapArticleContentfulInterface[]>, profile) => {

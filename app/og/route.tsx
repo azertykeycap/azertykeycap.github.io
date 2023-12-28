@@ -49,7 +49,7 @@ export async function GET(request: Request) {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
-            backgroundColor: "rgba(12, 10, 9, 0.75)",
+            backgroundColor: "rgba(12, 10, 9, 0.6)",
             fontSize: 60,
             letterSpacing: -2,
             textAlign: "center",

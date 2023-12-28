@@ -7,15 +7,75 @@ import { Navbar } from "@/components/navigation/navbar";
 import {
   getArticles,
   getNavigationLinks,
+  getRandomOgApiImg,
   getSocialLinksEntries,
 } from "@/lib/api/contentful";
 import Link from "next/link";
 import Icon from "@/components/core/icon";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
+import { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export async function generateMetadata({}) {
+  const randomOgApi = await getRandomOgApiImg();
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
+    title: "Azertykeycaps - Annuaire de keycaps françaises",
+    description:
+      "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
+    openGraph: {
+      title: "Azertykeycaps - Annuaire de keycaps françaises",
+      description:
+        "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
+      locale: "fr_FR",
+      type: "website",
+      images: [
+        {
+          url: `/og?imgUrl=${randomOgApi}`,
+          width: 1200,
+          height: 630,
+          alt: "Azertykeycaps - Annuaire de keycaps françaises",
+        },
+      ],
+    },
+    generator: "Next.js",
+    applicationName: "Azertykeycaps",
+    referrer: "origin-when-cross-origin",
+    keywords: ["Next.js", "React", "JavaScript"],
+    creator: "Théo Senoussaoui",
+    publisher: "Plaketdebeur",
+    icons: "/favicon.png",
+    twitter: {
+      title: "Azertykeycaps - Annuaire de keycaps françaises",
+      description:
+        "Azertykeycaps est un site communautaire répertoriant les derniers keysets possédant une compatibilité AZERTY (ou ISO-FR) dans le hobby des claviers mécaniques.",
+      card: "summary_large_image",
+      creator: "@theosenoussaoui",
+      creatorId: "1294263126481874944",
+      images: `${process.env.NEXT_PUBLIC_URL}/og?imgUrl=${randomOgApi}`,
+      app: {
+        name: "twitter_app",
+        id: {
+          iphone: "twitter_app://iphone",
+          ipad: "twitter_app://ipad",
+          googleplay: "twitter_app://googleplay",
+        },
+        url: {
+          iphone: "https://iphone_url",
+          ipad: "https://ipad_url",
+        },
+      },
+    },
+  };
+}
 
 async function getData() {
   const navigationLinks = await getNavigationLinks();
@@ -102,7 +162,6 @@ export default async function RootLayout({
             }}
           />
         </ThemeProvider>
-        <SpeedInsights />
       </body>
     </html>
   );
