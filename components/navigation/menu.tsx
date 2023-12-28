@@ -67,7 +67,7 @@ export function NavigationMenuNavbar({
 }) {
   return (
     <NavigationMenu>
-      <NavigationMenuList className="space-x-0">
+      <NavigationMenuList className="gap-x-1">
         {Object.entries(links).map(([link, subLinks]) => (
           <NavigationMenuItem key={link}>
             <NavigationMenuTrigger>{link}</NavigationMenuTrigger>
@@ -108,25 +108,29 @@ export function NavigationMenuNavbar({
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Dropshipping</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[200px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              <ListItem
-                title={"Tous les sites de dropshipping"}
-                href={`/dropshipping/sites`}
-              >
-                Voir la liste de tous les sites de dropshipping connus.
-              </ListItem>
-              <ListItem
-                title={"Reconnaître un site de dropshipping"}
-                href={`/dropshipping/howto`}
-              >
-                Comment repérer un site de dropshipping ?
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+        {process.env.NODE_ENV === "production" ? (
+          <></>
+        ) : (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Dropshipping</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[200px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                <ListItem
+                  title={"Tous les sites de dropshipping"}
+                  href={`/dropshipping/sites`}
+                >
+                  Voir la liste de tous les sites de dropshipping connus.
+                </ListItem>
+                <ListItem
+                  title={"Reconnaître un site de dropshipping"}
+                  href={`/dropshipping/howto`}
+                >
+                  Comment repérer un site de dropshipping ?
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

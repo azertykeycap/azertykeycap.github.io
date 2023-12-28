@@ -55,11 +55,7 @@ export default function SingleArticle({
     isNew,
   } = article;
 
-  const {
-    bg: bgStatusColor,
-    text: textStatusColor,
-    bgHover: bgHoverStatusColor,
-  } = getStatusColor(status);
+  const { bg: bgStatusColor, text: textStatusColor } = getStatusColor(status);
 
   return (
     <Card
@@ -102,10 +98,10 @@ export default function SingleArticle({
                     className="flex items-center gap-x-2"
                   >
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground/75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive-foreground/75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-destructive-foreground"></span>
                     </span>
-                    <span>Avertissement</span>
+                    <span className="text-white">Avertissement</span>
                   </Badge>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-[280px] text-center py-2 bg-destructive text-destructive-foreground">
@@ -145,10 +141,9 @@ export default function SingleArticle({
             <Badge
               variant="secondary"
               className={cn(
-                "uppercase",
+                "uppercase pointer-events-none",
                 bgStatusColor,
-                textStatusColor,
-                bgHoverStatusColor
+                textStatusColor
               )}
             >
               {status}

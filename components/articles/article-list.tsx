@@ -56,9 +56,9 @@ export default function ArticleList({ articles }: ArticleListProps) {
     <>
       <Separator className="my-8" />
       <div className="space-y-6">
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+        <span className="scroll-m-20 text-xl font-semibold tracking-tight">
           Filtres :
-        </h4>
+        </span>
         <div className="flex items-center gap-x-4">
           <Select value={status} onValueChange={handleStatusChange}>
             <SelectTrigger

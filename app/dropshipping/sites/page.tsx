@@ -6,6 +6,7 @@ import { richTextFromMarkdown } from "@contentful/rich-text-from-markdown";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { TypeDropshippingSitesPageSkeleton } from "@/types/content-types";
 import { TypographyP } from "@/components/core/typography/p";
+import { notFound } from "next/navigation";
 
 async function getData() {
   const dropshippingSitesPage =
@@ -35,8 +36,9 @@ async function getData() {
 
 export default async function DropshippingSites() {
   const { dropshippingWebsites, pageTitle, pageDescription } = await getData();
-
-  return (
+  return process.env.NODE_ENV === "production" ? (
+    notFound()
+  ) : (
     <main className="container my-12">
       <TypographyH1>{pageTitle}</TypographyH1>
       <TypographyP>{pageDescription}</TypographyP>

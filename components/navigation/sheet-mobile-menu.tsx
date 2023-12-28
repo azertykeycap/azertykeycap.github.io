@@ -4,7 +4,7 @@ import {
   NavigationLinksInterface,
   ShapedNavigationLinksInterface,
 } from "@/lib/api/contentful";
-import { Menu } from "lucide-react";
+import { ArrowUpRight, Menu } from "lucide-react";
 import * as React from "react";
 import { Button } from "../ui/button";
 import {
@@ -18,6 +18,7 @@ import { ActiveLink } from "./active-link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import Link from "next/link";
 
 export default function SheetMobileMenu({
   links,
@@ -83,7 +84,7 @@ export default function SheetMobileMenu({
             )}
             onClick={() => setOpen(false)}
           >
-            Suggestion
+            Suggérer un keyset
           </ActiveLink>
           <ActiveLink
             href="/informations"
@@ -95,23 +96,36 @@ export default function SheetMobileMenu({
             Informations
           </ActiveLink>
           <ActiveLink
-            href="/dropshipping/sites"
-            className={
-              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
-            }
-            onClick={() => setOpen(false)}
+            className="inline-flex items-center gap-x-3 transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+            href="https://www.keycaps.info/"
           >
-            Sites de dropshipping
+            <span>Comparer les profils</span>
+            <ArrowUpRight className="h-[1.2rem] w-[1.2rem] text-primary" />
           </ActiveLink>
-          <ActiveLink
-            href="/dropshipping/howto"
-            className={
-              "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
-            }
-            onClick={() => setOpen(false)}
-          >
-            &quot;Howto&quot; dropshipping
-          </ActiveLink>
+          {process.env.NODE_ENV === "production" ? (
+            <></>
+          ) : (
+            <>
+              <ActiveLink
+                href="/dropshipping/sites"
+                className={
+                  "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+                }
+                onClick={() => setOpen(false)}
+              >
+                Sites de dropshipping
+              </ActiveLink>
+              <ActiveLink
+                href="/dropshipping/howto"
+                className={
+                  "inline-block transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium"
+                }
+                onClick={() => setOpen(false)}
+              >
+                &quot;Howto&quot; dropshipping
+              </ActiveLink>
+            </>
+          )}
         </div>
       </SheetContent>
     </Sheet>
