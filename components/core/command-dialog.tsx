@@ -17,10 +17,10 @@ import { Button } from "../ui/button";
 import { getArticles } from "@/lib/api/contentful";
 import { ArrowUpRightIcon } from "lucide-react";
 import { UAParser } from "ua-parser-js";
+import { useRouter } from "next/navigation";
 
 export function CommandDialogDemo({
   groupedArticles,
-  operatingSystem,
 }: {
   groupedArticles: Partial<
     Record<string, Awaited<ReturnType<typeof getArticles>>>
@@ -28,6 +28,7 @@ export function CommandDialogDemo({
   operatingSystem?: string;
 }) {
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
   const { os } = UAParser();
 
   React.useEffect(() => {
@@ -69,9 +70,11 @@ export function CommandDialogDemo({
                 {groupedArticles[group]?.map((article, j) => (
                   <CommandItem
                     key={`${article.url}-${i}-${j}`}
-                    onSelect={() =>
-                      window.open(article.url, "_blank", "noreferrer")
-                    }
+                    value={article.title}
+                    onSelect={() => {
+                      setOpen(false);
+                      window.open(article.url, "_blank", "noreferrer");
+                    }}
                   >
                     {article.title}
                     <CommandShortcut>
