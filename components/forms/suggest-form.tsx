@@ -8,13 +8,14 @@ import { type ClassNameValue } from "tailwind-merge";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useReCaptcha } from "next-recaptcha-v3";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
+import { Loader } from "lucide-react";
 
 export function SuggestForm({ className }: { className?: ClassNameValue }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { executeRecaptcha } = useReCaptcha();
-
   const handleSubmit = useCallback(
     async (data: any) => {
       const token = await executeRecaptcha("form_submit");
@@ -38,7 +39,11 @@ export function SuggestForm({ className }: { className?: ClassNameValue }) {
     <section className={cn(className)}>
       <AutoForm
         formSchema={formSchema}
-        onSubmit={(data) => handleSubmit(data)}
+        onSubmit={(data) => {
+          setIsLoading(true);
+          toast.loading("Envoi de votre formulaire en cours.");
+          handleSubmit(data);
+        }}
         fieldConfig={{
           title: {
             description:
@@ -95,7 +100,7 @@ export function SuggestForm({ className }: { className?: ClassNameValue }) {
         }}
         className="w-full xl:w-1/2"
       >
-        <Button type="submit" className="mt-12">
+        <Button type="submit" className="mt-12" disabled={isLoading}>
           Envoyez votre suggestion
         </Button>
       </AutoForm>
