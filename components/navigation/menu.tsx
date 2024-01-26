@@ -85,7 +85,7 @@ export function NavigationMenuNavbar({
                 ))}
               </ul>
               <Separator className="px-4" />
-              <div className="p-4 text-xs text-muted-foreground">
+              <div className="p-4 text-xs">
                 Envie d&apos;en savoir plus sur les profils ? N&apos;hésitez pas
                 à aller sur{" "}
                 <Link
